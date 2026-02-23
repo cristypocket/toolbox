@@ -2,1706 +2,189 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Grimoire doux — Outils de régulation</title>
   <meta name="description" content="Un grimoire doux d’outils pour la gestion du stress, de la douleur et de l’énergie." />
 
-  <style>
-    :root{
-      /* Palette "grimoire doux" */
-      --bg: #f5f2ea;
-      --paper: #fbf8f1;
-      --ink: #20302c;
-      --muted: #5b6a63;
-      --sage: #2d8c86;
-      --sage-2: #1f6f6a;
-      --terracotta: #c9745a;
-      --gold: #c9a24e;
-      --line: rgba(32,48,44,.14);
-
-      --shadow: 0 10px 30px rgba(32,48,44,.10);
-      --shadow-sm: 0 6px 18px rgba(32,48,44,.08);
-      --radius: 18px;
-      --radius-lg: 26px;
-      --max: 1100px;
-
-      /* Thème nuit */
-    :root[data-theme="dark"]{
-      --bg: #0f1514;
-      --paper: #131c1a;
-      --ink: #e9f1ee;
-      --muted: rgba(233,241,238,.72);
-      --line: rgba(233,241,238,.14);
-
-      --shadow: 0 12px 34px rgba(0,0,0,.45);
-      --shadow-sm: 0 8px 20px rgba(0,0,0,.35);
-    }
-
-    :root[data-theme="dark"] body{
-    background:
-      radial-gradient(1200px 700px at 20% -10%, rgba(45,140,134,.14), transparent 60%),
-      radial-gradient(900px 600px at 85% 10%, rgba(201,116,90,.10), transparent 55%),
-      linear-gradient(180deg, #0b0f0f, #0f1514 70%, #0f1514);
-    }
-
-    /* Petits ajustements lisibilité */
-    :root[data-theme="dark"] .sigil:before{ color: rgba(233,241,238,.92); }
-    :root[data-theme="dark"] .pill,
-    :root[data-theme="dark"] .fav-btn,
-    :root[data-theme="dark"] details.drop > summary,
-    :root[data-theme="dark"] .search input,
-    :root[data-theme="dark"] .btn,
-    :root[data-theme="dark"] .card,
-    :root[data-theme="dark"] dialog{
-      background: rgba(19,28,26,.85);
-    }
-    :root[data-theme="dark"] .chip{
-      background: rgba(15,21,20,.55);
-      border-color: rgba(233,241,238,.10);
-    }
-
-      /* Typo */
-      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      --serif: ui-serif, Georgia, "Times New Roman", Times, serif;
-    }
-
-    *{ box-sizing: border-box; }
-    html, body { height: 100%; }
-    body{
-      margin:0;
-      font-family: var(--font);
-      color: var(--ink);
-      background:
-        radial-gradient(1200px 700px at 20% -10%, rgba(45,140,134,.18), transparent 60%),
-        radial-gradient(900px 600px at 85% 10%, rgba(201,116,90,.14), transparent 55%),
-        linear-gradient(180deg, var(--bg), #f0ece2 70%, #efe9dd);
-    }
-
-    a{ color: inherit; text-decoration: none; }
-    .wrap{ max-width: var(--max); margin: 0 auto; padding: 22px 18px 90px; }
-
-    /* Top bar */
-    .topbar{
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      backdrop-filter: blur(10px);
-      background: rgba(245,242,234,.72);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .topbar-inner{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 12px 18px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      justify-content: space-between;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      min-width: 220px;
-    }
-    .sigil{
-      width: 38px; height: 38px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, rgba(45,140,134,.95), rgba(31,111,106,.95));
-      box-shadow: 0 8px 18px rgba(45,140,134,.25);
-      position: relative;
-      flex: 0 0 auto;
-    }
-    .sigil:before{
-      content:"✦";
-      position:absolute;
-      inset:0;
-      display:grid;
-      place-items:center;
-      color: rgba(251,248,241,.95);
-      font-size: 18px;
-    }
-    .brand-title{
-      display:flex;
-      flex-direction:column;
-      line-height: 1.1;
-    }
-    .brand-title strong{
-      font-family: var(--serif);
-      font-weight: 700;
-      letter-spacing: .2px;
-    }
-    .brand-title span{
-      color: var(--muted);
-      font-size: 12.5px;
-    }
-
-    /* Mode switch */
-    .modes{
-      display:flex;
-      gap:8px;
-      align-items:center;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .pill{
-      border: 1px solid var(--line);
-      background: rgba(251,248,241,.85);
-      padding: 8px 10px;
-      border-radius: 999px;
-      font-size: 13px;
-      color: var(--muted);
-      cursor:pointer;
-      transition: transform .06s ease, background .2s ease, border-color .2s ease;
-      user-select: none;
-      display:flex;
-      gap:8px;
-      align-items:center;
-    }
-    .pill:active{ transform: translateY(1px); }
-    .pill:focus-visible{
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(45,140,134,.18);
-    }
-    .pill[aria-pressed="true"]{
-      border-color: rgba(45,140,134,.45);
-      background: rgba(45,140,134,.10);
-      color: var(--ink);
-    }
-    .pill .dot{
-      width: 8px; height: 8px; border-radius: 99px;
-      background: rgba(91,106,99,.55);
-    }
-    .pill[aria-pressed="true"] .dot{ background: var(--sage); }
-    .pill[data-mode="sos"][aria-pressed="true"]{
-      border-color: rgba(201,116,90,.55);
-      background: rgba(201,116,90,.12);
-    }
-    .pill[data-mode="sos"][aria-pressed="true"] .dot{ background: var(--terracotta); }
-
-    /* Search + favorites quick */
-    .tools{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      justify-content:flex-end;
-      min-width: 220px;
-    }
-    .search{
-      position: relative;
-      max-width: 280px;
-      width: min(40vw, 280px);
-    }
-    .search input{
-      width: 100%;
-      padding: 10px 12px 10px 34px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(251,248,241,.85);
-      outline: none;
-      color: var(--ink);
-    }
-    .search input:focus{
-      border-color: rgba(45,140,134,.55);
-      box-shadow: 0 0 0 3px rgba(45,140,134,.18);
-    }
-    .search:before{
-      content:"⌕";
-      position:absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: rgba(91,106,99,.85);
-      font-size: 14px;
-    }
-    .fav-btn{
-      border: 1px solid var(--line);
-      background: rgba(251,248,241,.85);
-      border-radius: 999px;
-      padding: 10px 12px;
-      cursor: pointer;
-      color: var(--muted);
-      display:flex;
-      align-items:center;
-      gap:8px;
-      white-space: nowrap;
-    }
-    .fav-btn:focus-visible{
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(45,140,134,.18);
-    }
-    .fav-count{
-      min-width: 20px;
-      height: 20px;
-      border-radius: 999px;
-      display:grid;
-      place-items:center;
-      background: rgba(45,140,134,.12);
-      color: var(--sage-2);
-      font-size: 12px;
-      border: 1px solid rgba(45,140,134,.18);
-      padding: 0 6px;
-    }
-    
-
-    /* Nav */
-    nav{
-      border-top: 1px solid var(--line);
-      background: rgba(245,242,234,.65);
-    }
-    .nav-inner{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 10px 18px 14px;
-      display:flex;
-      gap:12px;
-      align-items:center;
-      justify-content: space-between;
-    }
-    .nav-left{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap: wrap;
-    }
-
-    /* Dropdown via <details> */
-    details.drop{
-      position: relative;
-    }
-    details.drop > summary{
-      list-style: none;
-      cursor: pointer;
-      border: 1px solid var(--line);
-      background: rgba(251,248,241,.85);
-      border-radius: 999px;
-      padding: 9px 12px;
-      font-size: 13px;
-      color: var(--muted);
-      display:flex;
-      align-items:center;
-      gap:8px;
-      user-select: none;
-      transition: border-color .2s ease, background .2s ease;
-      white-space: nowrap;
-    }
-    details.drop > summary::-webkit-details-marker{ display:none; }
-    details.drop[open] > summary{
-      border-color: rgba(45,140,134,.45);
-      background: rgba(45,140,134,.08);
-      color: var(--ink);
-    }
-    details.drop > summary:focus-visible{
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(45,140,134,.18);
-    }
-    .caret{
-      opacity:.7;
-      transform: translateY(-1px);
-    }
-
-    .menu{
-      position: absolute;
-      top: calc(100% + 8px);
-      left: 0;
-      min-width: 230px;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      box-shadow: var(--shadow-sm);
-      padding: 8px;
-      z-index: 999;
-    }
-    .menu button{
-      width:100%;
-      text-align:left;
-      border: 0;
-      background: transparent;
-      padding: 10px 10px;
-      border-radius: 12px;
-      cursor:pointer;
-      color: var(--ink);
-      font-size: 13.5px;
-    }
-    .menu button:hover{
-      background: rgba(45,140,134,.08);
-    }
-    .menu button small{
-      display:block;
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 2px;
-    }
-
-    /* Hero */
-    .hero{
-      margin-top: 18px;
-      background: rgba(251,248,241,.65);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
-      padding: 26px 22px;
-      position: relative;
-      overflow:hidden;
-    }
-    .hero:before{
-      content:"";
-      position:absolute;
-      inset:-40px -30px auto auto;
-      width: 260px;
-      height: 260px;
-      background: radial-gradient(circle at 30% 30%, rgba(201,116,90,.25), transparent 65%);
-      transform: rotate(12deg);
-      pointer-events:none;
-    }
-    .hero h1{
-      margin:0;
-      font-family: var(--serif);
-      font-size: clamp(1.6rem, 2.2vw, 2.2rem);
-      letter-spacing: .2px;
-    }
-    .hero p{
-      margin: 10px 0 0;
-      color: var(--muted);
-      max-width: 62ch;
-      line-height: 1.55;
-    }
-    .hero-actions{
-      margin-top: 16px;
-      display:flex;
-      gap:10px;
-      flex-wrap: wrap;
-      align-items:center;
-    }
-    .btn{
-      border: 1px solid var(--line);
-      background: rgba(251,248,241,.9);
-      padding: 10px 12px;
-      border-radius: 12px;
-      cursor:pointer;
-      display:inline-flex;
-      gap:10px;
-      align-items:center;
-      color: var(--ink);
-      box-shadow: 0 6px 16px rgba(32,48,44,.06);
-      transition: transform .06s ease, border-color .2s ease;
-    }
-    .btn:active{ transform: translateY(1px); }
-    .btn.primary{
-      border-color: rgba(201,116,90,.35);
-      background: rgba(201,116,90,.10);
-    }
-    .btn.primary .tag{ background: rgba(201,116,90,.16); color: #7c3b2c; border-color: rgba(201,116,90,.22); }
-    .btn .tag{
-      font-size: 12px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(45,140,134,.18);
-      background: rgba(45,140,134,.10);
-      color: var(--sage-2);
-    }
-
-    /* Section titles */
-    .section{
-      margin-top: 18px;
-    }
-    .section h2{
-      font-family: var(--serif);
-      font-size: 1.15rem;
-      margin: 0 0 10px;
-      letter-spacing: .2px;
-    }
-    .section .hint{
-      color: var(--muted);
-      font-size: 13px;
-      margin: 0 0 14px;
-    }
-
-    /* Cards grid */
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-
-    .card{
-      background: rgba(251,248,241,.85);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 14px 14px 12px;
-      box-shadow: 0 10px 24px rgba(32,48,44,.06);
-      position: relative;
-      overflow:hidden;
-      min-height: 160px;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-    }
-    .card:before{
-      content:"";
-      position:absolute;
-      inset:-30px auto auto -30px;
-      width: 140px;
-      height: 140px;
-      background: radial-gradient(circle at 30% 30%, rgba(45,140,134,.14), transparent 70%);
-      pointer-events:none;
-    }
-    .card-head{
-      display:flex;
-      align-items:flex-start;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    .card h3{
-      margin: 0;
-      font-size: 15px;
-      letter-spacing: .2px;
-    }
-    .meta{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      color: var(--muted);
-      font-size: 12.5px;
-    }
-    .chip{
-      border: 1px solid rgba(32,48,44,.12);
-      background: rgba(245,242,234,.8);
-      padding: 4px 8px;
-      border-radius: 999px;
-    }
-    .chip.sos{
-      border-color: rgba(201,116,90,.28);
-      background: rgba(201,116,90,.10);
-    }
-
-    .card p{
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.45;
-      font-size: 13.5px;
-    }
-
-    .card-actions{
-      margin-top: auto;
-      display:flex;
-      align-items:center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    .card .open{
-      border: 1px solid var(--line);
-      background: rgba(251,248,241,.95);
-      border-radius: 12px;
-      padding: 8px 10px;
-      cursor:pointer;
-      font-size: 13px;
-      color: var(--ink);
-    }
-    .star{
-      border: 1px solid var(--line);
-      background: rgba(251,248,241,.95);
-      border-radius: 12px;
-      padding: 8px 10px;
-      cursor:pointer;
-      font-size: 13px;
-      color: var(--muted);
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
-    .star[aria-pressed="true"]{
-      border-color: rgba(201,116,90,.35);
-      background: rgba(201,116,90,.10);
-      color: var(--ink);
-    }
-
-    /* Modal */
-    dialog{
-      width: min(760px, calc(100vw - 24px));
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      background: var(--paper);
-      box-shadow: var(--shadow);
-      padding: 0;
-    }
-    dialog::backdrop{
-      background: rgba(32,48,44,.35);
-      backdrop-filter: blur(2px);
-    }
-    .modal{
-      padding: 18px 18px 16px;
-    }
-    .modal-top{
-      display:flex;
-      gap: 12px;
-      align-items:flex-start;
-      justify-content: space-between;
-    }
-    .modal h3{
-      margin: 0;
-      font-family: var(--serif);
-      font-size: 1.25rem;
-    }
-    .close{
-      border: 1px solid var(--line);
-      background: rgba(251,248,241,.95);
-      border-radius: 12px;
-      padding: 8px 10px;
-      cursor:pointer;
-    }
-    .steps{
-      margin-top: 12px;
-      border-top: 1px dashed rgba(32,48,44,.18);
-      padding-top: 12px;
-      display:grid;
-      gap: 10px;
-    }
-    .steps h4{
-      margin: 0 0 4px;
-      font-size: 13px;
-      color: var(--muted);
-      letter-spacing: .2px;
-      text-transform: uppercase;
-    }
-    .steps ul{
-      margin: 0;
-      padding-left: 18px;
-      line-height: 1.6;
-      color: var(--ink);
-    }
-    .note{
-      border: 1px solid rgba(45,140,134,.18);
-      background: rgba(45,140,134,.08);
-      border-radius: 16px;
-      padding: 12px;
-      color: var(--ink);
-    }
-
-    /* Footer hint */
-    .footer{
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 13px;
-      text-align:center;
-      opacity: .92;
-    }
-
-    /* Responsive */
-    @media (max-width: 980px){
-      .grid{ grid-template-columns: repeat(2, 1fr); }
-      .brand, .tools{ min-width: 180px; }
-    }
-    @media (max-width: 760px){
-      .topbar-inner{
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      .brand{ justify-content: center; min-width: auto; }
-      .tools{ justify-content: center; min-width: auto; width: 100%; }
-      .search{ width: 100%; max-width: 520px; }
-      .nav-inner{ flex-wrap: wrap; justify-content: center; }
-      .nav-left{ justify-content: center; }
-      .grid{ grid-template-columns: 1fr; }
-      .menu{ position: fixed; left: 12px; right: 12px; top: 160px; min-width: auto; }
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      *{ transition: none !important; scroll-behavior: auto !important; }
-    }
-    
-    /* Breath timer orb */
-    .breath-orb{
-      width: 170px;
-      height: 170px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(45,140,134,.10);
-      display:grid;
-      place-items:center;
-      box-shadow: var(--shadow-sm);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .breath-orb-inner{
-      width: 70px;
-      height: 70px;
-      border-radius: 999px;
-      background: rgba(201,116,90,.14);
-      border: 1px solid rgba(201,116,90,.22);
-      transform: scale(1);
-      transition: transform 0.2s ease;
-    }
-
-    /* Animation pilotée par classe */
-    .breath-orb.is-running .breath-orb-inner{
-      animation: breathe 10s ease-in-out infinite;
-    }
-
-    /* 10s = 4s inspire + 6s expire */
-    @keyframes breathe{
-      0%   { transform: scale(1); }
-      40%  { transform: scale(2.05); } /* inspire */
-      100% { transform: scale(1); }    /* expire */
-    }
-    
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-  <header class="topbar" role="banner">
+
+  <!-- ===================== -->
+  <!-- TOP BAR -->
+  <!-- ===================== -->
+  <header class="topbar">
     <div class="topbar-inner">
+
       <div class="brand">
-        <div class="sigil" aria-hidden="true"></div>
+        <div class="sigil"></div>
         <div class="brand-title">
           <strong>Grimoire doux</strong>
-          <span>Outils de régulation • stress • douleur • énergie</span>
+          <span>Outils de régulation</span>
         </div>
       </div>
 
-      <div class="modes" role="group" aria-label="Choisir un mode">
-        <button class="pill" data-mode="ok" aria-pressed="true" type="button">
-          <span class="dot" aria-hidden="true"></span> OK
+      <div class="modes">
+        <button class="pill" data-mode="ok" aria-pressed="true">
+          <span class="dot"></span> 🌿 OK
         </button>
-        <button class="pill" data-mode="fatigue" aria-pressed="false" type="button">
-          <span class="dot" aria-hidden="true"></span> Fatiguée
+        <button class="pill" data-mode="fatigue" aria-pressed="false">
+          <span class="dot"></span> 🌥 Fatigue
         </button>
-        <button class="pill" data-mode="sos" aria-pressed="false" type="button">
-          <span class="dot" aria-hidden="true"></span> SOS
+        <button class="pill" data-mode="sos" aria-pressed="false">
+          <span class="dot"></span> 🔥 SOS
         </button>
       </div>
 
       <div class="tools">
         <div class="search">
-          <input id="search" type="search" placeholder="Chercher un outil (respiration, nuque, ancrage…)" autocomplete="off" />
+          <input type="search" id="search" placeholder="Rechercher un outil…" />
         </div>
-        <button id="toggleFavs" class="fav-btn" type="button" aria-pressed="false" title="Afficher les favoris">
-          ★ Favoris <span id="favCount" class="fav-count">0</span>
+
+        <button id="toggleFavs" class="btn small" aria-pressed="false">
+          ⭐ Favoris <span id="favCount">0</span>
         </button>
-        <button id="toggleTheme" class="fav-btn" type="button" aria-pressed="false" title="Mode nuit">🌙 Nuit
+
+        <button id="toggleTheme" class="btn small" aria-pressed="false">
+          🌙 Nuit
         </button>
       </div>
+
     </div>
-
-    <nav aria-label="Navigation catégories">
-      <div class="nav-inner">
-        <div class="nav-left">
-          <!-- Dropdowns -->
-          <details class="drop">
-            <summary>Exercices <span class="caret">▾</span></summary>
-            <div class="menu" role="menu">
-              <button type="button" data-filter="Contracté–relâché" role="menuitem">Contracté–relâché <small>relâchement musculaire doux</small></button>
-              <button type="button" data-filter="Mobilisation douce" role="menuitem">Mobilisation douce <small>réveiller sans agresser</small></button>
-              <button type="button" data-filter="Étirements doux" role="menuitem">Étirements doux <small>sans forcer (SED friendly)</small></button>
-            </div>
-          </details>
-
-          <details class="drop">
-            <summary>Somatique <span class="caret">▾</span></summary>
-            <div class="menu" role="menu">
-              <button type="button" data-filter="Orientation" role="menuitem">Orientation <small>revenir au présent</small></button>
-              <button type="button" data-filter="Auto-contact" role="menuitem">Auto-contact <small>sécurité par le toucher</small></button>
-              <button type="button" data-filter="Pendulation" role="menuitem">Pendulation <small>aller-retour sécurité ↔ sensation</small></button>
-            </div>
-          </details>
-
-          <details class="drop">
-            <summary>Pacing <span class="caret">▾</span></summary>
-            <div class="menu" role="menu">
-              <button type="button" data-filter="Check énergie" role="menuitem">Check énergie <small>cuillères & limites</small></button>
-              <button type="button" data-filter="Minimum viable day" role="menuitem">Minimum viable day <small>jour “minimum vital”</small></button>
-              <button type="button" data-filter="Stop rules" role="menuitem">Stop rules <small>quand s’arrêter</small></button>
-            </div>
-          </details>
-
-          <details class="drop">
-            <summary>Ancrage <span class="caret">▾</span></summary>
-            <div class="menu" role="menu">
-              <button type="button" data-filter="5-4-3-2-1" role="menuitem">5-4-3-2-1 <small>ancrage par les sens</small></button>
-              <button type="button" data-filter="Ancrage arbre" role="menuitem">Ancrage arbre <small>connexion au vivant</small></button>
-              <button type="button" data-filter="Mantra minute" role="menuitem">Mantra minute <small>phrase d’apaisement</small></button>
-            </div>
-          </details>
-
-          <details class="drop">
-            <summary>Méditation <span class="caret">▾</span></summary>
-            <div class="menu" role="menu">
-              <button type="button" data-filter="Body scan doux" role="menuitem">Body scan doux <small>scan sans jugement</small></button>
-              <button type="button" data-filter="Lieu refuge" role="menuitem">Lieu refuge <small>visualisation ressource</small></button>
-              <button type="button" data-filter="Sommeil" role="menuitem">Sommeil <small>descente douce</small></button>
-            </div>
-          </details>
-
-          <details class="drop">
-            <summary>Douleur <span class="caret">▾</span></summary>
-            <div class="menu" role="menu">
-              <button type="button" data-filter="Nuque" role="menuitem">Nuque <small>apaiser la base du crâne</small></button>
-              <button type="button" data-filter="Mâchoire" role="menuitem">Mâchoire <small>déverrouillage doux</small></button>
-              <button type="button" data-filter="Trijumeau" role="menuitem">Trijumeau <small>protocole jour de crise</small></button>
-            </div>
-          </details>
-
-          <button id="clearFilters" class="btn" type="button" title="Réinitialiser les filtres">
-            ↺ Réinitialiser <span class="tag">tout</span>
-          </button>
-        </div>
-
-        <div class="nav-right" style="display:flex; gap:10px; align-items:center;">
-          <span style="color: var(--muted); font-size: 13px;">Filtre actif :</span>
-          <span id="activeFilter" class="chip">Aucun</span>
-        </div>
-      </div>
-    </nav>
   </header>
 
-  <main class="wrap" role="main">
-    <section class="hero">
-      <h1>Le Grimoire de Régulation de Cristy</h1>
+  <!-- ===================== -->
+  <!-- NAVIGATION -->
+  <!-- ===================== -->
+  <nav class="nav">
+    <div class="nav-inner">
+
+      <details class="drop">
+        <summary>Exercices</summary>
+        <ul>
+          <li><button data-filter="Contracté–relâché">Contracté–relâché</button></li>
+          <li><button data-filter="Mobilisation douce">Mobilisation douce</button></li>
+          <li><button data-filter="Étirements doux">Étirements doux</button></li>
+        </ul>
+      </details>
+
+      <details class="drop">
+        <summary>Somatique</summary>
+        <ul>
+          <li><button data-filter="Orientation">Orientation</button></li>
+          <li><button data-filter="Pendulation">Pendulation</button></li>
+          <li><button data-filter="Auto-contact">Auto-contact</button></li>
+        </ul>
+      </details>
+
+      <details class="drop">
+        <summary>Respiration</summary>
+        <ul>
+          <li><button data-filter="cohérence cardiaque">Cohérence cardiaque</button></li>
+          <li><button data-filter="soupir">Soupir physiologique</button></li>
+        </ul>
+      </details>
+
+      <details class="drop">
+        <summary>Pacing</summary>
+        <ul>
+          <li><button data-filter="Check énergie">Check énergie</button></li>
+          <li><button data-filter="Minimum viable day">Minimum viable day</button></li>
+        </ul>
+      </details>
+
+      <details class="drop">
+        <summary>Douleur</summary>
+        <ul>
+          <li><button data-filter="Nuque">Nuque</button></li>
+          <li><button data-filter="Mâchoire">Mâchoire</button></li>
+          <li><button data-filter="Rouleau">Rouleau à picots</button></li>
+          <li><button data-filter="Balle fascia">Balle fascia</button></li>
+        </ul>
+      </details>
+
+      <button id="clearFilters" class="btn small ghost">
+        ↺ Réinitialiser
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- ===================== -->
+  <!-- HERO -->
+  <!-- ===================== -->
+  <section class="hero">
+    <div class="wrap">
+
+      <h1>Ton sanctuaire de régulation</h1>
       <p>
-        Ici, on ne “réussit” rien. On revient au corps, on apaise le système, on choisit un petit pas.
-        Tu peux filtrer par mode (OK / Fatiguée / SOS), chercher un outil, et garder tes favoris.
+        Des outils doux pour apaiser le système nerveux,
+        la douleur et l’énergie.
       </p>
+
       <div class="hero-actions">
-        <button class="btn primary" id="sosJump" type="button">🔥 Mode SOS <span class="tag">rapide</span></button>
-        <button class="btn" id="randomTool" type="button">🎲 Donne-moi un outil <span class="tag">au hasard</span></button>
-        <button class="btn" id="breath2min" type="button">🌬 Respiration 2 min <span class="tag">express</span></button>
+        <button id="sosJump" class="btn primary">🔥 Je suis en crise</button>
+        <button id="breath2min" class="btn">🌬 Respiration 2 min</button>
+        <button id="randomTool" class="btn">🎲 Outil aléatoire</button>
       </div>
-    </section>
 
-    <section class="section" id="library">
-      <h2>Bibliothèque</h2>
-      <p class="hint">Les fiches ci-dessous sont un starter pack. On pourra ensuite ajouter tout ce que tu connais (rituels, routines, trijumeau, rouleau à picots, etc.).</p>
-      <div id="grid" class="grid" aria-live="polite"></div>
-    </section>
+    </div>
+  </section>
 
-    <p class="footer">🕯️ Petit rappel : si un exercice augmente la douleur ou le stress, on adapte ou on stop. Ici, c’est la sécurité d’abord.</p>
+  <!-- ===================== -->
+  <!-- LIBRARY -->
+  <!-- ===================== -->
+  <main id="library" class="wrap">
+    <div class="active-filter">
+      Filtre actif : <strong id="activeFilter">Aucun</strong>
+    </div>
+
+    <div id="grid" class="grid">
+      <!-- Les cartes seront injectées ici par script.js -->
+    </div>
   </main>
 
-  <!-- Modal fiche -->
-  <dialog id="toolModal" aria-labelledby="modalTitle">
+  <!-- ===================== -->
+  <!-- TOOL MODAL -->
+  <!-- ===================== -->
+  <dialog id="toolModal">
     <div class="modal">
       <div class="modal-top">
-        <div>
-          <h3 id="modalTitle"></h3>
-          <div id="modalMeta" class="meta" style="margin-top:8px;"></div>
-        </div>
-        <button class="close" type="button" id="closeModal">✕</button>
+        <h3 id="modalTitle"></h3>
+        <button id="closeModal" class="close">✕</button>
       </div>
 
-      <div class="steps" id="modalBody"></div>
+      <div id="modalMeta" class="meta"></div>
+      <div id="modalBody"></div>
     </div>
   </dialog>
-  
-  <dialog id="breathTimer" aria-labelledby="btTitle">
+
+  <!-- ===================== -->
+  <!-- BREATH TIMER MODAL -->
+  <!-- ===================== -->
+  <dialog id="breathTimer">
     <div class="modal">
       <div class="modal-top">
-        <div>
-          <h3 id="btTitle">🌬 Timer respiration</h3>
-            <div class="meta" style="margin-top:8px;">
-                <span class="chip">Inspire 4</span>
-                <span class="chip">Expire 6</span>
-                <span class="chip" id="btRemaining">2:00</span>
-            </div>
-        </div>
-        <button class="close" type="button" id="btClose">✕</button>
-    </div>
+        <h3>🌬 Timer respiration</h3>
+        <button id="btClose" class="close">✕</button>
+      </div>
 
-    <div style="display:grid; place-items:center; padding: 16px 0 6px;">
-      <div class="breath-orb" aria-hidden="true">
+      <div class="breath-orb">
         <div class="breath-orb-inner"></div>
       </div>
-      <div id="btPhase" style="margin-top:10px; color: var(--muted); font-size: 13px;">
-        Prête.
+
+      <div id="btPhase" class="center-text">Prête.</div>
+      <div id="btRemaining" class="center-text">2:00</div>
+
+      <div class="hero-actions">
+        <button id="btStart" class="btn primary">Démarrer</button>
+        <button id="btStop" class="btn">Stop</button>
+        <button id="btReset" class="btn ghost">Reset</button>
       </div>
     </div>
+  </dialog>
 
-    <div class="hero-actions" style="margin-top: 10px; justify-content:center;">
-      <button class="btn primary" type="button" id="btStart">Démarrer</button>
-      <button class="btn" type="button" id="btStop">Stop</button>
-      <button class="btn" type="button" id="btReset">Reset</button>
-    </div>
-
-    <div style="margin-top: 12px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-      <button class="pill" type="button" data-bt-min="1" aria-pressed="false"><span class="dot"></span> 1 min</button>
-      <button class="pill" type="button" data-bt-min="2" aria-pressed="true"><span class="dot"></span> 2 min</button>
-      <button class="pill" type="button" data-bt-min="3" aria-pressed="false"><span class="dot"></span> 3 min</button>
-      <button class="pill" type="button" data-bt-min="5" aria-pressed="false"><span class="dot"></span> 5 min</button>
-    </div>
-
-    <p style="margin: 14px 0 0; color: var(--muted); font-size: 13px; text-align:center;">
-      Option douce : si 4/6 te gêne, fais 3/4. L’expiration longue reste la clé.
-    </p>
-  </div>
-</dialog>
-
-  <script>
-
-    // -------------------------
-    // Data (starter pack)
-    // -------------------------
-    
-        const TOOLS = [
-      {
-        id: "contracte-relache",
-        title: "Contracté–relâché",
-        category: "Exercices",
-        tags: ["Contracté–relâché", "stress", "douleur", "relâchement"],
-        duration: "5 min",
-        position: "assis/allongé",
-        intensity: "très doux",
-        modes: ["ok","fatigue","sos"],
-        summary: "Relâcher les tensions sans forcer, en alternant contraction légère et détente.",
-        steps: [
-          "Inspire doucement.",
-          "Contracte très légèrement (mains/épaules) 3 secondes.",
-          "Expire longuement, relâche complètement.",
-          "Pause 10 secondes.",
-          "Répète 5 fois."
-        ],
-        low: "Version low battery : contracte seulement les mains.",
-        stop: "Stop si douleur articulaire inhabituelle, vertige, crispation.",
-        note: "Ce n’est pas la performance qui apaise. C’est la permission."
-      },
-      {
-        id: "mobilisation-douce",
-        title: "Mobilisation douce",
-        category: "Exercices",
-        tags: ["Mobilisation douce", "énergie", "douceur", "SED"],
-        duration: "6–8 min",
-        position: "assis/debout",
-        intensity: "doux",
-        modes: ["ok","fatigue"],
-        summary: "Réveiller le corps comme un chat : micro-cercles, amplitude mini, respiration lente.",
-        steps: [
-          "Cercles d’épaules (petits) x 6.",
-          "Rotations de nuque très mini (sans aller au bout) x 4.",
-          "Cercles poignets/chevilles x 6.",
-          "Balance du poids d’un pied à l’autre x 8.",
-          "Termine par 3 expirations longues."
-        ],
-        low: "Version low battery : uniquement poignets + chevilles.",
-        stop: "Stop si instabilité, douleur vive, pincement.",
-        note: "Petit mouvement = grand signal de sécurité."
-      },
-      {
-        id: "etirements-doux",
-        title: "Étirements doux",
-        category: "Exercices",
-        tags: ["Étirements doux", "souplesse", "SED"],
-        duration: "4–6 min",
-        position: "assis",
-        intensity: "très doux",
-        modes: ["ok","fatigue"],
-        summary: "Étirements non-performants : on cherche le confort, pas l’amplitude.",
-        steps: [
-          "Étirement latéral assis (très léger) 2 respirations de chaque côté.",
-          "Ouverture poitrine (mains derrière la tête, coudes ouverts) 3 respirations.",
-          "Avant-bras contre avant-bras (auto-étreinte) 4 respirations.",
-          "Fin : mains sur ventre, expiration longue."
-        ],
-        low: "Version low battery : auto-étreinte + 3 respirations.",
-        stop: "Stop si hyperlaxité qui “tire trop”, douleur articulaire.",
-        note: "Ton corps n’est pas un projet. C’est un vivant."
-      },
-      {
-        id: "orientation",
-        title: "Orientation",
-        category: "Somatique",
-        tags: ["Orientation", "ancrage", "somatique", "surcharge"],
-        duration: "2–3 min",
-        position: "assis/debout",
-        intensity: "très doux",
-        modes: ["ok","fatigue","sos"],
-        summary: "Revenir ici et maintenant via les yeux + la tête (micro), en cherchant ce qui est neutre/agréable.",
-        steps: [
-          "Regarde 5 objets autour de toi, lentement.",
-          "Nomme 3 couleurs.",
-          "Trouve 1 détail agréable (texture/lumière).",
-          "Pose une main sur le cœur, expire longuement."
-        ],
-        low: "Version low battery : 3 objets + 1 expiration longue.",
-        stop: "Stop si ça augmente l’anxiété ; alors fais uniquement l’expiration longue.",
-        note: "Tu n’as rien à prouver. Tu te retrouves."
-      },
-      {
-        id: "auto-contact",
-        title: "Auto-contact sécurisant",
-        category: "Somatique",
-        tags: ["Auto-contact", "somatique", "sécurité"],
-        duration: "1–3 min",
-        position: "assis/allongé",
-        intensity: "très doux",
-        modes: ["ok","fatigue","sos"],
-        summary: "Le toucher comme “signal de sécurité” : paumes, pression douce, chaleur.",
-        steps: [
-          "Une main sur le cœur, une sur le ventre.",
-          "Pression très douce (comme une couverture).",
-          "3 expirations longues.",
-          "Option : tapotements légers sur les bras."
-        ],
-        low: "Version low battery : une main sur le cœur + 2 expirations.",
-        stop: "Stop si le contact te met mal à l’aise : remplace par une main sur la cuisse.",
-        note: "Sécurité d’abord. Toujours."
-      },
-      {
-        id: "pendulation",
-        title: "Pendulation",
-        category: "Somatique",
-        tags: ["Pendulation", "somatique", "douleur"],
-        duration: "4–6 min",
-        position: "assis",
-        intensity: "doux",
-        modes: ["ok","fatigue","sos"],
-        summary: "Aller-retour entre une zone OK et une zone tendue, pour aider le système à ne pas se figer.",
-        steps: [
-          "Choisis une zone neutre (main, pieds) = Zone A.",
-          "Choisis une zone tendue (nuque, mâchoire) = Zone B.",
-          "Observe 10 sec la Zone A (respire).",
-          "Observe 5 sec la Zone B (sans plonger).",
-          "Retour Zone A. Répète 5 fois."
-        ],
-        low: "Version low battery : 2 allers-retours seulement.",
-        stop: "Stop si la Zone B déclenche panique : reste sur Zone A.",
-        note: "On dose. On apprivoise. On n’envahit pas."
-      },
-      {
-        id: "coherence",
-        title: "Cohérence cardiaque",
-        category: "Respiration",
-        tags: ["Respiration", "cohérence cardiaque", "stress"],
-        duration: "3–5 min",
-        position: "assis",
-        intensity: "très doux",
-        modes: ["ok","fatigue","sos"],
-        summary: "Respiration régulière pour calmer le système : inspire 4, expire 6 (adaptable).",
-        steps: [
-          "Inspire par le nez 4 secondes.",
-          "Expire 6 secondes (lente, douce).",
-          "Répète 10 cycles.",
-          "Si c’est trop : 3/4 au lieu de 4/6."
-        ],
-        low: "Version low battery : 5 cycles.",
-        stop: "Stop si essoufflement : reviens à respiration naturelle + longues expirations.",
-        note: "L’expiration longue est souvent la clé."
-      },
-      {
-        id: "soupir",
-        title: "Soupir physiologique",
-        category: "Respiration",
-        tags: ["Respiration", "sos", "stress"],
-        duration: "1 min",
-        position: "assis/debout",
-        intensity: "très doux",
-        modes: ["fatigue","sos"],
-        summary: "Reset rapide : deux petites inspirations + une longue expiration.",
-        steps: [
-          "Inspire normalement.",
-          "Re-inspire un petit “complément”.",
-          "Expire très longuement par la bouche.",
-          "Répète 3 fois."
-        ],
-        low: "Version low battery : 1 seule fois.",
-        stop: "Stop si vertige : fais une expiration longue simple.",
-        note: "Un mini reset quand tout déborde."
-      },
-      {
-        id: "check-energie",
-        title: "Check énergie",
-        category: "Pacing",
-        tags: ["Check énergie", "pacing", "cuillères"],
-        duration: "2–4 min",
-        position: "assis",
-        intensity: "très doux",
-        modes: ["ok","fatigue","sos"],
-        summary: "Faire le point sans jugement : énergie dispo, douleur, priorités “vitales”.",
-        steps: [
-          "Aujourd’hui : énergie 0–10 ?",
-          "Douleur 0–10 ?",
-          "Une chose vitale (eau, manger, repos) ?",
-          "Une chose douce (balcon, musique, arbre) ?",
-          "Choisis 1 micro-action."
-        ],
-        low: "Version low battery : énergie + 1 micro-action.",
-        stop: "Si ça stresse : remplace par ‘je bois un verre d’eau’.",
-        note: "Tu ajustes. Tu ne t’arraches pas."
-      },
-      {
-        id: "mvd",
-        title: "Minimum viable day",
-        category: "Pacing",
-        tags: ["Minimum viable day", "pacing", "fatigue"],
-        duration: "3–6 min",
-        position: "assis",
-        intensity: "très doux",
-        modes: ["fatigue","sos"],
-        summary: "Construire une journée “minimum vital” pour arrêter de se battre contre soi.",
-        steps: [
-          "3 besoins : eau / manger / repos (choisis 1).",
-          "1 tâche mini : 5 minutes max.",
-          "1 récup : respiration/sieste/poser le corps.",
-          "Tout le reste = bonus."
-        ],
-        low: "Version low battery : eau + repos.",
-        stop: "Stop si ça déclenche honte : ‘aujourd’hui je me protège’.",
-        note: "Minimum vital = victoire."
-      },
-      {
-        id: "54321",
-        title: "5-4-3-2-1",
-        category: "Ancrage",
-        tags: ["5-4-3-2-1", "ancrage", "sos"],
-        duration: "2–3 min",
-        position: "assis/debout",
-        intensity: "très doux",
-        modes: ["ok","fatigue","sos"],
-        summary: "Ancrage par les sens pour revenir dans le corps et le réel.",
-        steps: [
-          "5 choses que tu vois.",
-          "4 choses que tu touches.",
-          "3 sons que tu entends.",
-          "2 odeurs (ou 2 respirations).",
-          "1 chose que tu te dis de doux."
-        ],
-        low: "Version low battery : 3-2-1.",
-        stop: "Stop si c’est trop : fais juste 2 expirations longues.",
-        note: "Tu reviens, doucement."
-      },
-      {
-        id: "arbre",
-        title: "Ancrage arbre",
-        category: "Ancrage",
-        tags: ["Ancrage arbre", "nature", "douleur"],
-        duration: "3–7 min",
-        position: "debout",
-        intensity: "très doux",
-        modes: ["ok","fatigue","sos"],
-        summary: "Connexion au vivant : présence, appui, respiration. (Ton special power 🌳)",
-        steps: [
-          "Trouve un arbre (ou visualise-en un).",
-          "Pose la main sur l’écorce (ou sur le cœur).",
-          "Inspire : ‘je reçois’. Expire : ‘je relâche’.",
-          "Reste 10 respirations."
-        ],
-        low: "Version low battery : 3 respirations seulement.",
-        stop: "Stop si froid/douleur : visualise un arbre refuge à l’intérieur.",
-        note: "Le vivant tient ta main quand tu en as besoin."
-      },
-      {
-        id: "body-scan",
-        title: "Body scan doux",
-        category: "Méditation",
-        tags: ["Body scan doux", "méditation", "sommeil"],
-        duration: "5–8 min",
-        position: "allongé",
-        intensity: "très doux",
-        modes: ["ok","fatigue"],
-        summary: "Scan sans forcer : observer, accueillir, relâcher un cran.",
-        steps: [
-          "Pieds → mollets → genoux : ‘merci’ et relâche 1%.",
-          "Bassin → ventre : main posée, expiration longue.",
-          "Poitrine → épaules : desserre la mâchoire.",
-          "Front : ‘je peux me reposer’."
-        ],
-        low: "Version low battery : uniquement mâchoire + épaules + 3 expirations.",
-        stop: "Stop si ça active trop : fais orientation (regarder autour).",
-        note: "Observer ≠ plonger. Tu doses."
-      },
-      {
-        id: "nuque",
-        title: "Nuque — base du crâne",
-        category: "Douleur",
-        tags: ["Nuque", "douleur", "chaleur"],
-        duration: "3–10 min",
-        position: "assis/allongé",
-        intensity: "très doux",
-        modes: ["ok","fatigue","sos"],
-        summary: "Protocole doux : chaleur + respiration + relâchement de mâchoire.",
-        steps: [
-          "Chaleur à la base du crâne (si ok).",
-          "Expire longuement 6 fois.",
-          "Relâche la langue (elle se décolle du palais).",
-          "Option : auto-contact mains sur nuque."
-        ],
-        low: "Version low battery : chaleur + 3 expirations.",
-        stop: "Stop si chaleur impossible : remplace par mains tièdes sur nuque.",
-        note: "Tu ne combats pas. Tu apaises."
-      },
-      {
-        id: "machoire",
-        title: "Mâchoire — déverrouillage doux",
-        category: "Douleur",
-        tags: ["Mâchoire", "douleur", "trijumeau"],
-        duration: "2–5 min",
-        position: "assis",
-        intensity: "très doux",
-        modes: ["ok","fatigue","sos"],
-        summary: "Décharger la mâchoire (souvent liée au stress) sans étirer fort.",
-        steps: [
-          "Lèvres fermées, dents séparées.",
-          "Langue au repos (bas de bouche).",
-          "Mini mouvements ‘oui/non’ très petits.",
-          "2 soupirs physiologiques."
-        ],
-        low: "Version low battery : dents séparées + 1 soupir.",
-        stop: "Stop si douleur trijumeau : uniquement respiration + dents séparées.",
-        note: "La mâchoire peut être une armure. On l’invite à lâcher."
-      },
-      {
-        id: "trijumeau",
-        title: "Trijumeau — jour de crise (soft)",
-        category: "Douleur",
-        tags: ["Trijumeau", "sos", "douleur"],
-        duration: "2–6 min",
-        position: "allongé/assis",
-        intensity: "très doux",
-        modes: ["sos"],
-        summary: "Version très prudente : calme, chaleur si ok, réduction des stimuli.",
-        steps: [
-          "Réduis les stimuli (lumière/son).",
-          "Chaleur base du crâne si ça te soulage.",
-          "Expire longuement 8 fois.",
-          "Auto-contact : main sur joue/nuque si confortable."
-        ],
-        low: "Version low battery : juste réduire stimuli + 3 expirations.",
-        stop: "Si la douleur augmente : stop tout et repose-toi (protocole perso/médical).",
-        note: "Ici c’est un refuge, pas un défi."
-      }
-      {
-      id: "rouleau-picots",
-      title: "Rouleau à picots (dos) — usage intelligent",
-      category: "Douleur",
-      tags: ["Rouleau à picots", "fascia", "dos", "récup", "douleur"],
-      duration: "5–12 min",
-      position: "allongé",
-      intensity: "doux à modéré",
-      modes: ["ok","fatigue"],
-      summary: "Décompression + fascia : on dose pour éviter l’habituation (pas tous les jours).",
-      steps: [
-        "Pose-toi sur le rouleau (zone haut du dos ou milieu).",
-        "Commence par 1–2 minutes immobile, respiration longue.",
-        "Micro-roule très lentement (amplitude mini) 60–90 secondes.",
-        "Change de zone si OK, toujours sans chercher la douleur.",
-        "Fin : 4 expirations longues + verre d’eau."
-      ],
-      low: "Version low battery : 2 minutes immobile + respiration, sans rouler.",
-      stop: "Stop si douleur vive, engourdissement, sensation de pincement nerveux. Évite zone lombaire si sensible.",
-      note: "Pas tous les jours : laisse au corps le temps d’intégrer (sinon il s’habitue)."
-      },
-      {
-      id: "balle-fascia-trapeze",
-      title: "Balle fascia derrière le trapèze",
-      category: "Douleur",
-      tags: ["Balle fascia", "trapèze", "épaule", "fascia", "nuque"],
-      duration: "2–6 min",
-      position: "allongé",
-      intensity: "doux",
-      modes: ["ok","fatigue","sos"],
-      summary: "Déverrouillage doux du haut du dos : pression + mouvement du bras (6x mini).",
-      steps: [
-        "Allonge-toi sur le dos.",
-        "Place la balle derrière le trapèze (pas sur l’os).",
-        "Trouve un point ‘ah oui’ mais tolérable (pas ‘aïe’).",
-        "Lève le bras du côté concerné puis abaisse-le lentement (au moins 6 fois).",
-        "Respire : expiration longue sur la descente du bras.",
-        "Fin : bouge l’épaule en micro-cercles 3 fois."
-      ],
-      low: "Version low battery : garder la balle en place + 3 respirations longues, sans lever le bras.",
-      stop: "Stop si fourmillements, douleur nerveuse, douleur aiguë, vertige. Adapter amplitude.",
-      note: "C’est la lenteur qui fait le travail. On n’attaque pas le point."
-      }
-    ];
-
-    // -------------------------
-    // State + storage
-    // -------------------------
-    const state = {
-      mode: "ok",
-      query: "",
-      filter: "",
-      showFavs: false,
-      favorites: new Set()
-    };
-
-    const LS_KEY = "grimoire_favorites_v1";
-
-    function loadFavorites(){
-      try{
-        const raw = localStorage.getItem(LS_KEY);
-        if(!raw) return;
-        const arr = JSON.parse(raw);
-        if(Array.isArray(arr)){
-          state.favorites = new Set(arr);
-        }
-      }catch(e){}
-    }
-
-    function saveFavorites(){
-      try{
-        localStorage.setItem(LS_KEY, JSON.stringify([...state.favorites]));
-      }catch(e){}
-    }
-
-    // -------------------------
-    // DOM
-    // -------------------------
-    const grid = document.getElementById("grid");
-    const search = document.getElementById("search");
-    const activeFilter = document.getElementById("activeFilter");
-    const clearFilters = document.getElementById("clearFilters");
-    const toggleFavs = document.getElementById("toggleFavs");
-    const favCount = document.getElementById("favCount");
-
-    const modal = document.getElementById("toolModal");
-    const modalTitle = document.getElementById("modalTitle");
-    const modalMeta = document.getElementById("modalMeta");
-    const modalBody = document.getElementById("modalBody");
-    const closeModal = document.getElementById("closeModal");
-
-    // Close dropdowns when clicking outside
-    document.addEventListener("click", (e) => {
-      document.querySelectorAll("details.drop").forEach(d => {
-        if(!d.contains(e.target)) d.open = false;
-      });
-    });
-
-    // Close other dropdowns when opening one
-    document.querySelectorAll("details.drop").forEach(d => {
-      d.addEventListener("toggle", () => {
-        if(!d.open) return;
-        document.querySelectorAll("details.drop").forEach(other => {
-          if(other !== d) other.open = false;
-        });
-      });
-    });
-
-    // Filter buttons inside dropdowns
-    document.querySelectorAll("[data-filter]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        state.filter = btn.getAttribute("data-filter") || "";
-        activeFilter.textContent = state.filter || "Aucun";
-        const details = btn.closest("details");
-        if(details) details.open = false;
-        render();
-      });
-    });
-
-    // Modes
-    document.querySelectorAll(".pill").forEach(p => {
-      p.addEventListener("click", () => {
-        state.mode = p.dataset.mode || "ok";
-        document.querySelectorAll(".pill").forEach(x => x.setAttribute("aria-pressed","false"));
-        p.setAttribute("aria-pressed","true");
-        render();
-      });
-    });
-
-    // Search
-    search.addEventListener("input", () => {
-      state.query = search.value.trim();
-      render();
-    });
-
-    // Reset
-    clearFilters.addEventListener("click", () => {
-      state.filter = "";
-      state.query = "";
-      state.showFavs = false;
-      state.mode = "ok";
-
-      search.value = "";
-      activeFilter.textContent = "Aucun";
-      toggleFavs.setAttribute("aria-pressed","false");
-
-      document.querySelectorAll(".pill").forEach(x => x.setAttribute("aria-pressed","false"));
-      const okBtn = document.querySelector('.pill[data-mode="ok"]');
-      if(okBtn) okBtn.setAttribute("aria-pressed","true");
-
-      render();
-    });
-
-    // Favorites toggle
-    toggleFavs.addEventListener("click", () => {
-      state.showFavs = !state.showFavs;
-      toggleFavs.setAttribute("aria-pressed", state.showFavs ? "true" : "false");
-      render();
-    });
-
-    // Hero quick actions
-    const sosJump = document.getElementById("sosJump");
-    if(sosJump){
-      sosJump.addEventListener("click", () => {
-        state.mode = "sos";
-        document.querySelectorAll(".pill").forEach(x => x.setAttribute("aria-pressed","false"));
-        const sosBtn = document.querySelector('.pill[data-mode="sos"]');
-        if(sosBtn) sosBtn.setAttribute("aria-pressed","true");
-        const lib = document.getElementById("library");
-        if(lib) lib.scrollIntoView({behavior:"smooth", block:"start"});
-        render();
-      });
-    }
-
-    const randomTool = document.getElementById("randomTool");
-    if(randomTool){
-      randomTool.addEventListener("click", () => {
-        const list = getFilteredTools();
-        if(list.length === 0) return;
-        const pick = list[Math.floor(Math.random() * list.length)];
-        openTool(pick.id);
-      });
-    }
-
-    const breath2min = document.getElementById("breath2min");
-    if(breath2min){
-      breath2min.addEventListener("click", () => {
-        const id = (state.mode === "sos" || state.mode === "fatigue") ? "soupir" : "coherence";
-        openTool(id);
-      });
-    }
-
-    // Modal close
-    if(closeModal){
-      closeModal.addEventListener("click", () => {
-        try{ modal.close(); }catch(e){}
-      });
-    }
-
-    // Close modal on outside click (best effort)
-    if(modal){
-      modal.addEventListener("click", (e) => {
-        const rect = modal.getBoundingClientRect();
-        const inside =
-          e.clientX >= rect.left && e.clientX <= rect.right &&
-          e.clientY >= rect.top  && e.clientY <= rect.bottom;
-        if(!inside){
-          try{ modal.close(); }catch(err){}
-        }
-      });
-    }
-
-    // -------------------------
-    // Helpers
-    // -------------------------
-    function normalize(s){
-      return (s || "")
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
-    }
-
-    function matchesQuery(tool){
-      const q = normalize(state.query);
-      if(!q) return true;
-      const hay = normalize([tool.title, tool.category, tool.summary, ...(tool.tags || [])].join(" "));
-      return hay.includes(q);
-    }
-
-    function matchesFilter(tool){
-      if(!state.filter) return true;
-      const f = normalize(state.filter);
-      const inTags = (tool.tags || []).some(t => normalize(t).includes(f));
-      const inTitle = normalize(tool.title).includes(f);
-      return inTags || inTitle;
-    }
-
-    function matchesMode(tool){
-      return (tool.modes || []).includes(state.mode);
-    }
-
-    function matchesFavs(tool){
-      if(!state.showFavs) return true;
-      return state.favorites.has(tool.id);
-    }
-
-    function getFilteredTools(){
-      return TOOLS
-        .filter(matchesMode)
-        .filter(matchesQuery)
-        .filter(matchesFilter)
-        .filter(matchesFavs);
-    }
-
-    function escapeHtml(str){
-      return String(str)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-    }
-
-    function safeShowModal(dialogEl){
-      try{
-        if(dialogEl && typeof dialogEl.showModal === "function"){
-          dialogEl.showModal();
-          return true;
-        }
-      }catch(e){}
-      return false;
-    }
-
-    // -------------------------
-    // Theme (mode nuit)
-    // -------------------------
-    const THEME_KEY = "grimoire_theme_v1";
-    const themeBtn = document.getElementById("toggleTheme");
-
-    function applyTheme(theme){
-      const root = document.documentElement; // <html>
-        if(theme === "dark"){
-          root.setAttribute("data-theme", "dark");
-        if(themeBtn) themeBtn.setAttribute("aria-pressed","true");
-        }else{
-          root.removeAttribute("data-theme");
-        if(themeBtn) themeBtn.setAttribute("aria-pressed","false");
-        }
-    }  
-
-    function loadTheme(){
-      try{
-      const saved = localStorage.getItem(THEME_KEY);
-        if(saved === "dark") applyTheme("dark");
-      }catch(e){}
-    }
-
-    function saveTheme(theme){
-      try{ localStorage.setItem(THEME_KEY, theme); }catch(e){}
-    }
-
-    if(themeBtn){
-      themeBtn.addEventListener("click", () => {
-        const isDark = document.documentElement.getAttribute("data-theme") === "dark";
-        const next = isDark ? "light" : "dark";
-          applyTheme(next === "dark" ? "dark" : "light");
-          saveTheme(next === "dark" ? "dark" : "light");
-      });
-      }
-
-      loadTheme();
-
-    // -------------------------
-    // Render
-    // -------------------------
-    function render(){
-      if(favCount) favCount.textContent = String(state.favorites.size);
-
-      const items = getFilteredTools();
-      if(!grid) return;
-      grid.innerHTML = "";
-
-      if(items.length === 0){
-        const empty = document.createElement("div");
-        empty.className = "card";
-        empty.innerHTML = `
-          <div class="card-head">
-            <h3>Aucun résultat</h3>
-          </div>
-          <p>Essaie de changer le mode, d’enlever les favoris, ou de supprimer le filtre.</p>
-          <div class="card-actions">
-            <button class="open" type="button" id="emptyReset">↺ Réinitialiser</button>
-            <span class="chip">🕯️ douceur</span>
-          </div>
-        `;
-        grid.appendChild(empty);
-        const r = empty.querySelector("#emptyReset");
-        if(r) r.addEventListener("click", () => clearFilters && clearFilters.click());
-        return;
-      }
-
-      items.forEach(tool => {
-        const card = document.createElement("article");
-        card.className = "card";
-
-        const isFav = state.favorites.has(tool.id);
-
-        const modeChip = (tool.modes.includes("sos") && !tool.modes.includes("ok"))
-          ? `<span class="chip sos">🔥 SOS</span>`
-          : (state.mode === "sos" ? `<span class="chip sos">🔥 SOS</span>` : `<span class="chip">🌿</span>`);
-
-        card.innerHTML = `
-          <div class="card-head">
-            <div>
-              <h3>${escapeHtml(tool.title)}</h3>
-              <div class="meta" style="margin-top:8px;">
-                <span class="chip">${escapeHtml(tool.duration)}</span>
-                <span class="chip">${escapeHtml(tool.position)}</span>
-                <span class="chip">${escapeHtml(tool.intensity)}</span>
-                ${modeChip}
-              </div>
-            </div>
-            <button class="star" type="button" aria-pressed="${isFav ? "true":"false"}" title="Ajouter aux favoris">
-              ${isFav ? "★" : "☆"} <span style="font-size:12px;">Favori</span>
-            </button>
-          </div>
-
-          <p>${escapeHtml(tool.summary)}</p>
-
-          <div class="card-actions">
-            <button class="open" type="button">Ouvrir la fiche</button>
-            <span class="chip">${escapeHtml(tool.category)}</span>
-          </div>
-        `;
-
-        const openBtn = card.querySelector(".open");
-        if(openBtn) openBtn.addEventListener("click", () => openTool(tool.id));
-
-        const starBtn = card.querySelector(".star");
-        if(starBtn){
-          starBtn.addEventListener("click", () => {
-            toggleFavorite(tool.id);
-            const nowFav = state.favorites.has(tool.id);
-            starBtn.setAttribute("aria-pressed", nowFav ? "true" : "false");
-            starBtn.innerHTML = `${nowFav ? "★" : "☆"} <span style="font-size:12px;">Favori</span>`;
-            if(favCount) favCount.textContent = String(state.favorites.size);
-            if(state.showFavs) render();
-          });
-        }
-
-        grid.appendChild(card);
-      });
-    }
-
-    function openTool(id){
-      const tool = TOOLS.find(t => t.id === id);
-      if(!tool) return;
-
-      if(modalTitle) modalTitle.textContent = tool.title;
-
-      if(modalMeta){
-        modalMeta.innerHTML = `
-          <span class="chip">${escapeHtml(tool.category)}</span>
-          <span class="chip">${escapeHtml(tool.duration)}</span>
-          <span class="chip">${escapeHtml(tool.position)}</span>
-          <span class="chip">${escapeHtml(tool.intensity)}</span>
-        `;
-      }
-
-      const steps = (tool.steps || []).map(s => `<li>${escapeHtml(s)}</li>`).join("");
-      if(modalBody){
-        modalBody.innerHTML = `
-          <div>
-            <h4>Étapes</h4>
-            <ul>${steps}</ul>
-          </div>
-          <div class="note">
-            <strong>🌥 Version low battery</strong><br>
-            ${escapeHtml(tool.low || "—")}
-          </div>
-          <div class="note" style="border-color: rgba(201,116,90,.22); background: rgba(201,116,90,.08);">
-            <strong>🔥 Stop si…</strong><br>
-            ${escapeHtml(tool.stop || "—")}
-          </div>
-          <div class="note">
-            <strong>✨ Note Cristy</strong><br>
-            ${escapeHtml(tool.note || "—")}
-          </div>
-        `;
-      }
-
-      if(modal && !safeShowModal(modal)){
-        alert(tool.title + "\n\n" + (tool.summary || ""));
-      }
-    }
-
-    function toggleFavorite(id){
-      if(state.favorites.has(id)) state.favorites.delete(id);
-      else state.favorites.add(id);
-      saveFavorites();
-    }
-
-    // -------------------------
-    // Breath Timer (4/6)
-    // -------------------------
-      const bt = document.getElementById("breathTimer");
-      const btClose = document.getElementById("btClose");
-      const btStart = document.getElementById("btStart");
-      const btStop = document.getElementById("btStop");
-      const btReset = document.getElementById("btReset");
-      const btRemaining = document.getElementById("btRemaining");
-      const btPhase = document.getElementById("btPhase");
-      const orb = bt ? bt.querySelector(".breath-orb") : null;
-
-      let btTotalSec = 120; // 2 min default
-      let btLeftSec = btTotalSec;
-      let btTick = null;
-      let btPhaseTick = null;
-
-      function fmt(sec){
-        const m = Math.floor(sec / 60);
-        const s = sec % 60;
-        return `${m}:${String(s).padStart(2,"0")}`;
-      }
-
-      function btSetDuration(min){
-        btTotalSec = Math.max(60, min * 60);
-        btLeftSec = btTotalSec;
-        if(btRemaining) btRemaining.textContent = fmt(btLeftSec);
-      }
-
-      function btStopAll(){
-        if(btTick){ clearInterval(btTick); btTick = null; }
-        if(btPhaseTick){ clearInterval(btPhaseTick); btPhaseTick = null; }
-        if(orb) orb.classList.remove("is-running");
-        if(btPhase) btPhase.textContent = "Prête.";
-      }
-
-      function btStartRun(){
-        btStopAll();
-        if(orb) orb.classList.add("is-running");
-
-      // Phase label (4/6 loop)
-        let t = 0;
-        if(btPhase) btPhase.textContent = "Inspire…";
-        btPhaseTick = setInterval(() => {
-          t = (t + 1) % 10; // cycle 10s
-        if(btPhase){
-        if(t < 4) btPhase.textContent = "Inspire…";
-        else btPhase.textContent = "Expire…";
-        }
-        }, 1000);
-
-      // Countdown
-        btTick = setInterval(() => {
-          btLeftSec = Math.max(0, btLeftSec - 1);
-          if(btRemaining) btRemaining.textContent = fmt(btLeftSec);
-
-          if(btLeftSec <= 0){
-            btStopAll();
-          if(btPhase) btPhase.textContent = "Terminé 🌿";
-          }
-        }, 1000);
-      }
-
-      if(btClose) btClose.addEventListener("click", () => { btStopAll(); bt.close(); });
-      if(btStop) btStop.addEventListener("click", btStopAll);
-      if(btReset) btReset.addEventListener("click", () => { btStopAll(); btLeftSec = btTotalSec; if(btRemaining) btRemaining.textContent = fmt(btLeftSec); });
-      if(btStart) btStart.addEventListener("click", btStartRun);
-
-      // Buttons 1/2/3/5 min
-        document.querySelectorAll("[data-bt-min]").forEach(btn => {
-        btn.addEventListener("click", () => {
-        document.querySelectorAll("[data-bt-min]").forEach(b => b.setAttribute("aria-pressed","false"));
-          btn.setAttribute("aria-pressed","true");
-
-      const min = parseInt(btn.getAttribute("data-bt-min"), 10);
-        btSetDuration(min);
-        });
-        });
-
-      // Hook: bouton "Respiration 2 min" ouvre le timer
-        if(breath2min && bt){
-        breath2min.addEventListener("click", () => {
-        btSetDuration(2);
-        if(typeof bt.showModal === "function") bt.showModal();
-        });
-        }
-    
-    // Init
-    loadFavorites();
-    if(favCount) favCount.textContent = String(state.favorites.size);
-    render();
-  </script>
+  <script src="script.js" defer></script>
 </body>
 </html>
