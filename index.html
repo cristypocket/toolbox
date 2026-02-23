@@ -25,6 +25,41 @@
       --radius-lg: 26px;
       --max: 1100px;
 
+      /* Thème nuit */
+    :root[data-theme="dark"]{
+      --bg: #0f1514;
+      --paper: #131c1a;
+      --ink: #e9f1ee;
+      --muted: rgba(233,241,238,.72);
+      --line: rgba(233,241,238,.14);
+
+      --shadow: 0 12px 34px rgba(0,0,0,.45);
+      --shadow-sm: 0 8px 20px rgba(0,0,0,.35);
+    }
+
+    :root[data-theme="dark"] body{
+    background:
+      radial-gradient(1200px 700px at 20% -10%, rgba(45,140,134,.14), transparent 60%),
+      radial-gradient(900px 600px at 85% 10%, rgba(201,116,90,.10), transparent 55%),
+      linear-gradient(180deg, #0b0f0f, #0f1514 70%, #0f1514);
+    }
+
+    /* Petits ajustements lisibilité */
+    :root[data-theme="dark"] .sigil:before{ color: rgba(233,241,238,.92); }
+    :root[data-theme="dark"] .pill,
+    :root[data-theme="dark"] .fav-btn,
+    :root[data-theme="dark"] details.drop > summary,
+    :root[data-theme="dark"] .search input,
+    :root[data-theme="dark"] .btn,
+    :root[data-theme="dark"] .card,
+    :root[data-theme="dark"] dialog{
+      background: rgba(19,28,26,.85);
+    }
+    :root[data-theme="dark"] .chip{
+      background: rgba(15,21,20,.55);
+      border-color: rgba(233,241,238,.10);
+    }
+
       /* Typo */
       --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       --serif: ui-serif, Georgia, "Times New Roman", Times, serif;
@@ -209,6 +244,7 @@
       border: 1px solid rgba(45,140,134,.18);
       padding: 0 6px;
     }
+    
 
     /* Nav */
     nav{
@@ -575,6 +611,43 @@
     @media (prefers-reduced-motion: reduce){
       *{ transition: none !important; scroll-behavior: auto !important; }
     }
+    
+    /* Breath timer orb */
+    .breath-orb{
+      width: 170px;
+      height: 170px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(45,140,134,.10);
+      display:grid;
+      place-items:center;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .breath-orb-inner{
+      width: 70px;
+      height: 70px;
+      border-radius: 999px;
+      background: rgba(201,116,90,.14);
+      border: 1px solid rgba(201,116,90,.22);
+      transform: scale(1);
+      transition: transform 0.2s ease;
+    }
+
+    /* Animation pilotée par classe */
+    .breath-orb.is-running .breath-orb-inner{
+      animation: breathe 10s ease-in-out infinite;
+    }
+
+    /* 10s = 4s inspire + 6s expire */
+    @keyframes breathe{
+      0%   { transform: scale(1); }
+      40%  { transform: scale(2.05); } /* inspire */
+      100% { transform: scale(1); }    /* expire */
+    }
+    
   </style>
 </head>
 
@@ -607,6 +680,8 @@
         </div>
         <button id="toggleFavs" class="fav-btn" type="button" aria-pressed="false" title="Afficher les favoris">
           ★ Favoris <span id="favCount" class="fav-count">0</span>
+        </button>
+        <button id="toggleTheme" class="fav-btn" type="button" aria-pressed="false" title="Mode nuit">🌙 Nuit
         </button>
       </div>
     </div>
@@ -719,6 +794,48 @@
       <div class="steps" id="modalBody"></div>
     </div>
   </dialog>
+  
+  <dialog id="breathTimer" aria-labelledby="btTitle">
+    <div class="modal">
+      <div class="modal-top">
+        <div>
+          <h3 id="btTitle">🌬 Timer respiration</h3>
+            <div class="meta" style="margin-top:8px;">
+                <span class="chip">Inspire 4</span>
+                <span class="chip">Expire 6</span>
+                <span class="chip" id="btRemaining">2:00</span>
+            </div>
+        </div>
+        <button class="close" type="button" id="btClose">✕</button>
+    </div>
+
+    <div style="display:grid; place-items:center; padding: 16px 0 6px;">
+      <div class="breath-orb" aria-hidden="true">
+        <div class="breath-orb-inner"></div>
+      </div>
+      <div id="btPhase" style="margin-top:10px; color: var(--muted); font-size: 13px;">
+        Prête.
+      </div>
+    </div>
+
+    <div class="hero-actions" style="margin-top: 10px; justify-content:center;">
+      <button class="btn primary" type="button" id="btStart">Démarrer</button>
+      <button class="btn" type="button" id="btStop">Stop</button>
+      <button class="btn" type="button" id="btReset">Reset</button>
+    </div>
+
+    <div style="margin-top: 12px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+      <button class="pill" type="button" data-bt-min="1" aria-pressed="false"><span class="dot"></span> 1 min</button>
+      <button class="pill" type="button" data-bt-min="2" aria-pressed="true"><span class="dot"></span> 2 min</button>
+      <button class="pill" type="button" data-bt-min="3" aria-pressed="false"><span class="dot"></span> 3 min</button>
+      <button class="pill" type="button" data-bt-min="5" aria-pressed="false"><span class="dot"></span> 5 min</button>
+    </div>
+
+    <p style="margin: 14px 0 0; color: var(--muted); font-size: 13px; text-align:center;">
+      Option douce : si 4/6 te gêne, fais 3/4. L’expiration longue reste la clé.
+    </p>
+  </div>
+</dialog>
 
   <script>
 
@@ -1052,6 +1169,49 @@
         stop: "Si la douleur augmente : stop tout et repose-toi (protocole perso/médical).",
         note: "Ici c’est un refuge, pas un défi."
       }
+      {
+      id: "rouleau-picots",
+      title: "Rouleau à picots (dos) — usage intelligent",
+      category: "Douleur",
+      tags: ["Rouleau à picots", "fascia", "dos", "récup", "douleur"],
+      duration: "5–12 min",
+      position: "allongé",
+      intensity: "doux à modéré",
+      modes: ["ok","fatigue"],
+      summary: "Décompression + fascia : on dose pour éviter l’habituation (pas tous les jours).",
+      steps: [
+        "Pose-toi sur le rouleau (zone haut du dos ou milieu).",
+        "Commence par 1–2 minutes immobile, respiration longue.",
+        "Micro-roule très lentement (amplitude mini) 60–90 secondes.",
+        "Change de zone si OK, toujours sans chercher la douleur.",
+        "Fin : 4 expirations longues + verre d’eau."
+      ],
+      low: "Version low battery : 2 minutes immobile + respiration, sans rouler.",
+      stop: "Stop si douleur vive, engourdissement, sensation de pincement nerveux. Évite zone lombaire si sensible.",
+      note: "Pas tous les jours : laisse au corps le temps d’intégrer (sinon il s’habitue)."
+      },
+      {
+      id: "balle-fascia-trapeze",
+      title: "Balle fascia derrière le trapèze",
+      category: "Douleur",
+      tags: ["Balle fascia", "trapèze", "épaule", "fascia", "nuque"],
+      duration: "2–6 min",
+      position: "allongé",
+      intensity: "doux",
+      modes: ["ok","fatigue","sos"],
+      summary: "Déverrouillage doux du haut du dos : pression + mouvement du bras (6x mini).",
+      steps: [
+        "Allonge-toi sur le dos.",
+        "Place la balle derrière le trapèze (pas sur l’os).",
+        "Trouve un point ‘ah oui’ mais tolérable (pas ‘aïe’).",
+        "Lève le bras du côté concerné puis abaisse-le lentement (au moins 6 fois).",
+        "Respire : expiration longue sur la descente du bras.",
+        "Fin : bouge l’épaule en micro-cercles 3 fois."
+      ],
+      low: "Version low battery : garder la balle en place + 3 respirations longues, sans lever le bras.",
+      stop: "Stop si fourmillements, douleur nerveuse, douleur aiguë, vertige. Adapter amplitude.",
+      note: "C’est la lenteur qui fait le travail. On n’attaque pas le point."
+      }
     ];
 
     // -------------------------
@@ -1283,6 +1443,45 @@
     }
 
     // -------------------------
+    // Theme (mode nuit)
+    // -------------------------
+    const THEME_KEY = "grimoire_theme_v1";
+    const themeBtn = document.getElementById("toggleTheme");
+
+    function applyTheme(theme){
+      const root = document.documentElement; // <html>
+        if(theme === "dark"){
+          root.setAttribute("data-theme", "dark");
+        if(themeBtn) themeBtn.setAttribute("aria-pressed","true");
+        }else{
+          root.removeAttribute("data-theme");
+        if(themeBtn) themeBtn.setAttribute("aria-pressed","false");
+        }
+    }  
+
+    function loadTheme(){
+      try{
+      const saved = localStorage.getItem(THEME_KEY);
+        if(saved === "dark") applyTheme("dark");
+      }catch(e){}
+    }
+
+    function saveTheme(theme){
+      try{ localStorage.setItem(THEME_KEY, theme); }catch(e){}
+    }
+
+    if(themeBtn){
+      themeBtn.addEventListener("click", () => {
+        const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+        const next = isDark ? "light" : "dark";
+          applyTheme(next === "dark" ? "dark" : "light");
+          saveTheme(next === "dark" ? "dark" : "light");
+      });
+      }
+
+      loadTheme();
+
+    // -------------------------
     // Render
     // -------------------------
     function render(){
@@ -1412,6 +1611,93 @@
       saveFavorites();
     }
 
+    // -------------------------
+    // Breath Timer (4/6)
+    // -------------------------
+      const bt = document.getElementById("breathTimer");
+      const btClose = document.getElementById("btClose");
+      const btStart = document.getElementById("btStart");
+      const btStop = document.getElementById("btStop");
+      const btReset = document.getElementById("btReset");
+      const btRemaining = document.getElementById("btRemaining");
+      const btPhase = document.getElementById("btPhase");
+      const orb = bt ? bt.querySelector(".breath-orb") : null;
+
+      let btTotalSec = 120; // 2 min default
+      let btLeftSec = btTotalSec;
+      let btTick = null;
+      let btPhaseTick = null;
+
+      function fmt(sec){
+        const m = Math.floor(sec / 60);
+        const s = sec % 60;
+        return `${m}:${String(s).padStart(2,"0")}`;
+      }
+
+      function btSetDuration(min){
+        btTotalSec = Math.max(60, min * 60);
+        btLeftSec = btTotalSec;
+        if(btRemaining) btRemaining.textContent = fmt(btLeftSec);
+      }
+
+      function btStopAll(){
+        if(btTick){ clearInterval(btTick); btTick = null; }
+        if(btPhaseTick){ clearInterval(btPhaseTick); btPhaseTick = null; }
+        if(orb) orb.classList.remove("is-running");
+        if(btPhase) btPhase.textContent = "Prête.";
+      }
+
+      function btStartRun(){
+        btStopAll();
+        if(orb) orb.classList.add("is-running");
+
+      // Phase label (4/6 loop)
+        let t = 0;
+        if(btPhase) btPhase.textContent = "Inspire…";
+        btPhaseTick = setInterval(() => {
+          t = (t + 1) % 10; // cycle 10s
+        if(btPhase){
+        if(t < 4) btPhase.textContent = "Inspire…";
+        else btPhase.textContent = "Expire…";
+        }
+        }, 1000);
+
+      // Countdown
+        btTick = setInterval(() => {
+          btLeftSec = Math.max(0, btLeftSec - 1);
+          if(btRemaining) btRemaining.textContent = fmt(btLeftSec);
+
+          if(btLeftSec <= 0){
+            btStopAll();
+          if(btPhase) btPhase.textContent = "Terminé 🌿";
+          }
+        }, 1000);
+      }
+
+      if(btClose) btClose.addEventListener("click", () => { btStopAll(); bt.close(); });
+      if(btStop) btStop.addEventListener("click", btStopAll);
+      if(btReset) btReset.addEventListener("click", () => { btStopAll(); btLeftSec = btTotalSec; if(btRemaining) btRemaining.textContent = fmt(btLeftSec); });
+      if(btStart) btStart.addEventListener("click", btStartRun);
+
+      // Buttons 1/2/3/5 min
+        document.querySelectorAll("[data-bt-min]").forEach(btn => {
+        btn.addEventListener("click", () => {
+        document.querySelectorAll("[data-bt-min]").forEach(b => b.setAttribute("aria-pressed","false"));
+          btn.setAttribute("aria-pressed","true");
+
+      const min = parseInt(btn.getAttribute("data-bt-min"), 10);
+        btSetDuration(min);
+        });
+        });
+
+      // Hook: bouton "Respiration 2 min" ouvre le timer
+        if(breath2min && bt){
+        breath2min.addEventListener("click", () => {
+        btSetDuration(2);
+        if(typeof bt.showModal === "function") bt.showModal();
+        });
+        }
+    
     // Init
     loadFavorites();
     if(favCount) favCount.textContent = String(state.favorites.size);
