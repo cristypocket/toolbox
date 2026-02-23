@@ -231,26 +231,6 @@
       flex-wrap: wrap;
     }
 
-    .nav-toggle{
-      display:none;
-      border: 1px solid var(--line);
-      background: rgba(251,248,241,.85);
-      border-radius: 12px;
-      padding: 10px 12px;
-      cursor: pointer;
-    }
-    .nav-toggle:focus{
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(45,140,134,.18);
-    }
-
-    .nav-links{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap: wrap;
-    }
-
     /* Dropdown via <details> */
     details.drop{
       position: relative;
@@ -741,8 +721,12 @@
   </dialog>
 
   <script>
+
+    // -------------------------
+    // Data (starter pack)
+    // -------------------------
     
-    const TOOLS = [
+        const TOOLS = [
       {
         id: "contracte-relache",
         title: "Contracté–relâché",
@@ -1071,341 +1055,367 @@
     ];
 
     // -------------------------
-    // State
+    // State + storage
     // -------------------------
     const state = {
       mode: "ok",
       query: "",
-      filter: "",       // tag filter via dropdown buttons
+      filter: "",
       showFavs: false,
       favorites: new Set()
     };
 
     const LS_KEY = "grimoire_favorites_v1";
 
-   function loadFavorites(){
-  try{
-    const raw = localStorage.getItem(LS_KEY);
-    if(!raw) return;
-
-    const arr = JSON.parse(raw);
-    if(Array.isArray(arr)){
-      state.favorites = new Set(arr);
+    function loadFavorites(){
+      try{
+        const raw = localStorage.getItem(LS_KEY);
+        if(!raw) return;
+        const arr = JSON.parse(raw);
+        if(Array.isArray(arr)){
+          state.favorites = new Set(arr);
+        }
+      }catch(e){}
     }
-  }catch(e){}
-}
 
-Set(arr);
+    function saveFavorites(){
+      try{
+        localStorage.setItem(LS_KEY, JSON.stringify([...state.favorites]));
+      }catch(e){}
     }
-  }catch(e){}
-}
 
-function saveFavorites(){
-  try{
-    localStorage.setItem(LS_KEY, JSON.stringify([...state.favorites]));
-  }catch(e){}
-}
+    // -------------------------
+    // DOM
+    // -------------------------
+    const grid = document.getElementById("grid");
+    const search = document.getElementById("search");
+    const activeFilter = document.getElementById("activeFilter");
+    const clearFilters = document.getElementById("clearFilters");
+    const toggleFavs = document.getElementById("toggleFavs");
+    const favCount = document.getElementById("favCount");
 
-// -------------------------
-// DOM
-// -------------------------
-const grid = document.getElementById("grid");
-const search = document.getElementById("search");
-const activeFilter = document.getElementById("activeFilter");
-const clearFilters = document.getElementById("clearFilters");
-const toggleFavs = document.getElementById("toggleFavs");
-const favCount = document.getElementById("favCount");
+    const modal = document.getElementById("toolModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalMeta = document.getElementById("modalMeta");
+    const modalBody = document.getElementById("modalBody");
+    const closeModal = document.getElementById("closeModal");
 
-const modal = document.getElementById("toolModal");
-const modalTitle = document.getElementById("modalTitle");
-const modalMeta = document.getElementById("modalMeta");
-const modalBody = document.getElementById("modalBody");
-const closeModal = document.getElementById("closeModal");
-
-// Close dropdowns when clicking outside
-document.addEventListener("click", (e) => {
-  const drops = document.querySelectorAll("details.drop");
-  drops.forEach(d => {
-    if(!d.contains(e.target)) d.removeAttribute("open");
-  });
-});
-
-// Filter buttons inside dropdowns
-document.querySelectorAll("[data-filter]").forEach(btn => {
-  btn.addEventListener("click", () => {
-    state.filter = btn.getAttribute("data-filter") || "";
-    activeFilter.textContent = state.filter || "Aucun";
-    // close parent details
-    const details = btn.closest("details");
-    if(details) details.removeAttribute("open");
-    render();
-  });
-});
-
-// Modes
-document.querySelectorAll(".pill").forEach(p => {
-  p.addEventListener("click", () => {
-    const mode = p.dataset.mode;
-    state.mode = mode;
-    document.querySelectorAll(".pill").forEach(x => x.setAttribute("aria-pressed","false"));
-    p.setAttribute("aria-pressed","true");
-    render();
-  });
-});
-
-// Search
-search.addEventListener("input", () => {
-  state.query = search.value.trim().toLowerCase();
-  render();
-});
-
-// Reset
-clearFilters.addEventListener("click", () => {
-  state.filter = "";
-  state.query = "";
-  state.showFavs = false;
-  state.mode = "ok";
-
-  search.value = "";
-  activeFilter.textContent = "Aucun";
-  toggleFavs.setAttribute("aria-pressed","false");
-  document.querySelectorAll(".pill").forEach(x => x.setAttribute("aria-pressed","false"));
-  const okBtn = document.querySelector('.pill[data-mode="ok"]');
-  if(okBtn) okBtn.setAttribute("aria-pressed","true");
-
-  render();
-});
-
-// Favorites toggle
-toggleFavs.addEventListener("click", () => {
-  state.showFavs = !state.showFavs;
-  toggleFavs.setAttribute("aria-pressed", state.showFavs ? "true" : "false");
-  render();
-});
-
-// Hero quick actions
-const sosJump = document.getElementById("sosJump");
-if(sosJump){
-  sosJump.addEventListener("click", () => {
-    state.mode = "sos";
-    document.querySelectorAll(".pill").forEach(x => x.setAttribute("aria-pressed","false"));
-    const sosBtn = document.querySelector('.pill[data-mode="sos"]');
-    if(sosBtn) sosBtn.setAttribute("aria-pressed","true");
-    const lib = document.getElementById("library");
-    if(lib) lib.scrollIntoView({behavior:"smooth", block:"start"});
-    render();
-  });
-}
-
-const randomTool = document.getElementById("randomTool");
-if(randomTool){
-  randomTool.addEventListener("click", () => {
-    const list = getFilteredTools();
-    if(list.length === 0) return;
-    const pick = list[Math.floor(Math.random()*list.length)];
-    openTool(pick.id);
-  });
-}
-
-const breath2min = document.getElementById("breath2min");
-if(breath2min){
-  breath2min.addEventListener("click", () => {
-    const id = (state.mode === "sos" || state.mode === "fatigue") ? "soupir" : "coherence";
-    openTool(id);
-  });
-}
-
-// Modal close
-if(closeModal){
-  closeModal.addEventListener("click", () => modal.close());
-}
-
-if(modal){
-  modal.addEventListener("click", (e) => {
-    // Click outside content closes (robuste)
-    const r = modal.getBoundingClientRect();
-    const inside =
-      e.clientX >= r.left && e.clientX <= r.right &&
-      e.clientY >= r.top  && e.clientY <= r.bottom;
-    if(!inside) modal.close();
-  });
-}
-
-// -------------------------
-// Render helpers
-// -------------------------
-function normalize(s){
-  return (s || "")
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
-}
-
-function matchesQuery(tool){
-  if(!state.query) return true;
-  const q = normalize(state.query);
-  const hay = normalize([
-    tool.title,
-    tool.category,
-    tool.summary,
-    ...(tool.tags || [])
-  ].join(" "));
-  return hay.includes(q);
-}
-
-function matchesFilter(tool){
-  if(!state.filter) return true;
-  const f = normalize(state.filter);
-  const inTags = (tool.tags || []).some(t => normalize(t).includes(f));
-  const inTitle = normalize(tool.title).includes(f);
-  return inTags || inTitle;
-}
-
-function matchesMode(tool){
-  return (tool.modes || []).includes(state.mode);
-}
-
-function matchesFavs(tool){
-  if(!state.showFavs) return true;
-  return state.favorites.has(tool.id);
-}
-
-function getFilteredTools(){
-  return TOOLS
-    .filter(matchesMode)
-    .filter(matchesQuery)
-    .filter(matchesFilter)
-    .filter(matchesFavs);
-}
-
-function render(){
-  favCount.textContent = String(state.favorites.size);
-
-  const items = getFilteredTools();
-  grid.innerHTML = "";
-
-  if(items.length === 0){
-    const empty = document.createElement("div");
-    empty.className = "card";
-    empty.innerHTML = `
-      <div class="card-head">
-        <h3>Aucun résultat</h3>
-      </div>
-      <p>Essaie de changer le mode, d’enlever les favoris, ou de supprimer le filtre.</p>
-      <div class="card-actions">
-        <button class="open" type="button" id="emptyReset">↺ Réinitialiser</button>
-        <span class="chip">🕯️ douceur</span>
-      </div>
-    `;
-    grid.appendChild(empty);
-    empty.querySelector("#emptyReset").addEventListener("click", () => clearFilters.click());
-    return;
-  }
-
-  items.forEach(tool => {
-    const card = document.createElement("article");
-    card.className = "card";
-
-    const isFav = state.favorites.has(tool.id);
-
-    const modeChip = (tool.modes.includes("sos") && !tool.modes.includes("ok"))
-      ? `<span class="chip sos">🔥 SOS</span>`
-      : (state.mode === "sos" ? `<span class="chip sos">🔥 SOS</span>` : `<span class="chip">🌿</span>`);
-
-    card.innerHTML = `
-      <div class="card-head">
-        <div>
-          <h3>${escapeHtml(tool.title)}</h3>
-          <div class="meta" style="margin-top:8px;">
-            <span class="chip">${escapeHtml(tool.duration)}</span>
-            <span class="chip">${escapeHtml(tool.position)}</span>
-            <span class="chip">${escapeHtml(tool.intensity)}</span>
-            ${modeChip}
-          </div>
-        </div>
-        <button class="star" type="button" aria-pressed="${isFav ? "true":"false"}" title="Ajouter aux favoris">
-          ${isFav ? "★" : "☆"} <span style="font-size:12px;">Favori</span>
-        </button>
-      </div>
-
-      <p>${escapeHtml(tool.summary)}</p>
-
-      <div class="card-actions">
-        <button class="open" type="button">Ouvrir la fiche</button>
-        <span class="chip">${escapeHtml(tool.category)}</span>
-      </div>
-    `;
-
-    // Actions
-    card.querySelector(".open").addEventListener("click", () => openTool(tool.id));
-    const starBtn = card.querySelector(".star");
-    starBtn.addEventListener("click", () => {
-      toggleFavorite(tool.id);
-      const nowFav = state.favorites.has(tool.id);
-      starBtn.setAttribute("aria-pressed", nowFav ? "true" : "false");
-      starBtn.innerHTML = `${nowFav ? "★" : "☆"} <span style="font-size:12px;">Favori</span>`;
-      favCount.textContent = String(state.favorites.size);
-
-      if(state.showFavs) render();
+    // Close dropdowns when clicking outside
+    document.addEventListener("click", (e) => {
+      document.querySelectorAll("details.drop").forEach(d => {
+        if(!d.contains(e.target)) d.open = false;
+      });
     });
 
-    grid.appendChild(card);
-  });
-}
+    // Close other dropdowns when opening one
+    document.querySelectorAll("details.drop").forEach(d => {
+      d.addEventListener("toggle", () => {
+        if(!d.open) return;
+        document.querySelectorAll("details.drop").forEach(other => {
+          if(other !== d) other.open = false;
+        });
+      });
+    });
 
-function openTool(id){
-  const tool = TOOLS.find(t => t.id === id);
-  if(!tool) return;
+    // Filter buttons inside dropdowns
+    document.querySelectorAll("[data-filter]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        state.filter = btn.getAttribute("data-filter") || "";
+        activeFilter.textContent = state.filter || "Aucun";
+        const details = btn.closest("details");
+        if(details) details.open = false;
+        render();
+      });
+    });
 
-  modalTitle.textContent = tool.title;
+    // Modes
+    document.querySelectorAll(".pill").forEach(p => {
+      p.addEventListener("click", () => {
+        state.mode = p.dataset.mode || "ok";
+        document.querySelectorAll(".pill").forEach(x => x.setAttribute("aria-pressed","false"));
+        p.setAttribute("aria-pressed","true");
+        render();
+      });
+    });
 
-  modalMeta.innerHTML = `
-    <span class="chip">${escapeHtml(tool.category)}</span>
-    <span class="chip">${escapeHtml(tool.duration)}</span>
-    <span class="chip">${escapeHtml(tool.position)}</span>
-    <span class="chip">${escapeHtml(tool.intensity)}</span>
-  `;
+    // Search
+    search.addEventListener("input", () => {
+      state.query = search.value.trim();
+      render();
+    });
 
-  const steps = (tool.steps || []).map(s => `<li>${escapeHtml(s)}</li>`).join("");
-  modalBody.innerHTML = `
-    <div>
-      <h4>Étapes</h4>
-      <ul>${steps}</ul>
-    </div>
-    <div class="note">
-      <strong>🌥 Version low battery</strong><br>
-      ${escapeHtml(tool.low || "—")}
-    </div>
-    <div class="note" style="border-color: rgba(201,116,90,.22); background: rgba(201,116,90,.08);">
-      <strong>🔥 Stop si…</strong><br>
-      ${escapeHtml(tool.stop || "—")}
-    </div>
-    <div class="note">
-      <strong>✨ Note Cristy</strong><br>
-      ${escapeHtml(tool.note || "—")}
-    </div>
-  `;
+    // Reset
+    clearFilters.addEventListener("click", () => {
+      state.filter = "";
+      state.query = "";
+      state.showFavs = false;
+      state.mode = "ok";
 
-  if(typeof modal.showModal === "function") modal.showModal();
-  else alert(tool.title);
-}
+      search.value = "";
+      activeFilter.textContent = "Aucun";
+      toggleFavs.setAttribute("aria-pressed","false");
 
-function toggleFavorite(id){
-  if(state.favorites.has(id)) state.favorites.delete(id);
-  else state.favorites.add(id);
-  saveFavorites();
-}
+      document.querySelectorAll(".pill").forEach(x => x.setAttribute("aria-pressed","false"));
+      const okBtn = document.querySelector('.pill[data-mode="ok"]');
+      if(okBtn) okBtn.setAttribute("aria-pressed","true");
 
-function escapeHtml(str){
-  return String(str)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-}
+      render();
+    });
 
-// Init
-loadFavorites();
-favCount.textContent = String(state.favorites.size);
-render();
+    // Favorites toggle
+    toggleFavs.addEventListener("click", () => {
+      state.showFavs = !state.showFavs;
+      toggleFavs.setAttribute("aria-pressed", state.showFavs ? "true" : "false");
+      render();
+    });
+
+    // Hero quick actions
+    const sosJump = document.getElementById("sosJump");
+    if(sosJump){
+      sosJump.addEventListener("click", () => {
+        state.mode = "sos";
+        document.querySelectorAll(".pill").forEach(x => x.setAttribute("aria-pressed","false"));
+        const sosBtn = document.querySelector('.pill[data-mode="sos"]');
+        if(sosBtn) sosBtn.setAttribute("aria-pressed","true");
+        const lib = document.getElementById("library");
+        if(lib) lib.scrollIntoView({behavior:"smooth", block:"start"});
+        render();
+      });
+    }
+
+    const randomTool = document.getElementById("randomTool");
+    if(randomTool){
+      randomTool.addEventListener("click", () => {
+        const list = getFilteredTools();
+        if(list.length === 0) return;
+        const pick = list[Math.floor(Math.random() * list.length)];
+        openTool(pick.id);
+      });
+    }
+
+    const breath2min = document.getElementById("breath2min");
+    if(breath2min){
+      breath2min.addEventListener("click", () => {
+        const id = (state.mode === "sos" || state.mode === "fatigue") ? "soupir" : "coherence";
+        openTool(id);
+      });
+    }
+
+    // Modal close
+    if(closeModal){
+      closeModal.addEventListener("click", () => {
+        try{ modal.close(); }catch(e){}
+      });
+    }
+
+    // Close modal on outside click (best effort)
+    if(modal){
+      modal.addEventListener("click", (e) => {
+        const rect = modal.getBoundingClientRect();
+        const inside =
+          e.clientX >= rect.left && e.clientX <= rect.right &&
+          e.clientY >= rect.top  && e.clientY <= rect.bottom;
+        if(!inside){
+          try{ modal.close(); }catch(err){}
+        }
+      });
+    }
+
+    // -------------------------
+    // Helpers
+    // -------------------------
+    function normalize(s){
+      return (s || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function matchesQuery(tool){
+      const q = normalize(state.query);
+      if(!q) return true;
+      const hay = normalize([tool.title, tool.category, tool.summary, ...(tool.tags || [])].join(" "));
+      return hay.includes(q);
+    }
+
+    function matchesFilter(tool){
+      if(!state.filter) return true;
+      const f = normalize(state.filter);
+      const inTags = (tool.tags || []).some(t => normalize(t).includes(f));
+      const inTitle = normalize(tool.title).includes(f);
+      return inTags || inTitle;
+    }
+
+    function matchesMode(tool){
+      return (tool.modes || []).includes(state.mode);
+    }
+
+    function matchesFavs(tool){
+      if(!state.showFavs) return true;
+      return state.favorites.has(tool.id);
+    }
+
+    function getFilteredTools(){
+      return TOOLS
+        .filter(matchesMode)
+        .filter(matchesQuery)
+        .filter(matchesFilter)
+        .filter(matchesFavs);
+    }
+
+    function escapeHtml(str){
+      return String(str)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function safeShowModal(dialogEl){
+      try{
+        if(dialogEl && typeof dialogEl.showModal === "function"){
+          dialogEl.showModal();
+          return true;
+        }
+      }catch(e){}
+      return false;
+    }
+
+    // -------------------------
+    // Render
+    // -------------------------
+    function render(){
+      if(favCount) favCount.textContent = String(state.favorites.size);
+
+      const items = getFilteredTools();
+      if(!grid) return;
+      grid.innerHTML = "";
+
+      if(items.length === 0){
+        const empty = document.createElement("div");
+        empty.className = "card";
+        empty.innerHTML = `
+          <div class="card-head">
+            <h3>Aucun résultat</h3>
+          </div>
+          <p>Essaie de changer le mode, d’enlever les favoris, ou de supprimer le filtre.</p>
+          <div class="card-actions">
+            <button class="open" type="button" id="emptyReset">↺ Réinitialiser</button>
+            <span class="chip">🕯️ douceur</span>
+          </div>
+        `;
+        grid.appendChild(empty);
+        const r = empty.querySelector("#emptyReset");
+        if(r) r.addEventListener("click", () => clearFilters && clearFilters.click());
+        return;
+      }
+
+      items.forEach(tool => {
+        const card = document.createElement("article");
+        card.className = "card";
+
+        const isFav = state.favorites.has(tool.id);
+
+        const modeChip = (tool.modes.includes("sos") && !tool.modes.includes("ok"))
+          ? `<span class="chip sos">🔥 SOS</span>`
+          : (state.mode === "sos" ? `<span class="chip sos">🔥 SOS</span>` : `<span class="chip">🌿</span>`);
+
+        card.innerHTML = `
+          <div class="card-head">
+            <div>
+              <h3>${escapeHtml(tool.title)}</h3>
+              <div class="meta" style="margin-top:8px;">
+                <span class="chip">${escapeHtml(tool.duration)}</span>
+                <span class="chip">${escapeHtml(tool.position)}</span>
+                <span class="chip">${escapeHtml(tool.intensity)}</span>
+                ${modeChip}
+              </div>
+            </div>
+            <button class="star" type="button" aria-pressed="${isFav ? "true":"false"}" title="Ajouter aux favoris">
+              ${isFav ? "★" : "☆"} <span style="font-size:12px;">Favori</span>
+            </button>
+          </div>
+
+          <p>${escapeHtml(tool.summary)}</p>
+
+          <div class="card-actions">
+            <button class="open" type="button">Ouvrir la fiche</button>
+            <span class="chip">${escapeHtml(tool.category)}</span>
+          </div>
+        `;
+
+        const openBtn = card.querySelector(".open");
+        if(openBtn) openBtn.addEventListener("click", () => openTool(tool.id));
+
+        const starBtn = card.querySelector(".star");
+        if(starBtn){
+          starBtn.addEventListener("click", () => {
+            toggleFavorite(tool.id);
+            const nowFav = state.favorites.has(tool.id);
+            starBtn.setAttribute("aria-pressed", nowFav ? "true" : "false");
+            starBtn.innerHTML = `${nowFav ? "★" : "☆"} <span style="font-size:12px;">Favori</span>`;
+            if(favCount) favCount.textContent = String(state.favorites.size);
+            if(state.showFavs) render();
+          });
+        }
+
+        grid.appendChild(card);
+      });
+    }
+
+    function openTool(id){
+      const tool = TOOLS.find(t => t.id === id);
+      if(!tool) return;
+
+      if(modalTitle) modalTitle.textContent = tool.title;
+
+      if(modalMeta){
+        modalMeta.innerHTML = `
+          <span class="chip">${escapeHtml(tool.category)}</span>
+          <span class="chip">${escapeHtml(tool.duration)}</span>
+          <span class="chip">${escapeHtml(tool.position)}</span>
+          <span class="chip">${escapeHtml(tool.intensity)}</span>
+        `;
+      }
+
+      const steps = (tool.steps || []).map(s => `<li>${escapeHtml(s)}</li>`).join("");
+      if(modalBody){
+        modalBody.innerHTML = `
+          <div>
+            <h4>Étapes</h4>
+            <ul>${steps}</ul>
+          </div>
+          <div class="note">
+            <strong>🌥 Version low battery</strong><br>
+            ${escapeHtml(tool.low || "—")}
+          </div>
+          <div class="note" style="border-color: rgba(201,116,90,.22); background: rgba(201,116,90,.08);">
+            <strong>🔥 Stop si…</strong><br>
+            ${escapeHtml(tool.stop || "—")}
+          </div>
+          <div class="note">
+            <strong>✨ Note Cristy</strong><br>
+            ${escapeHtml(tool.note || "—")}
+          </div>
+        `;
+      }
+
+      if(modal && !safeShowModal(modal)){
+        alert(tool.title + "\n\n" + (tool.summary || ""));
+      }
+    }
+
+    function toggleFavorite(id){
+      if(state.favorites.has(id)) state.favorites.delete(id);
+      else state.favorites.add(id);
+      saveFavorites();
+    }
+
+    // Init
+    loadFavorites();
+    if(favCount) favCount.textContent = String(state.favorites.size);
+    render();
+  </script>
+</body>
+</html>
