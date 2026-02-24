@@ -493,27 +493,33 @@ function render(){
 
   items.forEach(tool => {
     const isFav = state.favorites.has(tool.id);
+    const sosChip = (tool.modes && tool.modes.includes("sos"))
+      ? `<span class="chip sos">🔥 SOS</span>`
+      : "";
 
-    const sosChip = tool.modes.includes("sos") ? `<span class="chip sos">🔥 SOS</span>` : "";
-      card.innerHTML = `
-        <div>
-          <h3>${escapeHtml(tool.title)}</h3>
-             <div class="meta">
-               <span class="chip">${escapeHtml(tool.category)}</span>
-               <span class="chip">${escapeHtml(tool.duration)}</span>
-               <span class="chip">${escapeHtml(tool.intensity)}</span>
-               ${sosChip}
-             </div>
-         <p style="margin-top:10px;">${escapeHtml(tool.summary)}</p>
-        </div>
+    const card = document.createElement("article");
+    card.className = "card";
 
-        <div class="hero-actions" style="justify-content:flex-start; margin-top:14px;">
-          <button class="btn small" data-open="${escapeHtml(tool.id)}">Ouvrir</button>
-          <button class="btn small ghost" data-fav="${escapeHtml(tool.id)}" aria-pressed="${isFav ? "true":"false"}">
-            ${isFav ? "★" : "☆"} Favori
-          </button>
+    card.innerHTML = `
+      <div>
+        <h3>${escapeHtml(tool.title)}</h3>
+        <div class="meta">
+          <span class="chip">${escapeHtml(tool.category)}</span>
+          <span class="chip">${escapeHtml(tool.duration)}</span>
+          <span class="chip">${escapeHtml(tool.intensity)}</span>
+          ${sosChip}
         </div>
-`;
+        <p style="margin-top:10px;">${escapeHtml(tool.summary)}</p>
+      </div>
+
+      <div class="hero-actions" style="justify-content:flex-start; margin-top:14px;">
+        <button class="btn small" data-open="${escapeHtml(tool.id)}">Ouvrir</button>
+        <button class="btn small ghost" data-fav="${escapeHtml(tool.id)}" aria-pressed="${isFav ? "true":"false"}">
+          ${isFav ? "★" : "☆"} Favori
+        </button>
+      </div>
+    `;
+
     grid.appendChild(card);
   });
 
