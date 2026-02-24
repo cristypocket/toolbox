@@ -583,30 +583,37 @@ dialog{
 }
 
 /* =========================
-   BREATH ORB
+   BREATH ORB (ROND + SCALE)
 ========================= */
 
 .breath-orb{
-  width: 160px;
-  height: 160px;
-  border-radius: 8px;
-  margin: 20px auto;
+  width: 180px;
+  height: 180px;
+  border-radius: 999px;             /* <- rond */
+  margin: 18px auto 10px;
   border: 1px solid var(--line);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--paper) 75%, transparent);
+  box-shadow: var(--shadow-sm);
 }
 
 .breath-orb-inner{
-  filter: blur(0px);
-}
-.breath-orb.is-running .breath-orb-inner{
-  filter: blur(.2px);
+  width: 88px;
+  height: 88px;
+  border-radius: 999px;             /* <- rond */
+  background: radial-gradient(circle at 30% 30%,
+    color-mix(in srgb, var(--terracotta) 30%, transparent),
+    color-mix(in srgb, var(--sage) 22%, transparent)
+  );
+  transform: scale(var(--orb-scale, 1));   /* <- scale piloté par JS */
+  transition: transform 900ms linear;
+  filter: blur(0.2px);
 }
 
-.center-text{
-  text-align: center;
-  margin: 6px 0;
+/* Optionnel : petit glow en running */
+.breath-orb.is-running .breath-orb-inner{
+  box-shadow: 0 0 0 10px color-mix(in srgb, var(--sage) 10%, transparent);
 }
 
 /* =========================
