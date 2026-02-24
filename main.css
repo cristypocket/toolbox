@@ -598,10 +598,10 @@ dialog{
 }
 
 .breath-orb-inner{
-  width: 70px;
-  height: 70px;
-  border-radius: 8px;
-  background: rgba(201,116,90,.2);
+  filter: blur(0px);
+}
+.breath-orb.is-running .breath-orb-inner{
+  filter: blur(.2px);
 }
 
 .center-text{
