@@ -11,8 +11,8 @@
 }
 
 @font-face {
-  font-family: "WhiteColors";
-  src: url("fonts/WhiteColors-xRRgR.ttf") format("truetype");
+  font-family: "Antagon";
+  src: url("fonts/Antagon.otf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -41,7 +41,7 @@
   --radius-lg: 26px;
   --max: 1100px;
   --font: "Nunito", system-ui, -apple-system, sans-serif;
-  --title-font: "WhiteColors", "Nunito", sans-serif;
+  --title-font: "Antagon", "Nunito", sans-serif;
   
 }
 
