@@ -254,6 +254,9 @@ body{
 .brand-title strong{
   font-family: var(--title-font);
   font-size: 40px;
+  letter-spacing: 1.5px;
+  line-height: 1.1;
+  margin-bottom: 18px;
 }
 
 .brand-title span{
@@ -482,7 +485,9 @@ details.drop > ul button:active{
 .hero h1{
   font-family: var(--title-font);
   font-size: clamp(46px, 4vw, 70px);
-  margin-bottom: 12px;
+  letter-spacing: 1.5px;
+  line-height: 1.1;
+  margin-bottom: 18px;
 }
 
 .hero p{
