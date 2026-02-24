@@ -14,46 +14,28 @@
   <!-- ===================== -->
   <!-- TOP BAR -->
   <!-- ===================== -->
-  <header class="topbar">
-    <div class="topbar-inner">
-
-      <div class="brand">
-        <div class="sigil"></div>
+  <header class="topbar" role="banner">
+    <div class="topbar-inner topbar-centered">
+      <div class="brand brand-centered">
+        <img class="brand-icon" src="images/wellbeing.png" alt="" aria-hidden="true">
         <div class="brand-title">
           <strong>Boîte à outils</strong>
           <span>Régulation</span>
         </div>
       </div>
 
-      <div class="modes">
-        <button class="pill" data-mode="ok" aria-pressed="true">
-          <span class="dot"></span> 🌿 OK
-        </button>
-        <button class="pill" data-mode="fatigue" aria-pressed="false">
-          <span class="dot"></span> 🌥 Fatigue
-        </button>
-        <button class="pill" data-mode="sos" aria-pressed="false">
-          <span class="dot"></span> 🔥 SOS
-        </button>
-      </div>
-
-      <div class="tools">
-        <button id="toggleFavs" class="btn small" aria-pressed="false">
-          ⭐ Favoris <span id="favCount">0</span>
-        </button>
-
-        <button id="toggleTheme" class="btn small" aria-pressed="false">
-          🌙 Nuit
-        </button>
-      </div>
-
+    <div class="tools">
+      <button id="toggleFavs" class="fav-btn" type="button" aria-pressed="false" title="Afficher les favoris">
+        ★ Favoris <span id="favCount" class="fav-count">0</span>
+      </button>
+      <button id="toggleTheme" class="btn small ghost" type="button" aria-pressed="false">🌙 Nuit</button>
     </div>
-  </header>
+  </div>
 
   <!-- ===================== -->
   <!-- NAVIGATION -->
   <!-- ===================== -->
-  <nav class="nav">
+  <nav class="nav" aria-label="Navigation catégories">
     <div class="nav-inner">
       <div class="nav-left">
       <details class="drop">
@@ -105,31 +87,38 @@
           <input id="search" type="search" placeholder="Rechercher un outil…" autocomplete="off" />
         </div>
 
-        <button id="clearFilters" class="btn small ghost">
-        ↺ Réinitialiser
-        </button>
+        <button id="clearFilters" class="btn small ghost" type="button">↺ Réinitialiser</button>
       </div>
     </div>
   </nav>
+</header>
 
+  
   <!-- ===================== -->
   <!-- HERO -->
   <!-- ===================== -->
   <section class="hero">
-    <div class="wrap">
-
-      <h1>Ton sanctuaire de régulation</h1>
-      <p>
-        Des outils doux pour apaiser le système nerveux,
-        la douleur et l’énergie.
-      </p>
+    <h1>Ton sanctuaire de régulation</h1>
+    <p>Des outils doux pour apaiser le système nerveux, la douleur et l’énergie.</p>
 
       <div class="hero-actions">
-        <button id="sosJump" class="btn primary">🔥 Je suis en crise</button>
-        <button id="breath2min" class="btn">🌬 Respiration 2 min</button>
-        <button id="randomTool" class="btn">🎲 Outil aléatoire</button>
+        <button class="btn primary" id="sosJump" type="button">🔥 Je suis en crise</button>
+        <button class="btn" id="breath2min" type="button">🌬 Respiration 2 min</button>
+        <button class="btn" id="randomTool" type="button">🎲 Outil aléatoire</button>
       </div>
 
+      <div class="feel-box" aria-label="Sélection de ton état du moment">
+        <h2 class="feel-title">Je me sens…</h2>
+
+        <div class="feel-grid" role="group" aria-label="Choisir un état">
+          <button class="pill" type="button" data-mode="ok" aria-pressed="true">🌿 OK</button>
+          <button class="pill" type="button" data-mode="fatigue_phys" aria-pressed="false">🫩 Fatigue physique</button>
+          <button class="pill" type="button" data-mode="fatigue_mentale" aria-pressed="false">🤯 Fatigue mentale</button>
+          <button class="pill" type="button" data-mode="fatigue_emo" aria-pressed="false">😔 Fatigue émotionnelle</button>
+          <button class="pill" type="button" data-mode="courbatures" aria-pressed="false">😬 Courbatures</button>
+          <button class="pill" type="button" data-mode="douleurs" aria-pressed="false">😣 Douleurs</button>
+        <  button class="pill" type="button" data-mode="sos" aria-pressed="false">🔥 SOS</button>
+        </div>
     </div>
   </section>
 
