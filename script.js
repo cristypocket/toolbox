@@ -15,7 +15,7 @@ const TOOLS = [
     duration: "5 min",
     position: "assis/allongé",
     intensity: "très doux",
-    modes: ["ok","fatigue","sos"],
+    modes: ["ok","fatigue_phys","fatigue_mentale","courbatures","sos"],
     summary: "Relâcher les tensions sans forcer, en alternant contraction légère et détente.",
     steps: [
       "Inspire doucement.",
@@ -36,7 +36,7 @@ const TOOLS = [
     duration: "6–8 min",
     position: "assis/debout",
     intensity: "doux",
-    modes: ["ok","fatigue"],
+    modes: ["ok","fatigue_phys","fatigue_mentale","courbatures"],
     summary: "Réveiller le corps comme un chat : micro-cercles, amplitude mini, respiration lente.",
     steps: [
       "Cercles d’épaules (petits) x 6.",
@@ -57,7 +57,7 @@ const TOOLS = [
     duration: "4–6 min",
     position: "assis",
     intensity: "très doux",
-    modes: ["ok","fatigue"],
+    modes: ["ok","fatigue_phys","courbatures"],
     summary: "Étirements non-performants : on cherche le confort, pas l’amplitude.",
     steps: [
       "Étirement latéral assis (très léger) 2 respirations de chaque côté.",
@@ -77,7 +77,7 @@ const TOOLS = [
     duration: "2–3 min",
     position: "assis/debout",
     intensity: "très doux",
-    modes: ["ok","fatigue","sos"],
+    modes: ["ok","fatigue_mentale""fatigue_emo","sos"],
     summary: "Revenir au présent via les yeux, en cherchant le neutre/agréable.",
     steps: [
       "Regarde 5 objets autour de toi, lentement.",
@@ -97,7 +97,7 @@ const TOOLS = [
     duration: "1–3 min",
     position: "assis/allongé",
     intensity: "très doux",
-    modes: ["ok","fatigue","sos"],
+    modes: ["ok","fatigue_mentale","fatigue_emo","sos"],
     summary: "Le toucher comme signal de sécurité : paumes + pression douce + expirations longues.",
     steps: [
       "Une main sur le cœur, une sur le ventre.",
@@ -117,7 +117,7 @@ const TOOLS = [
     duration: "4–6 min",
     position: "assis",
     intensity: "doux",
-    modes: ["ok","fatigue","sos"],
+    modes: ["ok","fatigue_mentale","fatigue_emo","fatigue_phys"],
     summary: "Aller-retour entre une zone OK et une zone tendue pour aider le système à ne pas se figer.",
     steps: [
       "Choisis une zone neutre (main, pieds) = Zone A.",
@@ -135,16 +135,14 @@ const TOOLS = [
     title: "Cohérence cardiaque",
     category: "Respiration",
     tags: ["cohérence cardiaque", "respiration", "stress"],
-    duration: "3–5 min",
+    duration: "5 min",
     position: "assis",
     intensity: "très doux",
-    modes: ["ok","fatigue","sos"],
+    modes: ["ok","fatigue_mentale","fatigue_emo","fatigue_phys", "douleurs","sos"],
     summary: "Respiration régulière : inspire 4, expire 6 (adaptable).",
     steps: [
-      "Inspire par le nez 4 secondes.",
-      "Expire 6 secondes (lente, douce).",
-      "Répète 10 cycles.",
-      "Si c’est trop : 3/4 au lieu de 4/6."
+      "Inspire par le nez 5 secondes.",
+      "Expire 5 secondes",
     ],
     low: "Version low battery : 5 cycles.",
     stop: "Stop si essoufflement : respiration naturelle + expirations longues.",
@@ -158,7 +156,7 @@ const TOOLS = [
     duration: "1 min",
     position: "assis/debout",
     intensity: "très doux",
-    modes: ["fatigue","sos"],
+    modes: ["fatigue_phys","fatigue_emo","fatigue_mentale","sos"],
     summary: "Reset rapide : deux petites inspirations + une longue expiration.",
     steps: [
       "Inspire normalement.",
@@ -178,7 +176,7 @@ const TOOLS = [
     duration: "2–4 min",
     position: "assis",
     intensity: "très doux",
-    modes: ["ok","fatigue","sos"],
+    modes: ["ok","fatigue_phys","fatigue-mentale","fatigue_emo","sos"],
     summary: "Faire le point sans jugement : énergie, douleur, priorités vitales.",
     steps: [
       "Énergie 0–10 ?",
@@ -193,13 +191,13 @@ const TOOLS = [
   },
   {
     id: "mvd",
-    title: "Minimum viable day",
+    title: "Minimum vital",
     category: "Pacing",
-    tags: ["Minimum viable day", "pacing", "fatigue"],
+    tags: ["Minimum vital", "pacing", "fatigue"],
     duration: "3–6 min",
     position: "assis",
     intensity: "très doux",
-    modes: ["fatigue","sos"],
+    modes: ["fatigue_phys","fatigue_mentale","fatigue_emo","douleurs","sos"],
     summary: "Construire une journée “minimum vital” pour arrêter de se battre contre soi.",
     steps: [
       "3 besoins : eau / manger / repos (choisis 1).",
@@ -219,7 +217,7 @@ const TOOLS = [
     duration: "3–10 min",
     position: "assis/allongé",
     intensity: "très doux",
-    modes: ["ok","fatigue","sos"],
+    modes: ["ok","fatigue_phys","douleurs","sos"],
     summary: "Protocole doux : chaleur + respiration + relâchement de mâchoire.",
     steps: [
       "Chaleur à la base du crâne (si ok).",
@@ -239,7 +237,7 @@ const TOOLS = [
     duration: "2–5 min",
     position: "assis",
     intensity: "très doux",
-    modes: ["ok","fatigue","sos"],
+    modes: ["ok","fatigue_phys","douleurs","sos"],
     summary: "Décharger la mâchoire sans étirer fort.",
     steps: [
       "Lèvres fermées, dents séparées.",
@@ -259,7 +257,7 @@ const TOOLS = [
     duration: "5–12 min",
     position: "allongé",
     intensity: "doux à modéré",
-    modes: ["ok","fatigue"],
+    modes: ["ok","fatigue_phys","douleurs"],
     summary: "Décompression + fascia : on dose pour éviter l’habituation (pas tous les jours).",
     steps: [
       "Pose-toi sur le rouleau (haut/milieu du dos).",
@@ -280,7 +278,7 @@ const TOOLS = [
     duration: "2–6 min",
     position: "allongé",
     intensity: "doux",
-    modes: ["ok","fatigue","sos"],
+    modes: ["ok","fatigue_phys","douleurs","sos"],
     summary: "Déverrouillage doux : pression + mouvement du bras (6x mini).",
     steps: [
       "Allonge-toi sur le dos.",
@@ -293,6 +291,28 @@ const TOOLS = [
     low: "Version low battery : balle en place + 3 expirations longues.",
     stop: "Stop si fourmillements, douleur nerveuse, douleur aiguë, vertige.",
     note: "C’est la lenteur qui fait le travail. On n’attaque pas le point."
+  },
+   {
+    id: "dance_party",
+    title: "Dance party",
+    category: "Somatique",
+    tags: ["Danse", "musique", "lâché prise", "bouger", "joie"],
+    duration: "2–6 min",
+    position: "debout",
+    intensity: "doux",
+    modes: ["ok","fatigue_mentale","fatigue_emo"],
+    summary: "Danse, bouge, sens ton corps.",
+    steps: [
+      "Mets une musique qui te donne envie de bouger.",
+      "Danse comme tu le souhaites.",
+      "Evite les mouvements trop brusques",
+      "Laisse ton corps s'exprimer au rythme de la musique",
+      "Sens comme la détente s'étend sur toi",
+      "Fin : Secoue les bras et les jambes."
+    ],
+    low: "Version low battery : Juste écouter la musique et se balancer tranquillement",
+    stop: "Stop si fourmillements, douleur nerveuse, douleur aiguë, vertige.",
+    note: "C’est le mouvement et la joie qui font le travail."
   }
 ];
 
@@ -421,7 +441,7 @@ function updateThemeButton(){
   const isDark = currentTheme() === THEME_DARK;
 
   // Quand on est en dark, on propose "Jour" (soleil)
-  themeBtn.textContent = isDark ? "☀️ Jour" : "🌙 Nuit";
+  themeBtn.textContent = isDark ? "☀️ Mode jour" : "🌙 Mode nuit";
   themeBtn.setAttribute("aria-pressed", isDark ? "true" : "false");
   themeBtn.setAttribute("title", isDark ? "Passer en mode jour" : "Passer en mode nuit");
 }
@@ -455,7 +475,19 @@ function saveTheme(theme){
 // Filters
 // -------------------------
 function matchesMode(tool){
-  return (tool.modes || []).includes(state.mode);
+  const toolModes = tool.modes || [];
+
+  // Cas normal : l’outil a été tagué avec les nouveaux modes
+  if(toolModes.includes(state.mode)) return true;
+
+  // Compat optionnelle : si un outil est encore en ancien format
+  // "fatigue" doit rester valable si tu n’as pas encore tout retagué
+  if(state.mode.startsWith("fatigue_") && toolModes.includes("fatigue")) return true;
+
+  // (Optionnel) douleurs/courbatures: si tu as des anciens outils "douleur"
+  if((state.mode === "douleurs" || state.mode === "courbatures") && toolModes.includes("douleur")) return true;
+
+  return false;
 }
 
 function matchesQuery(tool){
