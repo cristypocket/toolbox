@@ -26,8 +26,7 @@
   --paper: #fbf8f1;
   --ink: #20302c;
   --muted: #5b6a63;
-  --font: "Nunito", system-ui, -apple-system, sans-serif;
-  --title-font: "WhiteColors", "Nunito", sans-serif;
+  
   --sage: #2d8c86;
   --sage-2: #1f6f6a;
   --terracotta: #c9745a;
@@ -41,6 +40,8 @@
   --radius: 18px;
   --radius-lg: 26px;
   --max: 1100px;
+  --font: "Nunito", system-ui, -apple-system, sans-serif;
+  --title-font: "WhiteColors", "Nunito", sans-serif;
   
 }
 
