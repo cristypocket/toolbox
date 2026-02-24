@@ -334,14 +334,14 @@ body{
 }
 
 .nav-left{
-  display: flex;
+  display: inline;
   gap: 12px;
   flex-wrap: wrap;
   align-items: center;
 }
 
 .nav-right{
-  display: flex;
+  display: inline;
   gap: 12px;
   align-items: center;
 }
