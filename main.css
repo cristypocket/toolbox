@@ -253,14 +253,14 @@ body{
 
 .brand-title strong{
   font-family: var(--title-font);
-  font-size: 40px;
-  letter-spacing: 1.5px;
+  font-size: 70px;
+  letter-spacing: 1.8px;
   line-height: 1.1;
   margin-bottom: 18px;
 }
 
 .brand-title span{
-  font-size: 30px;
+  font-size: 48px;
   color: var(--muted);
 }
 
@@ -484,8 +484,8 @@ details.drop > ul button:active{
 
 .hero h1{
   font-family: var(--title-font);
-  font-size: clamp(46px, 4vw, 70px);
-  letter-spacing: 1.5px;
+  font-size: clamp(60px, 4vw, 90px);
+  letter-spacing: 1.8px;
   line-height: 1.1;
   margin-bottom: 18px;
 }
@@ -652,15 +652,15 @@ dialog{
 
 .brand-title strong{
   font-family: var(--title-font);
-  font-size: 28px;          /* + grand */
-  letter-spacing: 1px;
+  font-size: 40px;          /* + grand */
+  letter-spacing: 1.5px;
   line-height: 1;
   display: block;
 }
 
 .brand-title span{
   display: block;
-  font-size: 13px;
+  font-size: 40px;
   margin-top: 4px;
   color: var(--muted);
 }
