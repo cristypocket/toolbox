@@ -407,22 +407,44 @@ function toggleFavorite(id){
 // -------------------------
 // Theme
 // -------------------------
+const THEME_DARK = "dark";
+const THEME_LIGHT = "light";
+
+function currentTheme(){
+  return document.documentElement.getAttribute("data-theme") === THEME_DARK
+    ? THEME_DARK
+    : THEME_LIGHT;
+}
+
+function updateThemeButton(){
+  if(!themeBtn) return;
+  const isDark = currentTheme() === THEME_DARK;
+
+  // Quand on est en dark, on propose "Jour" (soleil)
+  themeBtn.textContent = isDark ? "☀️ Jour" : "🌙 Nuit";
+  themeBtn.setAttribute("aria-pressed", isDark ? "true" : "false");
+  themeBtn.setAttribute("title", isDark ? "Passer en mode jour" : "Passer en mode nuit");
+}
+
 function applyTheme(theme){
   const root = document.documentElement;
-  if(theme === "dark"){
-    root.setAttribute("data-theme","dark");
-    if(themeBtn) themeBtn.setAttribute("aria-pressed","true");
+
+  if(theme === THEME_DARK){
+    root.setAttribute("data-theme", THEME_DARK);
   }else{
     root.removeAttribute("data-theme");
-    if(themeBtn) themeBtn.setAttribute("aria-pressed","false");
   }
+
+  updateThemeButton();
 }
 
 function loadTheme(){
   try{
     const saved = localStorage.getItem(LS_THEME);
-    if(saved === "dark") applyTheme("dark");
-  }catch(e){}
+    applyTheme(saved === THEME_DARK ? THEME_DARK : THEME_LIGHT);
+  }catch(e){
+    applyTheme(THEME_LIGHT);
+  }
 }
 
 function saveTheme(theme){
