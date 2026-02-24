@@ -616,6 +616,3 @@ dialog{
   --line: rgba(233,241,238,.14);
 }
 
-:root[data-theme="dark"] body{
-  background: #0f1514;
-}
