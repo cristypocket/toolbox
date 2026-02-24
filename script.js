@@ -136,6 +136,7 @@ const TOOLS = [
     category: "Respiration",
     tags: ["cohérence cardiaque", "respiration", "stress"],
     duration: "5 min",
+    timer: { totalSec: 300, inhaleSec: 5, exhaleSec: 5 }, 
     position: "assis",
     intensity: "très doux",
     modes: ["ok","fatigue_mentale","fatigue_emo","fatigue_phys", "douleurs","sos"],
@@ -622,6 +623,15 @@ function openTool(id){
   if(!safeShowModal(toolModal)){
     alert(`${tool.title}\n\n${tool.summary}`);
   }
+   if(tool.timer){
+     modalBody.innerHTML += `
+    <button class="btn" id="startToolTimer">⏱ Lancer le timer</button>
+  `;
+     setTimeout(() => {
+       const b = document.getElementById("startToolTimer");
+       if(b) b.addEventListener("click", () => openBreathTimer({ ...tool.timer, sound: true }));
+     }, 0);
+   }
 }
 
 // -------------------------
