@@ -1,6 +1,6 @@
 /* =========================
    VARIABLES — GRIMOIRE DOUX
-========================= */
+========================= 
 
 :root{
   --bg: #f5f2ea;
@@ -22,6 +22,120 @@
 
   --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
   --serif: ui-serif, Georgia, "Times New Roman", Times, serif;
+}*/
+
+/* =========================
+   THEME TOKENS (Jour par défaut)
+========================= */
+:root{
+  --bg: #f5f2ea;
+  --paper: #fbf8f1;
+  --ink: #20302c;
+  --muted: #5b6a63;
+
+  --sage: #2d8c86;
+  --sage-2: #1f6f6a;
+  --terracotta: #c9745a;
+  --gold: #c9a24e;
+
+  --line: rgba(32,48,44,.14);
+
+  --shadow: 0 10px 30px rgba(32,48,44,.10);
+  --shadow-sm: 0 6px 18px rgba(32,48,44,.08);
+
+  --radius: 18px;
+  --radius-lg: 26px;
+  --max: 1100px;
+}
+
+/* =========================
+   THEME OVERRIDES (Nuit)
+========================= */
+:root[data-theme="dark"]{
+  --bg: #0f1514;
+  --paper: #131c1a;
+  --ink: #e9f1ee;
+  --muted: rgba(233,241,238,.72);
+
+  --line: rgba(233,241,238,.14);
+
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --shadow-sm: 0 6px 18px rgba(0,0,0,.28);
+}
+
+/* =========================
+   GLOBAL BACKGROUND + TEXT
+   (TOUJOURS via variables)
+========================= */
+body{
+  margin:0;
+  color: var(--ink);
+  background:
+    radial-gradient(1200px 700px at 20% -10%, rgba(45,140,134,.18), transparent 60%),
+    radial-gradient(900px 600px at 85% 10%, rgba(201,116,90,.14), transparent 55%),
+    linear-gradient(180deg, var(--bg), color-mix(in srgb, var(--bg) 88%, #000 12%) 70%, var(--bg));
+}
+
+/* =========================
+   COMPOSANTS QUI DOIVENT SUIVRE LE THEME
+========================= */
+.topbar{
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(10px);
+}
+
+nav, .nav{
+  background: color-mix(in srgb, var(--bg) 62%, transparent);
+  border-top: 1px solid var(--line);
+}
+
+.card{
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn, .pill, .fav-btn, .nav-toggle, details.drop > summary{
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.search input{
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.search:before{ color: var(--muted); }
+
+.meta, .hint, .footer, .brand-title span{ color: var(--muted); }
+
+.chip{
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
+  border: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
+}
+
+.chip.sos{
+  background: color-mix(in srgb, var(--terracotta) 18%, transparent);
+  border: 1px solid color-mix(in srgb, var(--terracotta) 28%, transparent);
+}
+
+details.drop > ul{
+  background: var(--paper);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+/* focus visible lisible sur les deux thèmes */
+.btn:focus-visible,
+.pill:focus-visible,
+.fav-btn:focus-visible,
+.search input:focus,
+details.drop > summary:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--sage) 25%, transparent);
 }
 
 /* =========================
