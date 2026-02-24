@@ -1,5 +1,5 @@
 /* =========================
-   GRIMOIRE DOUX — script.js
+   BOITE A OUTILS — script.js
    (HTML: index.html, CSS: main.css)
 ========================= */
 
@@ -77,7 +77,7 @@ const TOOLS = [
     duration: "2–3 min",
     position: "assis/debout",
     intensity: "très doux",
-    modes: ["ok","fatigue_mentale""fatigue_emo","sos"],
+    modes: ["ok","fatigue_mentale","fatigue_emo","sos"],
     summary: "Revenir au présent via les yeux, en cherchant le neutre/agréable.",
     steps: [
       "Regarde 5 objets autour de toi, lentement.",
@@ -142,7 +142,7 @@ const TOOLS = [
     summary: "Respiration régulière : inspire 4, expire 6 (adaptable).",
     steps: [
       "Inspire par le nez 5 secondes.",
-      "Expire 5 secondes",
+      "Expire 5 secondes"
     ],
     low: "Version low battery : 5 cycles.",
     stop: "Stop si essoufflement : respiration naturelle + expirations longues.",
@@ -176,7 +176,7 @@ const TOOLS = [
     duration: "2–4 min",
     position: "assis",
     intensity: "très doux",
-    modes: ["ok","fatigue_phys","fatigue-mentale","fatigue_emo","sos"],
+    modes: ["ok","fatigue_phys","fatigue_mentale","fatigue_emo","sos"],
     summary: "Faire le point sans jugement : énergie, douleur, priorités vitales.",
     steps: [
       "Énergie 0–10 ?",
@@ -293,7 +293,7 @@ const TOOLS = [
     note: "C’est la lenteur qui fait le travail. On n’attaque pas le point."
   },
    {
-    id: "dance_party",
+    id: "dance-party",
     title: "Dance party",
     category: "Somatique",
     tags: ["Danse", "musique", "lâché prise", "bouger", "joie"],
@@ -803,7 +803,8 @@ function setupEvents(){
         return;
       }
       // fallback to tool card
-      const id = (state.mode === "sos" || state.mode === "fatigue") ? "soupir" : "coherence";
+      const isFatigue = state.mode.startsWith("fatigue_");
+      const id = (state.mode === "sos" || isFatigue) ? "soupir" : "coherence";
       openTool(id);
     });
   }
