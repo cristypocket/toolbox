@@ -160,41 +160,100 @@ body{
   margin: 0 auto;
   padding: 12px 20px;
   display: flex;
-  gap: 16px;
+  gap: 12px;
   flex-wrap: wrap;
   align-items: center;
 }
 
-details{
+details.drop{
   position: relative;
 }
 
-details summary{
+details.drop > summary{
+  list-style: none;
   cursor: pointer;
-  font-weight: 500;
+  user-select: none;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 8px 12px;
+  border-radius: 999px;
+
+  border: 1px solid var(--line);
+  background: rgba(251,248,241,.85);
+  color: var(--ink);
+  font-size: 14px;
+  box-shadow: 0 6px 16px rgba(32,48,44,.06);
 }
 
-details ul{
+details.drop > summary::-webkit-details-marker{ display:none; }
+
+details.drop > summary::after{
+  content: "▾";
+  opacity: .75;
+  transform: translateY(-1px);
+}
+
+details.drop[open] > summary{
+  border-color: rgba(45,140,134,.55);
+  background: rgba(45,140,134,.10);
+}
+
+details.drop > ul{
   list-style: none;
-  padding: 10px;
-  margin: 6px 0 0;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
+  padding: 8px;
+  margin: 10px 0 0;
+
   position: absolute;
+  left: 0;
+  top: 100%;
+
+  min-width: 240px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: var(--paper);
   box-shadow: var(--shadow);
   z-index: 999;
 }
 
-details li button{
-  background: none;
-  border: none;
-  padding: 6px 10px;
-  text-align: left;
-  width: 100%;
-  cursor: pointer;
+details.drop > ul li{
+  margin: 0;
 }
 
+details.drop > ul button{
+  width: 100%;
+  text-align: left;
+
+  border: 0;
+  background: transparent;
+
+  padding: 10px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+
+  color: var(--ink);
+  font-size: 14px;
+}
+
+details.drop > ul button:hover{
+  background: rgba(45,140,134,.10);
+}
+
+details.drop > ul button:active{
+  transform: translateY(1px);
+}
+
+/* Dark mode dropdowns */
+:root[data-theme="dark"] details.drop > summary{
+  background: rgba(19,28,26,.95);
+  box-shadow: 0 6px 16px rgba(0,0,0,.25);
+}
+
+:root[data-theme="dark"] details.drop[open] > summary{
+  background: rgba(45,140,134,.18);
+}
 /* =========================
    HERO
 ========================= */
@@ -266,6 +325,10 @@ details li button{
   padding: 4px 8px;
   border-radius: 999px;
   font-size: 12px;
+}
+.chip.sos{
+  background: rgba(201,116,90,.18);
+  border: 1px solid rgba(201,116,90,.28);
 }
 
 /* =========================
