@@ -55,7 +55,7 @@
   <!-- ===================== -->
   <nav class="nav">
     <div class="nav-inner">
-
+      <div class="nav-left">
       <details class="drop">
         <summary>Exercices</summary>
         <ul>
@@ -99,15 +99,16 @@
           <li><button data-filter="Balle fascia">Balle fascia</button></li>
         </ul>
       </details>
+      </div>
+      <div class="nav-right">
+        <div class="search">
+          <input id="search" type="search" placeholder="Rechercher un outil…" autocomplete="off" />
+        </div>
 
-      <button id="clearFilters" class="btn small ghost">
+        <button id="clearFilters" class="btn small ghost">
         ↺ Réinitialiser
-      </button>
-       <div class="tools">
-          <div class="search">
-            <input type="search" id="search" placeholder="Rechercher un outil…" />
-          </div>
-       </div>
+        </button>
+      </div>
     </div>
   </nav>
 
