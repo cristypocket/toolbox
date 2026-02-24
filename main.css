@@ -73,6 +73,11 @@
   background: rgba(10, 14, 13, 0.78);
   border-top-color: rgba(233,241,238,.10);
 }
+:root[data-theme="dark"] .nav-right .search input{
+  background: rgba(19,28,26,.95);
+  color: var(--ink);
+  border-color: var(--line);
+}
 
 /* Texte du “brand” bien lisible */
 :root[data-theme="dark"] .brand-title strong{
@@ -322,9 +327,34 @@ body{
   margin: 0 auto;
   padding: 12px 20px;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.nav-left{
+  display: flex;
   gap: 12px;
   flex-wrap: wrap;
   align-items: center;
+}
+
+.nav-right{
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Search dans nav */
+.nav-right .search{
+  width: 260px;
+}
+
+.nav-right .search input{
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 999px;
 }
 
 details.drop{
