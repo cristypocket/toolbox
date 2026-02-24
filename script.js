@@ -900,18 +900,7 @@ function setupEvents(){
   }
 
   // Hero actions
-  if(sosJump){
-    sosJump.addEventListener("click", () => {
-      state.mode = "sos";
-      document.querySelectorAll(".pill").forEach(x => x.setAttribute("aria-pressed","false"));
-      const sosBtn = document.querySelector('.pill[data-mode="sos"]');
-      if(sosBtn) sosBtn.setAttribute("aria-pressed","true");
-      const lib = document.getElementById("library");
-      if(lib) lib.scrollIntoView({behavior:"smooth", block:"start"});
-      render();
-    });
-  }
-
+   
   if(randomTool){
     randomTool.addEventListener("click", () => {
       const list = getFilteredTools();
@@ -922,21 +911,15 @@ function setupEvents(){
   }
 
   if(breath2min){
-    breath2min.addEventListener("click", () => {
-      // open timer modal if present
-      if(breathTimer){
-        btTotal = 120;
-        btLeft = 120;
-        btUpdateUI();
-        safeShowModal(breathTimer);
-        return;
-      }
-      // fallback to tool card
-      const isFatigue = state.mode.startsWith("fatigue_");
-      const id = (state.mode === "sos" || isFatigue) ? "soupir" : "coherence";
-      openTool(id);
+  breath2min.addEventListener("click", () => {
+    openBreathTimer({
+      totalSec: 120,
+      inhaleSec: 4,
+      exhaleSec: 6,
+      sound: true
     });
-  }
+  });
+}
 
   // Breath timer controls
   if(btClose && breathTimer){
