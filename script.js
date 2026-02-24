@@ -361,7 +361,6 @@ const btRemaining = document.getElementById("btRemaining");
 const breathOrb = breathTimer ? breathTimer.querySelector(".breath-orb") : null;
 
 // Hero
-const sosJump = document.getElementById("sosJump");
 const breath2min = document.getElementById("breath2min");
 const randomTool = document.getElementById("randomTool");
 
@@ -626,43 +625,164 @@ function openTool(id){
 }
 
 // -------------------------
-// Breath timer (2 min)
+// Breath timer (réutilisable)
 // -------------------------
-let btTotal = 120;
-let btLeft = 120;
+
+// Réglages par défaut
+let btConfig = {
+  totalSec: 120,
+  inhaleSec: 4,
+  exhaleSec: 6,
+  sound: false // activé/désactivé
+};
+
+let btLeft = btConfig.totalSec;
 let btTick = null;
 let btPhaseTick = null;
+let btRunning = false;
+
+// Audio (WebAudio) — simple et léger (pas de fichier)
+let audioCtx = null;
+let osc = null;
+let gain = null;
+
+function btEnsureAudio(){
+  if(audioCtx) return;
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  osc = audioCtx.createOscillator();
+  gain = audioCtx.createGain();
+
+  // "vague" douce : fréquence basse + volume très faible
+  osc.type = "sine";
+  osc.frequency.value = 140;
+
+  gain.gain.value = 0.0001; // quasi inaudible au départ
+
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  osc.start();
+}
+
+function btSetSound(on){
+  btConfig.sound = !!on;
+  if(!on){
+    if(gain) gain.gain.value = 0.0001;
+    return;
+  }
+  btEnsureAudio();
+  // au démarrage, on met un volume doux
+  gain.gain.value = 0.02;
+}
+
+function btUpdateSound(phase, phaseProgress01){
+  // phase = "inhale" / "exhale"
+  if(!btConfig.sound || !osc || !gain) return;
+
+  // Variation douce type "vague" :
+  // - inspiration : fréquence monte un peu
+  // - expiration : fréquence descend
+  const base = 120;
+  const span = 120;
+
+  const f = (phase === "inhale")
+    ? base + span * phaseProgress01
+    : base + span * (1 - phaseProgress01);
+
+  osc.frequency.setTargetAtTime(f, audioCtx.currentTime, 0.05);
+
+  // Volume un poil plus haut en expiration (souvent apaisant)
+  const vol = (phase === "exhale") ? 0.026 : 0.020;
+  gain.gain.setTargetAtTime(vol, audioCtx.currentTime, 0.08);
+}
 
 function btUpdateUI(){
   if(btRemaining) btRemaining.textContent = fmt(btLeft);
 }
 
 function btStopAll(){
+  btRunning = false;
   if(btTick){ clearInterval(btTick); btTick = null; }
   if(btPhaseTick){ clearInterval(btPhaseTick); btPhaseTick = null; }
+
+  // stop animation
   if(breathOrb) breathOrb.classList.remove("is-running");
+  if(breathOrb) breathOrb.style.setProperty("--orb-scale", "1");
+
   if(btPhase) btPhase.textContent = "Prête.";
+
+  // son off (mais on garde le contexte)
+  if(gain) gain.gain.value = 0.0001;
 }
 
 function btResetAll(){
   btStopAll();
-  btLeft = btTotal;
+  btLeft = btConfig.totalSec;
   btUpdateUI();
 }
 
+// Ouvre le timer avec config (pour l’utiliser depuis une fiche)
+function openBreathTimer(options = {}){
+  btConfig = {
+    totalSec: typeof options.totalSec === "number" ? options.totalSec : btConfig.totalSec,
+    inhaleSec: typeof options.inhaleSec === "number" ? options.inhaleSec : btConfig.inhaleSec,
+    exhaleSec: typeof options.exhaleSec === "number" ? options.exhaleSec : btConfig.exhaleSec,
+    sound: typeof options.sound === "boolean" ? options.sound : btConfig.sound
+  };
+
+  btLeft = btConfig.totalSec;
+  btUpdateUI();
+
+  if(btPhase) btPhase.textContent = "Prête.";
+  if(breathOrb) breathOrb.style.setProperty("--orb-scale", "1");
+
+  // Si tu ajoutes un toggle son plus tard, tu peux le brancher ici
+  btSetSound(btConfig.sound);
+
+  if(breathTimer){
+    safeShowModal(breathTimer);
+  }
+}
+
+// Lancement (anime la phase + l’orbe + le son)
 function btStartRun(){
   btStopAll();
+  btRunning = true;
+
+  // sécurité
   btLeft = Math.max(1, btLeft);
 
   if(breathOrb) breathOrb.classList.add("is-running");
 
-  let t = 0;
+  const cycle = btConfig.inhaleSec + btConfig.exhaleSec;
+  let t = 0; // secondes dans le cycle
+
   if(btPhase) btPhase.textContent = "Inspire…";
+
   btPhaseTick = setInterval(() => {
-    t = (t + 1) % 10; // 4s inspire + 6s expire
+    t = (t + 1) % cycle;
+
+    const phase = (t < btConfig.inhaleSec) ? "inhale" : "exhale";
+    const phaseT = (phase === "inhale")
+      ? t / btConfig.inhaleSec
+      : (t - btConfig.inhaleSec) / btConfig.exhaleSec;
+
     if(btPhase){
-      btPhase.textContent = (t < 4) ? "Inspire…" : "Expire…";
+      btPhase.textContent = (phase === "inhale") ? "Inspire…" : "Expire…";
     }
+
+    // ORB SCALE : inspiration = grandit, expiration = rétrécit
+    // scale de 1 → 1.45
+    const scale = (phase === "inhale")
+      ? (1 + 0.45 * phaseT)
+      : (1.45 - 0.45 * phaseT);
+
+    if(breathOrb){
+      breathOrb.style.setProperty("--orb-scale", String(scale));
+    }
+
+    // son vague
+    btUpdateSound(phase, phaseT);
+
   }, 1000);
 
   btTick = setInterval(() => {
@@ -675,7 +795,6 @@ function btStartRun(){
     }
   }, 1000);
 }
-
 // -------------------------
 // Events
 // -------------------------
