@@ -253,11 +253,11 @@ body{
 
 .brand-title strong{
   font-family: var(--title-font);
-  font-size: 18px;
+  font-size: 40px;
 }
 
 .brand-title span{
-  font-size: 12px;
+  font-size: 30px;
   color: var(--muted);
 }
 
@@ -481,7 +481,7 @@ details.drop > ul button:active{
 
 .hero h1{
   font-family: var(--title-font);
-  font-size: clamp(26px, 4vw, 40px);
+  font-size: clamp(46px, 4vw, 70px);
   margin-bottom: 12px;
 }
 
