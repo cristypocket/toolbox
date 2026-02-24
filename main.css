@@ -63,6 +63,53 @@
   --shadow-sm: 0 6px 18px rgba(0,0,0,.28);
 }
 
+:root[data-theme="dark"] .topbar{
+  background: rgba(10, 14, 13, 0.88);   /* plus dark que le reste */
+  border-bottom-color: rgba(233,241,238,.10);
+}
+
+:root[data-theme="dark"] nav,
+:root[data-theme="dark"] .nav{
+  background: rgba(10, 14, 13, 0.78);
+  border-top-color: rgba(233,241,238,.10);
+}
+
+/* Texte du “brand” bien lisible */
+:root[data-theme="dark"] .brand-title strong{
+  color: rgba(233,241,238,.95);
+}
+:root[data-theme="dark"] .brand-title span{
+  color: rgba(233,241,238,.60);
+}
+
+/* Search + boutons dans la topbar un poil plus sombres */
+:root[data-theme="dark"] .topbar .btn,
+:root[data-theme="dark"] .topbar .pill,
+:root[data-theme="dark"] .topbar .fav-btn,
+:root[data-theme="dark"] .topbar details.drop > summary,
+:root[data-theme="dark"] .topbar .search input{
+  background: rgba(19, 28, 26, 0.92);
+  border-color: rgba(233,241,238,.14);
+  color: rgba(233,241,238,.92);
+}
+
+/* Placeholder + icon loupe */
+:root[data-theme="dark"] .topbar .search input::placeholder{
+  color: rgba(233,241,238,.55);
+}
+:root[data-theme="dark"] .topbar .search:before{
+  color: rgba(233,241,238,.55);
+}
+
+/* Dropdown list */
+:root[data-theme="dark"] details.drop > ul{
+  background: rgba(19, 28, 26, 0.98);
+  border-color: rgba(233,241,238,.14);
+}
+:root[data-theme="dark"] details.drop > ul button:hover{
+  background: rgba(45,140,134,.14);
+}
+
 /* =========================
    GLOBAL BACKGROUND + TEXT
    (TOUJOURS via variables)
