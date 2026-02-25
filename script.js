@@ -375,6 +375,15 @@ function normalize(s){
     .replace(/[\u0300-\u036f]/g, "");
 }
 
+function escapeHtml(str){
+  return String(str)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
 function fmt(sec){
   const m = Math.floor(sec/60);
   const s = sec % 60;
@@ -385,9 +394,12 @@ function safeShowModal(d){
   try{
     if(d && typeof d.showModal === "function"){
       d.showModal();
+      return true;
     }
   }catch(e){}
+  return false;
 }
+
 
 // -------------------------
 // Favorites
