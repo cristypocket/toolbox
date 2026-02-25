@@ -612,15 +612,7 @@ function openTool(id){
   if(!safeShowModal(toolModal)){
     alert(`${tool.title}\n\n${tool.summary}`);
   }
-   if(tool.timer){
-     modalBody.innerHTML += `
-    <button class="btn" id="startToolTimer">⏱ Lancer le timer</button>
-  `;
-     setTimeout(() => {
-       const b = document.getElementById("startToolTimer");
-       if(b) b.addEventListener("click", () => openBreathTimer({ ...tool.timer, sound: true }));
-     }, 0);
-   }
+   
 }
 
 // -------------------------
