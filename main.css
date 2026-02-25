@@ -256,7 +256,7 @@ body{
   font-size: 90px;
   letter-spacing: 2.5px;
   line-height: 1.1;
-  margin-bottom: 18px;
+  margin-bottom: 13px;
 }
 
 .brand-title span{
@@ -651,8 +651,8 @@ dialog{
 }
 
 .brand-icon{
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   object-fit: contain;
   display: block;
   vertical-align:middle; 
