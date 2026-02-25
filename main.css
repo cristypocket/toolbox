@@ -657,6 +657,9 @@ dialog{
   display: block;
   vertical-align:middle; 
 }
+[data-theme="dark"] .brand-icon {
+  content: url("./images/wellbeing_wh.png");
+}
 
 .brand-title strong{
   font-family: var(--title-font);
