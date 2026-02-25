@@ -655,6 +655,7 @@ dialog{
   height: 60px;
   object-fit: contain;
   display: block;
+  vertical-align:middle; 
 }
 
 .brand-title strong{
