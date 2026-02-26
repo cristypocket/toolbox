@@ -974,12 +974,67 @@ function setupEvents(){
 }
 
 // -------------------------
+// Sticky header hide + nav top (responsive)
+// -------------------------
+function setupStickyHeaderNav(){
+  const topbar = document.querySelector(".topbar-inner.topbar-centered");
+  const nav = document.querySelector(".nav");
+
+  function refreshHeights(){
+    const topbarH = topbar ? Math.round(topbar.getBoundingClientRect().height) : 0;
+    const navH = nav ? Math.round(nav.getBoundingClientRect().height) : 0;
+    document.documentElement.style.setProperty("--topbar-h", topbarH + "px");
+    document.documentElement.style.setProperty("--nav-h", navH + "px");
+  }
+
+  let lastY = window.scrollY || 0;
+  let locked = false;
+
+  function onScroll(){
+    if(locked) return;
+    locked = true;
+
+    requestAnimationFrame(() => {
+      const y = window.scrollY || 0;
+      const delta = y - lastY;
+
+      // un petit seuil pour éviter le “flicker”
+      const TH = 10;
+
+      if(y < 10){
+        // tout en haut : header visible
+        document.documentElement.classList.remove("topbar-hidden");
+      }else if(delta > TH){
+        // scroll down : cache header
+        document.documentElement.classList.add("topbar-hidden");
+      }else if(delta < -TH){
+        // scroll up : montre header
+        document.documentElement.classList.remove("topbar-hidden");
+      }
+
+      lastY = y;
+      locked = false;
+    });
+  }
+
+  refreshHeights();
+  window.addEventListener("resize", refreshHeights);
+  window.addEventListener("orientationchange", refreshHeights);
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  // au cas où les polices/images chargent après
+  setTimeout(refreshHeights, 250);
+  setTimeout(refreshHeights, 800);
+}
+
+// -------------------------
 // Init
 // -------------------------
 function init(){
   loadFavorites();
   loadTheme();
   setupEvents();
+  setupStickyHeaderNav(); 
   render();
 }
 
