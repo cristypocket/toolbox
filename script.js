@@ -620,7 +620,11 @@ function openTool(id){
       <p><strong>✨ Note :</strong> ${escapeHtml(tool.note || "—")}</p>
     `;
   }
-
+   
+  if(tool.timer){
+  modalBody.innerHTML += `<button ...>⏱ Lancer le timer</button>`;
+  }
+   
   if(!safeShowModal(toolModal)){
     alert(`${tool.title}\n\n${tool.summary}`);
   }
