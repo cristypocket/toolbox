@@ -713,8 +713,8 @@ function btUpdateSound(phase, phaseProgress01){
 
   // Cutoff + volume varient doucement, comme une vague
   // Inspiration : un peu plus “clair” (cutoff monte), expiration : plus “sombre” (cutoff descend)
-  const cutoffInhale = 900;
-  const cutoffExhale = 420;
+  const cutoffInhale = 1200;
+  const cutoffExhale = 200;
 
   const cutoff = (phase === "inhale")
     ? (cutoffExhale + (cutoffInhale - cutoffExhale) * phaseProgress01)
@@ -753,7 +753,7 @@ function btStopAll(){
 
   // coupe le son sans détruire le contexte
   if(noiseGain && audioCtx){
-    noiseGain.gain.setTargetAtTime(0.0001, audioCtx.currentTime, 0.08);
+    noiseGain.gain.setTargetAtTime(0.0001, audioCtx.currentTime, 0.00);
   }
 }
 
