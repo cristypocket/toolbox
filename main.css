@@ -361,7 +361,7 @@ body{
 ========================= */
 
 .nav{
-  position: absolute;
+  position: sticky;
   display: flex; 
   left: 0;
   right: 0;
