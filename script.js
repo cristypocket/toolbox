@@ -611,6 +611,7 @@ function openTool(id){
   }
 
   const steps = (tool.steps || []).map(s => `<li>${escapeHtml(s)}</li>`).join("");
+
   if(modalBody){
     modalBody.innerHTML = `
       <h4>Étapes</h4>
@@ -619,16 +620,30 @@ function openTool(id){
       <p><strong>🔥 Stop si :</strong> ${escapeHtml(tool.stop || "—")}</p>
       <p><strong>✨ Note :</strong> ${escapeHtml(tool.note || "—")}</p>
     `;
+
+    // 👉 AJOUT DU TIMER SI L'OUTIL EN A UN
+    if(tool.timer){
+      modalBody.innerHTML += `
+        <div style="margin-top:16px;">
+          <button class="btn" id="startToolTimer" type="button">
+            ⏱ Lancer le timer
+          </button>
+        </div>
+      `;
+
+      // bind click
+      setTimeout(() => {
+        const btn = document.getElementById("startToolTimer");
+        if(btn){
+          btn.addEventListener("click", () => {
+            openBreathTimer({ ...tool.timer, sound: true });
+          });
+        }
+      }, 0);
+    }
   }
-   
-  if(tool.timer){
-  modalBody.innerHTML += `<button ...>⏱ Lancer le timer</button>`;
-  }
-   
-  if(!safeShowModal(toolModal)){
-    alert(`${tool.title}\n\n${tool.summary}`);
-  }
-   
+
+  safeShowModal(toolModal);
 }
 
 // -------------------------
