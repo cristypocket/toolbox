@@ -642,15 +642,15 @@ dialog{
 }
 
 .breath-orb-inner{
-  width: 88px;
-  height: 88px;
+  width: 55px;
+  height: 55px;
   border-radius: 999px;             /* <- rond */
   background: radial-gradient(circle at 30% 30%,
     color-mix(in srgb, var(--terracotta) 30%, transparent),
     color-mix(in srgb, var(--sage) 22%, transparent)
   );
   transform: scale(var(--orb-scale, 1));   /* <- scale piloté par JS */
-  transition: transform 900ms linear;
+  transition: transform 1000ms linear;
   filter: blur(0.2px);
 }
 
