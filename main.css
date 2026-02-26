@@ -117,7 +117,6 @@
    (TOUJOURS via variables)
 ========================= */
 body{
-  padding-top: calc(var(--topbar-h, 0px) + var(--nav-h, 0px));
   margin:0;
   color: var(--ink);
   background:
@@ -206,6 +205,7 @@ body{
     radial-gradient(1200px 700px at 20% -10%, rgba(45,140,134,.18), transparent 60%),
     radial-gradient(900px 600px at 85% 10%, rgba(201,116,90,.14), transparent 55%),
     linear-gradient(180deg, var(--bg), #f0ece2 70%, #efe9dd);
+  padding-top: calc(var(--topbar-h, 0px) + var(--nav-h, 0px));
 }
 
 .wrap{
@@ -242,14 +242,6 @@ body{
   display: flex;
   align-items: center;
   gap: 12px;
-}
-
-.sigil{
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, var(--sage), var(--sage-2));
-  box-shadow: var(--shadow-sm);
 }
 
 .brand-title strong{
@@ -400,16 +392,24 @@ body{
 
 .nav-right{
   display: flex;
+  flex-direction: column; 
+  align-items: flex-end;
+  gap: 10px;
+  min-width: 280px;             
+}
+
+.nav-actions{
+  display: flex;
   align-items: center;
-  gap: 12px;
-  flex-wrap: nowrap;     /* important */
-  margin-left: auto;     /* pousse à droite */
+  gap: 12px; 
+  flex-wrap: nowrap;    
+  justify-content: flex-end;     
 }
 
 /* Search à droite */
 .nav-right .search{
   width: 280px;
-  max-width: 32vw;
+  max-width: 36vw;
   min-width: 200px;
 }
 
@@ -426,14 +426,19 @@ body{
     flex-wrap: wrap;
   }
   .nav-right{
-    flex-wrap: wrap;
     width: 100%;
-    justify-content: flex-end; /* search + reset à droite sur la ligne suivante */
+    align-items: stretch;     
   }
+
+  .nav-actions{
+    justify-content: flex-end;
+    flex-wrap: wrap;          
+  }
+
   .nav-right .search{
+    width: 100%;
     max-width: 520px;
-    width: min(520px, 100%);
-    flex: 1 1 260px;
+    min-width: 0;
   }
 }
 
