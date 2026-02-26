@@ -432,7 +432,7 @@ const THEME_DARK = "dark";
 const THEME_LIGHT = "light";
 
 function currentTheme(){
-  return document.documentElement.getAttribute("data-theme") === THEME_DARK
+  return document.documentElement.setAttribute("data-theme") === THEME_DARK
     ? THEME_DARK
     : THEME_LIGHT;
 }
