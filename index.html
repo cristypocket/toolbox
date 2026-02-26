@@ -77,13 +77,23 @@
       </details>
       </div>
       <div class="nav-right">
+        <div class="nav-actions">
+          <button id="toggleFavs" class="fav-btn" type="button" aria-pressed="false">
+          ★ Favoris <span id="favCount" class="fav-count">0</span>
+          </button>
+
+          <button id="toggleTheme" class="btn small ghost" type="button">
+          🌙 Nuit
+          </button>
+
+          <button id="clearFilters" class="btn small ghost" type="button">
+          ↺ Réinitialiser
+          </button>
+        </div>
+
         <div class="search">
           <input id="search" type="search" placeholder="Rechercher un outil…" autocomplete="off" />
         </div>
-        <button id="toggleFavs" class="fav-btn" type="button" aria-pressed="false" title="Afficher les favoris">
-        ★ Favoris <span id="favCount" class="fav-count">0</span></button>
-        <button id="toggleTheme" class="btn small ghost" type="button" aria-pressed="false">🌙 Nuit</button>
-        <button id="clearFilters" class="btn small ghost" type="button">↺ Réinitialiser</button>
       </div>
     </div>
   </nav>
