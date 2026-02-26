@@ -362,7 +362,6 @@ body{
 
 .nav{
   position: sticky;
-  display: flex; 
   left: 0;
   right: 0;
   top: 80px;
