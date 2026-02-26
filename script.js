@@ -983,7 +983,7 @@ function setupStickyHeaderNav(){
   function refreshHeights(){
     const topbarH = topbar ? Math.round(topbar.getBoundingClientRect().height) : 0;
     const navH = nav ? Math.round(nav.getBoundingClientRect().height) : 0;
-    document.documentElement.style.setProperty("--topbar-h", topbarH + "px");
+    document.documentElement.style.removeProperty("--topbar-h", topbarH + "px");
     document.documentElement.style.setProperty("--nav-h", navH + "px");
   }
 
