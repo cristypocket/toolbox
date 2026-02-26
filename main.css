@@ -18,6 +18,10 @@
   font-display: swap;
 }
 
+html{
+  scroll-padding-top: var(--nav-h, 0px);
+}
+
 /* =========================
    THEME TOKENS (Jour par défaut)
 ========================= */
@@ -216,7 +220,7 @@ body{
     radial-gradient(900px 600px at 85% 10%, rgba(201,116,90,.14), transparent 55%),
     linear-gradient(180deg, var(--bg), #f0ece2 70%, #efe9dd);
   padding-top: 0;
-  scroll-padding-top: var(--nav-h); 
+  scroll-padding-top: 0; 
 }
 
 .wrap{
