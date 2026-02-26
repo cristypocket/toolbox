@@ -240,11 +240,11 @@ body{
 .topbar-inner{
   max-width: var(--max);
   margin: 0 auto;
-  padding: 14px 20px;
+  padding: 5px 5px 5px 5px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
