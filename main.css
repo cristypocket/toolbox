@@ -656,7 +656,7 @@ dialog{
 
 /* Optionnel : petit glow en running */
 .breath-orb.is-running .breath-orb-inner{
-  box-shadow: 0 0 0 10px color-mix(in srgb, var(--sage) 10%, transparent);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--sage) 10%, transparent);
 }
 
 /* =========================
