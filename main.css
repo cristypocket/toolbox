@@ -362,6 +362,7 @@ body{
 
 .nav{
   position: absolute;
+  display: flex; 
   left: 0;
   right: 0;
   top: 80px;
@@ -707,7 +708,6 @@ dialog{
   right: 0;
   z-index: 1200;
 
-  border-bottom: 1px solid var(--line);
   background: rgba(245,242,234,.85);
   backdrop-filter: blur(10px);
 
