@@ -131,7 +131,7 @@ body{
 ========================= */
 .topbar{
   background: color-mix(in srgb, var(--bg) 70%, transparent);
-  border-bottom: 1px solid var(--line);
+  border-bottom: 0px solid var(--line);
   backdrop-filter: blur(10px);
 }
 
@@ -234,14 +234,14 @@ body{
   top: 0;
   backdrop-filter: blur(10px);
   background: rgba(245,242,234,.85);
-  border-bottom: 1px solid var(--line);
+  border-bottom: opx solid var(--line);
   z-index: 1000;
 }
 
 .topbar-inner{
   max-width: var(--max);
   margin: 0 auto;
-  padding: 5px 5px 5px 5px;
+  padding: 0px 5px 0px 5px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -260,7 +260,7 @@ body{
   font-size: 90px;
   letter-spacing: 2.5px;
   line-height: 1.1;
-  margin-bottom: 13px;
+  margin-bottom: 3px;
 }
 
 .brand-title span{
@@ -275,7 +275,7 @@ body{
     justify-content: space-between;
     align-items: center;
     gap: 10px;
-    padding: 10px 14px;
+    padding: 0;
   }
 
   /* brand : logo + titre mieux gérés */
@@ -364,7 +364,7 @@ body{
   position: fixed;
   left: 0;
   right: 0;
-  top: var(--topbar-h, 5px);
+  top: 80px;
   z-index: 1100;
 
   border-bottom: 1px solid var(--line);
