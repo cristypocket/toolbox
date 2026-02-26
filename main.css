@@ -235,7 +235,7 @@ body{
   backdrop-filter: blur(10px);
   background: rgba(245,242,234,.85);
   border-bottom: opx solid var(--line);
-  z-index: 1000;
+  z-index: 800;
 }
 
 .topbar-inner{
@@ -361,7 +361,7 @@ body{
 ========================= */
 
 .nav{
-  position: fixed;
+  position: absolute;
   left: 0;
   right: 0;
   top: 80px;
