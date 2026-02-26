@@ -152,6 +152,16 @@ nav, .nav{
   color: var(--ink);
 }
 
+.fav-count{
+  margin-left: 6px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  font-size: 12px;
+  line-height: 1.1;
+}
+
 .search input{
   background: color-mix(in srgb, var(--paper) 88%, transparent);
   border: 1px solid var(--line);
