@@ -712,8 +712,8 @@ details.drop > ul button:active{
 }
 
 .breath-orb-inner{
-  width: 180px;
-  height: 180px;
+  width: 55px;
+  height: 55px;
   border-radius: 999px;            
   background: radial-gradient(circle at 30% 30%,
     color-mix(in srgb, var(--terracotta) 30%, transparent),
