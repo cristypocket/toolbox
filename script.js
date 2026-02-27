@@ -636,7 +636,7 @@ function openTool(id){
         const btn = document.getElementById("startToolTimer");
         if(btn){
           btn.addEventListener("click", () => {
-            openBreathTimer({ ...tool.timer, sound: true });
+            openBreathTimer({ ...tool.timer, sound: fasle });
           });
         }
       }, 0);
@@ -841,13 +841,15 @@ function btStartRun(){
       btPhase.textContent = (phase === "inhale") ? "Inspire…" : "Expire…";
     }
 
-    // Orbe : scale 1 → 1.45 (si ton CSS le lit)
+    const ORB_MIN_SCALE = 1;
+    const ORB_MAX_SCALE = 3.0; // <-- augmente / diminue ici
+
     const scale = (phase === "inhale")
-      ? (1 + 0.45 * phaseT)
-      : (1.45 - 0.45 * phaseT);
+     ? (ORB_MIN_SCALE + (ORB_MAX_SCALE - ORB_MIN_SCALE) * phaseT)
+     : (ORB_MAX_SCALE - (ORB_MAX_SCALE - ORB_MIN_SCALE) * phaseT);
 
     if(breathOrb){
-      breathOrb.style.setProperty("--orb-scale", String(scale));
+     breathOrb.style.setProperty("--orb-scale", String(scale));
     }
 
     btUpdateSound(phase, phaseT);
