@@ -353,7 +353,7 @@ details.drop > summary:focus-visible{
 
 .brand-title strong{
   font-family: var(--title-font);
-  font-size: 90px;
+  font-size: 46px;
   letter-spacing: 2.5px;
   line-height: 1.1;
   margin-bottom: 3px;
