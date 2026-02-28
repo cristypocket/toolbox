@@ -675,7 +675,7 @@ function openTool(id){
 // Breath timer (réutilisable)
 // -------------------------
 
-// Config par défaut (si tu ouvres le timer “à la main”)
+// Config par défaut
 let btConfig = {
   totalSec: 120,
   inhaleSec: 4,
@@ -687,17 +687,15 @@ let btLeft = btConfig.totalSec;
 let btTick = null;
 let btRunning = false;
 
-// Animation rAF (anti-glitch)
+// Animation rAF
 let btAnimId = null;
 let btAnimStart = 0;
 
-// garde TON amplitude actuelle (tu peux ajuster ici)
 const ORB_MIN_SCALE = 1;
 const ORB_MAX_SCALE = 3.0;
 
 // -------------------------
-// Audio “vague” (WebAudio)
-// - bruit doux + filtre passe-bas (moins agressif qu’un oscillateur)
+// Audio
 // -------------------------
 let audioCtx = null;
 let noiseSrc = null;
@@ -714,7 +712,6 @@ function btEnsureAudio(){
   const Ctx = window.AudioContext || window.webkitAudioContext;
   audioCtx = new Ctx();
 
-  // buffer de bruit (white noise)
   const seconds = 2;
   const buffer = audioCtx.createBuffer(1, audioCtx.sampleRate * seconds, audioCtx.sampleRate);
   const data = buffer.getChannelData(0);
@@ -752,7 +749,6 @@ function btSetSound(on){
 
   btEnsureAudio();
 
-  // Safari/iOS : resume nécessaire après interaction
   if(audioCtx && audioCtx.state === "suspended"){
     audioCtx.resume().catch(() => {});
   }
@@ -762,21 +758,21 @@ function btSetSound(on){
   }
 }
 
-function btUpdateSound(phase, phaseProgress01){
+function btUpdateSound(phase, progress){
   if(!btConfig.sound || !audioCtx || !noiseGain || !noiseFilter) return;
 
   const cutoffInhale = 900;
   const cutoffExhale = 420;
 
   const cutoff = (phase === "inhale")
-    ? (cutoffExhale + (cutoffInhale - cutoffExhale) * phaseProgress01)
-    : (cutoffInhale - (cutoffInhale - cutoffExhale) * phaseProgress01);
+    ? (cutoffExhale + (cutoffInhale - cutoffExhale) * progress)
+    : (cutoffInhale - (cutoffInhale - cutoffExhale) * progress);
 
   noiseFilter.frequency.setTargetAtTime(cutoff, audioCtx.currentTime, 0.12);
 
   const vol = (phase === "exhale")
-    ? (0.020 + 0.006 * phaseProgress01)
-    : (0.018 + 0.004 * phaseProgress01);
+    ? (0.020 + 0.006 * progress)
+    : (0.018 + 0.004 * progress);
 
   noiseGain.gain.setTargetAtTime(vol, audioCtx.currentTime, 0.15);
 }
@@ -784,22 +780,22 @@ function btUpdateSound(phase, phaseProgress01){
 // -------------------------
 // UI helpers
 // -------------------------
+
 function btUpdateUI(){
   if(btRemaining) btRemaining.textContent = fmt(btLeft);
 }
 
-// mini compteur au centre : 5-4-3-2-1 (puis repart)
 function btUpdateCenterCount(phase, tMs, inhaleMs, exhaleMs){
   if(!btCount) return;
 
   let remainingMs;
+
   if(phase === "inhale"){
     remainingMs = inhaleMs - tMs;
-  }else{
+  } else {
     remainingMs = exhaleMs - (tMs - inhaleMs);
   }
 
-  // Math.ceil => 5,4,3,2,1 (au lieu de 4,3,2,1,0)
   const sec = Math.max(1, Math.ceil(remainingMs / 1000));
   btCount.textContent = String(sec);
 }
@@ -825,7 +821,6 @@ function btStopAll(){
   if(btPhase) btPhase.textContent = "Prête.";
   if(btCount) btCount.textContent = "";
 
-  // coupe le son sans détruire le contexte
   if(noiseGain && audioCtx){
     noiseGain.gain.setTargetAtTime(0.0001, audioCtx.currentTime, 0.08);
   }
@@ -838,9 +833,9 @@ function btResetAll(){
 }
 
 // -------------------------
-// API réutilisable (par fiche)
-// Ex: openBreathTimer(tool.timer) où tool.timer = { totalSec, inhaleSec, exhaleSec, sound }
+// Open timer
 // -------------------------
+
 function openBreathTimer(options = {}){
   const total = Number(options.totalSec);
   const inh = Number(options.inhaleSec);
@@ -860,8 +855,7 @@ function openBreathTimer(options = {}){
   if(btCount) btCount.textContent = "";
   if(breathOrb) breathOrb.style.setProperty("--orb-scale", String(ORB_MIN_SCALE));
 
-  // IMPORTANT : on NE démarre PAS le son ici.
-  // Le son doit démarrer uniquement quand l'utilisateur clique Start.
+  // IMPORTANT : pas de son ici
 
   if(breathTimer){
     safeShowModal(breathTimer);
@@ -871,6 +865,7 @@ function openBreathTimer(options = {}){
 // -------------------------
 // Run
 // -------------------------
+
 function btStartRun(){
   btStopAll();
   btRunning = true;
@@ -880,7 +875,7 @@ function btStartRun(){
 
   if(breathOrb) breathOrb.classList.add("is-running");
 
-  // ✅ son démarre uniquement au clic Start
+  // Son uniquement ici
   btSetSound(btConfig.sound);
 
   const inhaleMs = btConfig.inhaleSec * 1000;
@@ -893,10 +888,10 @@ function btStartRun(){
     if(!btRunning) return;
 
     const elapsed = now - btAnimStart;
-    const t = elapsed % cycleMs; // ms dans le cycle
+    const t = elapsed % cycleMs;
 
     const phase = (t < inhaleMs) ? "inhale" : "exhale";
-    const phaseT = (phase === "inhale")
+    const progress = (phase === "inhale")
       ? (t / inhaleMs)
       : ((t - inhaleMs) / exhaleMs);
 
@@ -904,27 +899,22 @@ function btStartRun(){
       btPhase.textContent = (phase === "inhale") ? "Inspire…" : "Expire…";
     }
 
-    // orbe parfaitement synchro (pas de "grandit encore en exhale")
     const scale = (phase === "inhale")
-      ? (ORB_MIN_SCALE + (ORB_MAX_SCALE - ORB_MIN_SCALE) * phaseT)
-      : (ORB_MAX_SCALE - (ORB_MAX_SCALE - ORB_MIN_SCALE) * phaseT);
+      ? (ORB_MIN_SCALE + (ORB_MAX_SCALE - ORB_MIN_SCALE) * progress)
+      : (ORB_MAX_SCALE - (ORB_MAX_SCALE - ORB_MIN_SCALE) * progress);
 
     if(breathOrb){
       breathOrb.style.setProperty("--orb-scale", String(scale));
     }
 
-    // mini décompte central (5-4-3-2-1)
     btUpdateCenterCount(phase, t, inhaleMs, exhaleMs);
-
-    // audio vague
-    btUpdateSound(phase, phaseT);
+    btUpdateSound(phase, progress);
 
     btAnimId = requestAnimationFrame(step);
   };
 
   btAnimId = requestAnimationFrame(step);
 
-  // total countdown (inchangé)
   btTick = setInterval(() => {
     btLeft = Math.max(0, btLeft - 1);
     btUpdateUI();
