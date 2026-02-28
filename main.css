@@ -790,7 +790,7 @@ details.drop > ul button:active{
 }
 
 .pill-ok[aria-pressed="true"]{
-  background: rgba(96,221,82,.28;
+  background: rgba(96,221,82,.28);
   border: 1px solid rgba(30,123,88,.68);
 }
 
