@@ -90,6 +90,27 @@ const TOOLS = [
     note: "Tu n’as rien à prouver. Tu te retrouves."
   },
   {
+    id: "ancrage5sens",
+    title: "Encrage des 5 sens",
+    category: "Somatique",
+    tags: ["Orientation", "ancrage", "somatique", "surcharge"],
+    duration: "2–3 min",
+    position: "assis/debout",
+    intensity: "très doux",
+    modes: ["fatigue_mentale","fatigue_emo","sos"],
+    summary: "Revenir en pleine conscience en activant les 5 sens.",
+    steps: [
+      "5. Repère 5 choses que tu peux voir.",
+      "4. Repère 4 choses que tu peux toucher.",
+      "3. Repère 3 choses que tu peux entendre.",
+      "2. Capte 2 odeurs que tu peux sentir.",
+      "1. Savoure 1 chose que tu peux goûter."
+    ],
+    low: "Version low battery : 3 objets + 1 expiration longue.",
+    stop: "Stop si ça augmente l’anxiété : fais uniquement l’expiration longue.",
+    note: "Tu n’as rien à prouver. Tu te retrouves."
+  }, 
+  {
     id: "auto-contact",
     title: "Auto-contact sécurisant",
     category: "Somatique",
@@ -137,9 +158,9 @@ const TOOLS = [
     tags: ["cohérence cardiaque", "respiration", "stress"],
     duration: "5 min",
     timer: { totalSec: 300, inhaleSec: 5, exhaleSec: 5 }, 
-    position: "assis",
+    position: "assis/allongé",
     intensity: "très doux",
-    modes: ["ok","fatigue_mentale","fatigue_emo","fatigue_phys", "douleurs","sos"],
+    modes: ["ok","fatigue_mentale","fatigue_emo","fatigue_phys","douleurs","sos"],
     summary: "Respiration régulière : inspire 4, expire 6 (adaptable).",
     steps: [
       "Inspire par le nez 5 secondes.",
@@ -150,6 +171,32 @@ const TOOLS = [
     note: "L’expiration longue est souvent la clé."
   },
   {
+    id: "bodyscan",
+    title: "Body scan",
+    category: "Somatique",
+    tags: ["Orientation", "ancrage", "somatique", "surcharge","cohérence cardiaque", "respiration", "stress","douleurs"],
+    duration: "2-4 min",
+    position: "allongé",
+    intensity: "très doux",
+    modes: ["fatigue_mentale","fatigue_emo","fatigue_phys","douleurs","sos"],
+    summary: "On scan le corps des pieds à la tête, calmement.",
+    steps: [
+      "Respire tranquillement.",
+      "Commence par sentir tes pieds, tes orteils, remue les légérement si besoin, juste pour t'y connecter.",
+      "Remonte tranquillement, en sentant tes chevilles, puis tes mollets, tes genoux, tes cuisses.",
+      "Note mentalement si tu sens des tensions.",
+      "Continue avec ton bassin, le bas de ton dos, remonte doucement en prenant le temps de sentir chaque muscle.",
+      "Puis tes mains, tes poignets, remonte jusqu'aux coudes, puis les épaule, le haut du dos.",
+      "Est-ce que ça tire? Note le mentalement."
+      "Puis enfin ta nuque, ta gorge, ta mâchoire, tes pomettes, ton front et le haut de ton crâne.",
+      "Respire calmement."
+      " 
+    ],
+    low: "Version low battery : juste le scan.",
+    stop: "Stop si douleurs trop fortes.",
+    note: "A faire idéalement avant des étirements ou cohérence cardiaque, et après pour noter une éventuellement différence."
+  }, 
+  {
     id: "soupir",
     title: "Soupir physiologique",
     category: "Respiration",
@@ -157,7 +204,7 @@ const TOOLS = [
     duration: "1 min",
     position: "assis/debout",
     intensity: "très doux",
-    modes: ["fatigue_phys","fatigue_emo","fatigue_mentale","sos"],
+    modes: ["fatigue_phys","fatigue_emo","fatigue_mentale","douleurs","sos"],
     summary: "Reset rapide : deux petites inspirations + une longue expiration.",
     steps: [
       "Inspire normalement.",
@@ -218,7 +265,7 @@ const TOOLS = [
     duration: "3–10 min",
     position: "assis/allongé",
     intensity: "très doux",
-    modes: ["ok","fatigue_phys","douleurs","sos"],
+    modes: ["fatigue_phys","douleurs","sos"],
     summary: "Protocole doux : chaleur + respiration + relâchement de mâchoire.",
     steps: [
       "Chaleur à la base du crâne (si ok).",
@@ -238,7 +285,7 @@ const TOOLS = [
     duration: "2–5 min",
     position: "assis",
     intensity: "très doux",
-    modes: ["ok","fatigue_phys","douleurs","sos"],
+    modes: ["fatigue_phys","fatigue_mentale","douleurs","sos"],
     summary: "Décharger la mâchoire sans étirer fort.",
     steps: [
       "Lèvres fermées, dents séparées.",
@@ -252,25 +299,48 @@ const TOOLS = [
   },
   {
     id: "rouleau-picots",
-    title: "Rouleau à picots (dos) — usage intelligent",
+    title: "Rouleau à picots (haut du dos)",
     category: "Douleur",
     tags: ["Rouleau", "rouleau à picots", "fascia", "dos", "récup", "douleur"],
-    duration: "5–12 min",
+    duration: "5–7 min",
     position: "allongé",
     intensity: "doux à modéré",
-    modes: ["ok","fatigue_phys","douleurs"],
+    modes: ["fatigue_phys","douleurs","sos"],
     summary: "Décompression + fascia : on dose pour éviter l’habituation (pas tous les jours).",
     steps: [
-      "Pose-toi sur le rouleau (haut/milieu du dos).",
-      "1–2 minutes immobile + expirations longues.",
+      "Pose-toi sur le rouleau (haut/milieu du dos), bassin relevé, mains derrière la tête en soutien.",
       "Micro-roule très lentement (amplitude mini) 60–90 sec.",
-      "Change de zone si OK, sans chercher la douleur.",
-      "Fin : 4 expirations longues + verre d’eau."
+      "Trouve un point de tension et reste dessus, repose le bassin au sol sans trop cambrer.",  
+      "Inspire en écartant les coudes et en abaissant le haut du dos vers le sol.",
+      "Expire en remontant, sans forcer. C'est OK si tu entends des 'cracs', c'est que les tensions se relâchent.", 
+      "Répète 3 fois pour chaque point douloureux."
     ],
-    low: "Version low battery : 2 minutes immobile + respiration, sans rouler.",
-    stop: "Stop si douleur vive, engourdissement, pincement nerveux. Évite lombaires si sensible.",
+    low: "Version low battery : 2 minutes en roulant doucement + respiration.",
+    stop: "Stop si douleur vive, engourdissement, pincement nerveux.",
     note: "Pas tous les jours : laisse au corps le temps d’intégrer (sinon il s’habitue)."
   },
+  {
+    id: "rouleau-picots-nuque",
+    title: "Rouleau à picots (nuque)",
+    category: "Douleur",
+    tags: ["Rouleau", "rouleau à picots", "fascia", "dos", "récup", "douleur"],
+    duration: "5 min",
+    position: "allongé",
+    intensity: "doux à modéré",
+    modes: ["fatigue_phys","douleurs","sos"],
+    summary: "Décompression + fascia : on dose pour éviter l’habituation (pas tous les jours).",
+    steps: [
+      "Pose-toi le rouleau sous ta nuque, le corps bien à plat au sol, et les bras le long du corps.",
+      "Tourne la tête de gauche à droite, puis de droite à gauche, tout doucement pendant 20 sec.",
+      "N'oublie pas de respirer!", 
+      "Trouve un point de tension et reste dessus.",
+      "Tout en restant sur le point de tension, monte la tête de haut en bas. Aide toi de tes yeux en regardant en haut, puis en bas."  
+      "Répète 6 fois pour chaque point douloureux."
+    ],
+    low: "Version low battery : 1 minute en tourant la tête doucement d'un côté à l'autre + respiration.",
+    stop: "Stop si douleur vive, engourdissement, pincement nerveux.",
+    note: "Pas tous les jours : laisse au corps le temps d’intégrer (sinon il s’habitue)."
+  }, 
   {
     id: "balle-fascia-trapeze",
     title: "Balle fascia derrière le trapèze",
@@ -285,7 +355,7 @@ const TOOLS = [
       "Allonge-toi sur le dos.",
       "Place la balle derrière le trapèze (pas sur l’os).",
       "Trouve un point ‘oui’ tolérable (pas ‘aïe’).",
-      "Lève le bras du côté concerné puis abaisse-le lentement (≥ 6 fois).",
+      "Lève le bras du côté concerné en inspirant, puis abaisse-le lentement (≥ 6 fois).",
       "Expiration longue sur la descente.",
       "Fin : micro-cercles d’épaule 3 fois."
     ],
