@@ -442,7 +442,7 @@ details.drop > summary:focus-visible{
   }
 }
 
-@media (max-width: 760px){
+/*@media (max-width: 760px){
   .topbar-inner.topbar-centered{
     grid-template-columns: 1fr;
     justify-items: center;
@@ -451,7 +451,7 @@ details.drop > summary:focus-visible{
     grid-column: auto;
     justify-self: center;
   }
-}
+}*/
 
 
 /* =========================
@@ -790,7 +790,7 @@ details.drop > ul button:active{
 }
 
 .pill-ok[aria-pressed="true"]{
-  background: rgba(45,140,134,.12);
+  background: rgba(96,221,82,.28;
   border: 1px solid rgba(30,123,88,.68);
 }
 
