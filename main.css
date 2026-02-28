@@ -879,7 +879,7 @@ details.drop > ul button:active{
     color-mix(in srgb, var(--sage) 22%, transparent)
   );
   transform: scale(var(--orb-scale, 1));   /* <- scale piloté par JS */
-  transition: transform 1000ms linear;
+  transition: transform 950ms linear;
   filter: blur(0.2px);
 }
 
