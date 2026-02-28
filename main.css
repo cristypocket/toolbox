@@ -80,6 +80,13 @@ nav, .nav{
   box-shadow: var(--shadow-sm);
 }
 
+.toolModal{
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+
+
 .btn, .pill, .fav-btn, .nav-toggle, details.drop > summary{
   background: color-mix(in srgb, var(--paper) 88%, transparent);
   border: 1px solid var(--line);
@@ -150,6 +157,11 @@ details.drop > summary:focus-visible{
   border-bottom-color: rgba(233,241,238,.10);
 }
 
+:root[data-theme="dark"] .topbar-inner{
+  background: rgba(10, 14, 13, 0.88); 
+  border-bottom-color: rgba(233,241,238,.10);
+}
+
 :root[data-theme="dark"] nav,
 :root[data-theme="dark"] .nav{
   background: rgba(10, 14, 13, 0.78);
@@ -210,6 +222,12 @@ details.drop > summary:focus-visible{
 
 :root[data-theme="dark"] details.drop[open] > summary{
   background: rgba(45,140,134,.18);
+}
+
+:root[data-theme="dark"] .toolModal{
+  background: rgba(19,28,26,.90);
+  border-color: var(--line);
+  color: rgba(233,241,238,.55);
 }
 
 /* =========================
@@ -649,6 +667,31 @@ details.drop > ul button:active{
   background: rgba(201,116,90,.18);
   border: 1px solid rgba(201,116,90,.28);
 }
+.chip.ok{
+  background: rgba(201,116,90,.18);
+  border: 1px solid rgba(201,116,90,.28);
+}
+.chip.fatique_phys{
+  background: rgba(201,116,90,.18);
+  border: 1px solid rgba(201,116,90,.28);
+}
+.chip.fatique_mentale{
+  background: rgba(201,116,90,.18);
+  border: 1px solid rgba(201,116,90,.28);
+}
+.chip.fatigue_emo{
+  background: rgba(201,116,90,.18);
+  border: 1px solid rgba(201,116,90,.28);
+}
+.chip.courbatures{
+  background: rgba(201,116,90,.18);
+  border: 1px solid rgba(201,116,90,.28);
+}
+.chip.douleurs{
+  background: rgba(201,116,90,.18);
+  border: 1px solid rgba(201,116,90,.28);
+}
+
 
 /* === Pills === */
 
