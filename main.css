@@ -716,7 +716,7 @@ details.drop > ul button:active{
 
 .pill-ok{
   background: rgba(96,221,82,.08);
-  border: 1px solid rgba(196,221,82,.48); 
+  border: 1px solid rgba(30,123,88,.48); 
   padding: 12px 12px;
   border-radius: 8px;
   font-size: 13px;
@@ -725,7 +725,7 @@ details.drop > ul button:active{
 
 .pill-phys{
   background: rgba(225,240,119,.08);
-  border: 1px solid rgba(225,240,119,.48);
+  border: 1px solid rgba(164,179,64,.48);
   padding: 12px 12px;
   border-radius: 8px;
   font-size: 13px;
@@ -784,12 +784,12 @@ details.drop > ul button:active{
 
 .pill-ok[aria-pressed="true"]{
   background: rgba(45,140,134,.12);
-  border: 1px solid var(--sage);
+  border: 1px solid rgba(30,123,88,.68));
 }
 
 .pill-phys[aria-pressed="true"]{
   background: rgba(225,240,119,.28);
-  border: 1px solid rgba(225,240,119,.68);
+  border: 1px solid rgba(164,179,64,.68);
 }
 
 .pill-ment[aria-pressed="true"]{
