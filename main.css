@@ -674,32 +674,32 @@ details.drop > ul button:active{
   font-size: 12px;
 }
 .chip.sos{
-  background: rgba(201,116,90,.18);
-  border: 1px solid rgba(201,116,90,.28);
+  background: rgba(201,116,90,.08);
+  border: 1px solid rgba(201,116,90,.48);
 }
 .chip.ok{
-  background: rgba(45,140,134,.12);
-  border: 1px solid rgbavar(--sage);
+  background: rgba(96,221,82,.08);
+  border: 1px solid rgba(30,123,88,.48); 
 }
 .chip.fatique_phys{
-  background: rgba(225,240,119,.18);
-  border: 1px solid rgba(225,240,119,.28);
+  background: rgba(225,240,119,.28);
+  border: 1px solid rgba(164,179,64,.68);
 }
 .chip.fatique_mentale{
-  background: rgba(119,206,240,.18);
-  border: 1px solid rgba(119,206,240,.28);
+  background: rgba(119,206,240,.08);
+  border: 1px solid rgba(119,206,240,.48);
 }
 .chip.fatigue_emo{
-  background: rgba(227,59,251,.18);
-  border: 1px solid rgba(227,59,251,.28);
+  background: rgba(227,59,251,.08);
+  border: 1px solid rgba(227,59,251,.48);
 }
 .chip.courbatures{
-  background: rgba(251,158,59,.18);
-  border: 1px solid rgba(251,158,59,.28);
+  background: rgba(251,158,59,.08);
+  border: 1px solid rgba(251,158,59,.48);
 }
 .chip.douleurs{
-  background: rgba(251,59,149,.18);
-  border: 1px solid rgba(251,59,149,.28);
+  background: rgba(251,59,149,.08);
+  border: 1px solid rgba(251,59,149,.48);
 }
 
 
