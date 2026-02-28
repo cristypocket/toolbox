@@ -784,10 +784,10 @@ details.drop > ul button:active{
   cursor: pointer;
 }
 
-.pill[aria-pressed="true"]{
+/*.pill[aria-pressed="true"]{
   background: rgba(45,140,134,.12);
   border-color: var(--sage);
-}
+}*/
 
 .pill-ok[aria-pressed="true"]{
   background: rgba(96,221,82,.28);
