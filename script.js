@@ -331,8 +331,8 @@ const state = {
 // -------------------------
 // Storage keys
 // -------------------------
-const LS_FAVS = "grimoire_favorites_v1";
-const LS_THEME = "grimoire_theme_v1";
+const LS_FAVS = "toolbox_favorites_v1";
+const LS_THEME = "toolbox_theme_v1";
 
 // -------------------------
 // DOM
@@ -549,9 +549,27 @@ function render(){
   items.forEach(tool => {
     const isFav = state.favorites.has(tool.id);
     const sosChip = (tool.modes && tool.modes.includes("sos"))
-      ? `<span class="chip sos">🔥 SOS</span>`
+      ? `<span class="chip sos">🔥</span>`
       : "";
-
+   const okChip = (tool.modes && tool.modes.includes("ok"))
+      ? `<span class="chip ok">🌿</span>`
+      : "";
+   const physChip = (tool.modes && tool.modes.includes("fatigue_phys"))
+      ? `<span class="chip fatique_phys">🫩</span>`
+      : "";
+   const mentChip = (tool.modes && tool.modes.includes("fatigue_phys"))
+      ? `<span class="chip fatique_mentale">🤯</span>`
+      : "";  
+   const emoChip = (tool.modes && tool.modes.includes("fatigue_emo"))
+      ? `<span class="chip fatigue_emo">🥺</span>`
+      : "";
+   const courbChip = (tool.modes && tool.modes.includes("courbatures"))
+      ? `<span class="chip courbatures">😬</span>`
+      : "";
+   const doulChip = (tool.modes && tool.modes.includes("douleurs"))
+      ? `<span class="chip douleurs">😣</span>`
+      : ""; 
+     
     const card = document.createElement("article");
     card.className = "card";
 
@@ -636,7 +654,7 @@ function openTool(id){
         const btn = document.getElementById("startToolTimer");
         if(btn){
           btn.addEventListener("click", () => {
-            openBreathTimer({ ...tool.timer, sound: fasle });
+            openBreathTimer({ ...tool.timer, sound: false });
           });
         }
       }, 0);
