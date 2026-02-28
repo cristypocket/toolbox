@@ -683,13 +683,15 @@ let btConfig = {
 };
 
 let btLeft = btConfig.totalSec;
-let btTick = null;
-let btPhaseTick = null;
+let btTick = null;        // countdown (reste en setInterval)
 let btRunning = false;
+
+// Animation (phase/orbe/son) via requestAnimationFrame
+let btAnimId = null;
+let btAnimStart = 0;      // timestamp du début d’animation (ms)
 
 // -------------------------
 // Audio “vague” (WebAudio)
-// - bruit doux + filtre passe-bas (ça fait beaucoup moins “bip” qu’un oscillateur)
 // -------------------------
 let audioCtx = null;
 let noiseSrc = null;
@@ -721,9 +723,9 @@ function btEnsureAudio(){
   // Filtre = “vague” (passe-bas)
   noiseFilter = audioCtx.createBiquadFilter();
   noiseFilter.type = "lowpass";
-  noiseFilter.frequency.value = 450; // point de départ
+  noiseFilter.frequency.value = 450;
 
-  // Gain très bas (sinon c’est vite agressif)
+  // Gain très bas
   noiseGain = audioCtx.createGain();
   noiseGain.gain.value = 0.0001;
 
@@ -737,27 +739,24 @@ function btEnsureAudio(){
 function btSetSound(on){
   btConfig.sound = !!on;
   if(!btConfig.sound){
-    if(noiseGain) noiseGain.gain.setTargetAtTime(0.0001, audioCtx.currentTime, 0.08);
+    if(noiseGain && audioCtx) noiseGain.gain.setTargetAtTime(0.0001, audioCtx.currentTime, 0.08);
     return;
   }
 
   btEnsureAudio();
 
-  // iOS / Safari : l’audio context peut être “suspended” tant qu’il n’y a pas d’interaction
   if(audioCtx && audioCtx.state === "suspended"){
     audioCtx.resume().catch(() => {});
   }
 
-  if(noiseGain) noiseGain.gain.setTargetAtTime(0.018, audioCtx.currentTime, 0.12);
+  if(noiseGain && audioCtx) noiseGain.gain.setTargetAtTime(0.018, audioCtx.currentTime, 0.12);
 }
 
 function btUpdateSound(phase, phaseProgress01){
   if(!btConfig.sound || !audioCtx || !noiseGain || !noiseFilter) return;
 
-  // Cutoff + volume varient doucement, comme une vague
-  // Inspiration : un peu plus “clair” (cutoff monte), expiration : plus “sombre” (cutoff descend)
-  const cutoffInhale = 1200;
-  const cutoffExhale = 200;
+  const cutoffInhale = 900;
+  const cutoffExhale = 420;
 
   const cutoff = (phase === "inhale")
     ? (cutoffExhale + (cutoffInhale - cutoffExhale) * phaseProgress01)
@@ -765,7 +764,6 @@ function btUpdateSound(phase, phaseProgress01){
 
   noiseFilter.frequency.setTargetAtTime(cutoff, audioCtx.currentTime, 0.12);
 
-  // Volume légèrement + haut en expiration (souvent plus apaisant)
   const vol = (phase === "exhale")
     ? (0.020 + 0.006 * phaseProgress01)
     : (0.018 + 0.004 * phaseProgress01);
@@ -783,12 +781,17 @@ function btUpdateUI(){
 function btStopAll(){
   btRunning = false;
 
+  // Stop countdown
   if(btTick){ clearInterval(btTick); btTick = null; }
-  if(btPhaseTick){ clearInterval(btPhaseTick); btPhaseTick = null; }
+
+  // Stop animation frame (IMPORTANT : sinon ça continue en arrière-plan)
+  if(btAnimId){
+    cancelAnimationFrame(btAnimId);
+    btAnimId = null;
+  }
 
   if(breathOrb){
     breathOrb.classList.remove("is-running");
-    // si ton CSS utilise --orb-scale, on remet à 1, sinon ça ne gêne pas
     breathOrb.style.setProperty("--orb-scale", "1");
   }
 
@@ -796,7 +799,7 @@ function btStopAll(){
 
   // coupe le son sans détruire le contexte
   if(noiseGain && audioCtx){
-    noiseGain.gain.setTargetAtTime(0.0001, audioCtx.currentTime, 0.00);
+    noiseGain.gain.setTargetAtTime(0.0001, audioCtx.currentTime, 0.08);
   }
 }
 
@@ -811,7 +814,6 @@ function btResetAll(){
 // Ex: openBreathTimer(tool.timer) où tool.timer = { totalSec, inhaleSec, exhaleSec, sound }
 // -------------------------
 function openBreathTimer(options = {}){
-  // IMPORTANT : accepte les nombres même si ils viennent d’un JSON
   const total = Number(options.totalSec);
   const inh = Number(options.inhaleSec);
   const exh = Number(options.exhaleSec);
@@ -837,7 +839,7 @@ function openBreathTimer(options = {}){
 }
 
 // -------------------------
-// Run
+// Run (fix glitch orb + sync inhale/exhale)
 // -------------------------
 function btStartRun(){
   btStopAll();
@@ -848,37 +850,47 @@ function btStartRun(){
 
   if(breathOrb) breathOrb.classList.add("is-running");
 
-  const cycle = btConfig.inhaleSec + btConfig.exhaleSec;
-  let t = 0; // secondes dans le cycle
+  // garde TON amplitude actuelle
+  const ORB_MIN_SCALE = 1;
+  const ORB_MAX_SCALE = 3.0;
 
-  if(btPhase) btPhase.textContent = "Inspire…";
+  const inhaleMs = btConfig.inhaleSec * 1000;
+  const exhaleMs = btConfig.exhaleSec * 1000;
+  const cycleMs  = inhaleMs + exhaleMs;
 
-  btPhaseTick = setInterval(() => {
-    t = (t + 1) % cycle;
+  btAnimStart = performance.now();
 
-    const phase = (t < btConfig.inhaleSec) ? "inhale" : "exhale";
+  const step = (now) => {
+    if(!btRunning) return;
+
+    const elapsed = now - btAnimStart;
+    const t = elapsed % cycleMs;
+
+    const phase = (t < inhaleMs) ? "inhale" : "exhale";
     const phaseT = (phase === "inhale")
-      ? (t / btConfig.inhaleSec)
-      : ((t - btConfig.inhaleSec) / btConfig.exhaleSec);
+      ? (t / inhaleMs)
+      : ((t - inhaleMs) / exhaleMs);
 
     if(btPhase){
       btPhase.textContent = (phase === "inhale") ? "Inspire…" : "Expire…";
     }
 
-    const ORB_MIN_SCALE = 1;
-    const ORB_MAX_SCALE = 3.0; // <-- augmente / diminue ici
-
     const scale = (phase === "inhale")
-     ? (ORB_MIN_SCALE + (ORB_MAX_SCALE - ORB_MIN_SCALE) * phaseT)
-     : (ORB_MAX_SCALE - (ORB_MAX_SCALE - ORB_MIN_SCALE) * phaseT);
+      ? (ORB_MIN_SCALE + (ORB_MAX_SCALE - ORB_MIN_SCALE) * phaseT)
+      : (ORB_MAX_SCALE - (ORB_MAX_SCALE - ORB_MIN_SCALE) * phaseT);
 
     if(breathOrb){
-     breathOrb.style.setProperty("--orb-scale", String(scale));
+      breathOrb.style.setProperty("--orb-scale", String(scale));
     }
 
     btUpdateSound(phase, phaseT);
-  }, 1000);
 
+    btAnimId = requestAnimationFrame(step);
+  };
+
+  btAnimId = requestAnimationFrame(step);
+
+  // countdown (inchangé)
   btTick = setInterval(() => {
     btLeft = Math.max(0, btLeft - 1);
     btUpdateUI();
