@@ -690,7 +690,7 @@ details.drop > ul button:active{
   border: 1px solid rgba(30,123,88,.48); 
 }
 .chip.fatique_phys{
-  background: rgba(228, 236,169,0.28);
+  background: rgba(141,149,87,0.28);
   border: 1px solid rgba(164,179,64,0.64);
 }
 .chip.fatique_mentale{
@@ -732,7 +732,7 @@ details.drop > ul button:active{
 }
 
 .pill-phys{
-  background: rgba(228,236,169,0.28);
+  background: rgba(141,149,87,0.28);
   border: 1px solid rgba(164,179,64,0.64);
   padding: 12px 12px;
   border-radius: 8px;
