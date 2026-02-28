@@ -174,7 +174,7 @@ const TOOLS = [
     id: "bodyscan",
     title: "Body scan",
     category: "Somatique",
-    tags: ["Orientation", "ancrage", "somatique", "surcharge","cohérence cardiaque", "respiration", "stress","douleurs"],
+    tags: ["Orientation","ancrage","somatique","surcharge","cohérence cardiaque","respiration","stress","douleurs"],
     duration: "2-4 min",
     position: "allongé",
     intensity: "très doux",
@@ -187,10 +187,9 @@ const TOOLS = [
       "Note mentalement si tu sens des tensions.",
       "Continue avec ton bassin, le bas de ton dos, remonte doucement en prenant le temps de sentir chaque muscle.",
       "Puis tes mains, tes poignets, remonte jusqu'aux coudes, puis les épaule, le haut du dos.",
-      "Est-ce que ça tire? Note le mentalement."
+      "Est-ce que ça tire? Note le mentalement.",
       "Puis enfin ta nuque, ta gorge, ta mâchoire, tes pomettes, ton front et le haut de ton crâne.",
       "Respire calmement."
-      " 
     ],
     low: "Version low battery : juste le scan.",
     stop: "Stop si douleurs trop fortes.",
@@ -334,7 +333,7 @@ const TOOLS = [
       "Tourne la tête de gauche à droite, puis de droite à gauche, tout doucement pendant 20 sec.",
       "N'oublie pas de respirer!", 
       "Trouve un point de tension et reste dessus.",
-      "Tout en restant sur le point de tension, monte la tête de haut en bas. Aide toi de tes yeux en regardant en haut, puis en bas."  
+      "Tout en restant sur le point de tension, monte la tête de haut en bas. Aide toi de tes yeux en regardant en haut, puis en bas.",  
       "Répète 6 fois pour chaque point douloureux."
     ],
     low: "Version low battery : 1 minute en tourant la tête doucement d'un côté à l'autre + respiration.",
