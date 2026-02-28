@@ -7,7 +7,32 @@
 // DATA (Starter pack)
 // -------------------------
 const TOOLS = [
-  {
+   {
+    id: "bodyscan",
+    title: "Body scan",
+    category: "Somatique",
+    tags: ["Orientation","ancrage","somatique","surcharge","cohérence cardiaque","respiration","stress","douleurs"],
+    duration: "2-4 min",
+    position: "allongé",
+    intensity: "très doux",
+    modes: ["fatigue_mentale","fatigue_emo","fatigue_phys","douleurs","sos"],
+    summary: "On scan le corps des pieds à la tête, calmement.",
+    steps: [
+      "Respire tranquillement.",
+      "Commence par sentir tes pieds, tes orteils, remue les légérement si besoin, juste pour t'y connecter.",
+      "Remonte tranquillement, en sentant tes chevilles, puis tes mollets, tes genoux, tes cuisses.",
+      "Note mentalement si tu sens des tensions.",
+      "Continue avec ton bassin, le bas de ton dos, remonte doucement en prenant le temps de sentir chaque muscle.",
+      "Puis tes mains, tes poignets, remonte jusqu'aux coudes, puis les épaule, le haut du dos.",
+      "Est-ce que ça tire? Note le mentalement.",
+      "Puis enfin ta nuque, ta gorge, ta mâchoire, tes pomettes, ton front et le haut de ton crâne.",
+      "Respire calmement."
+    ],
+    low: "Version low battery : juste le scan.",
+    stop: "Stop si douleurs trop fortes.",
+    note: "A faire idéalement avant des étirements ou cohérence cardiaque, et après pour noter une éventuellement différence."
+  },
+   {
     id: "contracte-relache",
     title: "Contracté–relâché",
     category: "Exercices",
@@ -169,31 +194,6 @@ const TOOLS = [
     low: "Version low battery : 5 cycles.",
     stop: "Stop si essoufflement : respiration naturelle + expirations longues.",
     note: "L’expiration longue est souvent la clé."
-  },
-  {
-    id: "bodyscan",
-    title: "Body scan",
-    category: "Somatique",
-    tags: ["Orientation","ancrage","somatique","surcharge","cohérence cardiaque","respiration","stress","douleurs"],
-    duration: "2-4 min",
-    position: "allongé",
-    intensity: "très doux",
-    modes: ["fatigue_mentale","fatigue_emo","fatigue_phys","douleurs","sos"],
-    summary: "On scan le corps des pieds à la tête, calmement.",
-    steps: [
-      "Respire tranquillement.",
-      "Commence par sentir tes pieds, tes orteils, remue les légérement si besoin, juste pour t'y connecter.",
-      "Remonte tranquillement, en sentant tes chevilles, puis tes mollets, tes genoux, tes cuisses.",
-      "Note mentalement si tu sens des tensions.",
-      "Continue avec ton bassin, le bas de ton dos, remonte doucement en prenant le temps de sentir chaque muscle.",
-      "Puis tes mains, tes poignets, remonte jusqu'aux coudes, puis les épaule, le haut du dos.",
-      "Est-ce que ça tire? Note le mentalement.",
-      "Puis enfin ta nuque, ta gorge, ta mâchoire, tes pomettes, ton front et le haut de ton crâne.",
-      "Respire calmement."
-    ],
-    low: "Version low battery : juste le scan.",
-    stop: "Stop si douleurs trop fortes.",
-    note: "A faire idéalement avant des étirements ou cohérence cardiaque, et après pour noter une éventuellement différence."
   }, 
   {
     id: "soupir",
