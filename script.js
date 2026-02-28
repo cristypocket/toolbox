@@ -695,9 +695,6 @@ let btAnimStart = 0;
 const ORB_MIN_SCALE = 1;
 const ORB_MAX_SCALE = 3.0;
 
-// éléments UI (dans ton HTML actuel : breathOrb + breathOrbInner existent déjà)
-const btCount = breathTimer ? breathTimer.querySelector('[data-bt-count]') : null;
-
 // -------------------------
 // Audio “vague” (WebAudio)
 // - bruit doux + filtre passe-bas (moins agressif qu’un oscillateur)
