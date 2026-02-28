@@ -230,6 +230,12 @@ details.drop > summary:focus-visible{
   color: rgba(233,241,238,.55);
 }
 
+:root[data-theme="dark"] .modal{
+  background: rgba(19,28,26,.90);
+  border-color: var(--line);
+  color: rgba(233,241,238,.55);
+}
+
 /* =========================
    3. RESET
 ========================= */
