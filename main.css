@@ -227,13 +227,17 @@ details.drop > summary:focus-visible{
 :root[data-theme="dark"] .toolModal{
   background: rgba(19,28,26,.90);
   border-color: var(--line);
-  color: rgba(233,241,238,.55);
+  color: var(--ink);
 }
 
 :root[data-theme="dark"] .modal{
   background: rgba(19,28,26,.90);
   border-color: var(--line);
-  color: rgba(233,241,238,.55);
+  color: var(--ink);
+}
+
+:root[data-theme="dark"] .close{
+  color: var(--ink);
 }
 
 /* =========================
@@ -674,28 +678,28 @@ details.drop > ul button:active{
   border: 1px solid rgba(201,116,90,.28);
 }
 .chip.ok{
-  background: rgba(201,116,90,.18);
-  border: 1px solid rgba(201,116,90,.28);
+  background: rgba(196,221,82,.08);
+  border: 1px solid rgba(196,221,82,.28);
 }
 .chip.fatique_phys{
-  background: rgba(201,116,90,.18);
-  border: 1px solid rgba(201,116,90,.28);
+  background: rgba(225,240,119,.18);
+  border: 1px solid rgba(225,240,119,.28);
 }
 .chip.fatique_mentale{
-  background: rgba(201,116,90,.18);
-  border: 1px solid rgba(201,116,90,.28);
+  background: rgba(119,206,240,.18);
+  border: 1px solid rgba(119,206,240,.28);
 }
 .chip.fatigue_emo{
-  background: rgba(201,116,90,.18);
-  border: 1px solid rgba(201,116,90,.28);
+  background: rgba(227,59,251,.18);
+  border: 1px solid rgba(227,59,251,.28);
 }
 .chip.courbatures{
-  background: rgba(201,116,90,.18);
-  border: 1px solid rgba(201,116,90,.28);
+  background: rgba(251,158,59,.18);
+  border: 1px solid rgba(251,158,59,.28);
 }
 .chip.douleurs{
-  background: rgba(201,116,90,.18);
-  border: 1px solid rgba(201,116,90,.28);
+  background: rgba(251,59,149,.18);
+  border: 1px solid rgba(251,59,149,.28);
 }
 
 
