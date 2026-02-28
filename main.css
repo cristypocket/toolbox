@@ -114,16 +114,6 @@ nav, .nav{
 
 .meta, .hint, .footer, .brand-title span{ color: var(--muted); }
 
-.chip{
-  background: color-mix(in srgb, var(--bg) 70%, transparent);
-  border: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
-}
-
-.chip.sos{
-  background: color-mix(in srgb, var(--terracotta) 18%, transparent);
-  border: 1px solid color-mix(in srgb, var(--terracotta) 28%, transparent);
-}
-
 details.drop > ul{
   background: var(--paper);
   border: 1px solid var(--line);
@@ -241,12 +231,14 @@ details.drop > summary:focus-visible{
 }
 :root[data-theme="dark"] .breathorb{
   background: color-mix(in srgb, #a6c4bd24 75%, transparent);
+}
 
 :root[data-theme="dark"] .breath-orb-inner{        
   background: radial-gradient(circle at 30% 30%,
-    color-mix(in srgb, var(--terracotta) 60%, transparent),
-    color-mix(in srgb, var(--sage) 44%, transparent)
+    color-mix(in srgb, var(--terracotta) 30%, transparent),
+    color-mix(in srgb, var(--sage) 22%, transparent)
   );
+}
 
 /* =========================
    3. RESET
@@ -681,30 +673,37 @@ details.drop > ul button:active{
   border-radius: 8px;
   font-size: 12px;
 }
+   
 .chip.sos{
   background: rgba(201,116,90,.08);
   border: 1px solid rgba(201,116,90,.48);
 }
+   
 .chip.ok{
   background: rgba(96,221,82,.08);
   border: 1px solid rgba(30,123,88,.48); 
 }
+   
 .chip.fatique_phys{
-  background: rgba(141,149,87,0.28);
-  border: 1px solid rgba(164,179,64,0.64);
+  background: rgba(141,149,87,.28);
+  border: 1px solid rgba(164,179,64,.64);
 }
+   
 .chip.fatique_mentale{
   background: rgba(119,206,240,.08);
   border: 1px solid rgba(119,206,240,.48);
 }
+   
 .chip.fatigue_emo{
   background: rgba(227,59,251,.08);
   border: 1px solid rgba(227,59,251,.48);
 }
+   
 .chip.courbatures{
   background: rgba(251,158,59,.08);
   border: 1px solid rgba(251,158,59,.48);
 }
+   
 .chip.douleurs{
   background: rgba(251,59,149,.08);
   border: 1px solid rgba(251,59,149,.48);
@@ -732,8 +731,8 @@ details.drop > ul button:active{
 }
 
 .pill-phys{
-  background: rgba(141,149,87,0.28);
-  border: 1px solid rgba(164,179,64,0.64);
+  background: rgba(141,149,87,.28);
+  border: 1px solid rgba(164,179,64,.64);
   padding: 12px 12px;
   border-radius: 8px;
   font-size: 13px;
@@ -792,7 +791,7 @@ details.drop > ul button:active{
 
 .pill-ok[aria-pressed="true"]{
   background: rgba(45,140,134,.12);
-  border: 1px solid rgba(30,123,88,.68));
+  border: 1px solid rgba(30,123,88,.68);
 }
 
 .pill-phys[aria-pressed="true"]{
