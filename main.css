@@ -239,6 +239,14 @@ details.drop > summary:focus-visible{
 :root[data-theme="dark"] .close{
   color: var(--ink);
 }
+:root[data-theme="dark"] .breathorb{
+  background: color-mix(in srgb, #a6c4bd24 75%, transparent);
+
+:root[data-theme="dark"] .breath-orb-inner{        
+  background: radial-gradient(circle at 30% 30%,
+    color-mix(in srgb, var(--terracotta) 60%, transparent),
+    color-mix(in srgb, var(--sage) 44%, transparent)
+  );
 
 /* =========================
    3. RESET
