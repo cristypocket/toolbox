@@ -871,7 +871,7 @@ function openBreathTimer(options = {}){
 }
 
 // -------------------------
-// Run (anti-glitch + synchro inhale/exhale + mini compteur)
+// Run 
 // -------------------------
 function btStartRun(){
   btStopAll();
