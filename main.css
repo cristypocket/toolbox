@@ -678,8 +678,8 @@ details.drop > ul button:active{
   border: 1px solid rgba(201,116,90,.28);
 }
 .chip.ok{
-  background: rgba(196,221,82,.08);
-  border: 1px solid rgba(196,221,82,.28);
+  background: rgba(45,140,134,.12);
+  border: 1px solid rgbavar(--sage);
 }
 .chip.fatique_phys{
   background: rgba(225,240,119,.18);
@@ -714,9 +714,107 @@ details.drop > ul button:active{
   cursor: pointer;
 }
 
+.pill-ok{
+  background: rgba(96,221,82,.08);
+  border: 1px solid rgba(196,221,82,.28); 
+  padding: 12px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.pill-phys{
+  background: rgba(225,240,119,.18);
+  border: 1px solid rgba(225,240,119,.28);
+  padding: 12px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.pill-ment{
+  background: rgba(119,206,240,.18);
+  border: 1px solid rgba(119,206,240,.28);
+  padding: 12px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.pill-emo{
+  background: rgba(227,59,251,.18);
+  border: 1px solid rgba(227,59,251,.28);
+  padding: 12px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.pill-courb{
+  background: rgba(251,158,59,.18);
+  border: 1px solid rgba(251,158,59,.28);
+  padding: 12px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.pill-doul{
+  background: rgba(251,59,149,.18);
+  border: 1px solid rgba(251,59,149,.28);
+  padding: 12px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.pill-sos{
+  background: rgba(201,116,90,.18);
+  border: 1px solid rgba(201,116,90,.28);
+  padding: 12px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
 .pill[aria-pressed="true"]{
   background: rgba(45,140,134,.12);
   border-color: var(--sage);
+}
+
+.pill-ok[aria-pressed="true"]{
+  background: rgba(45,140,134,.12);
+  border-color: var(--sage);
+}
+
+.pill-phys[aria-pressed="true"]{
+  background: rgba(225,240,119,.18);
+  border-color: rgba(225,240,119,.38);
+}
+
+.pill-ment[aria-pressed="true"]{
+  background: rgba(119,206,240,.18);
+  border-color: rgba(119,206,240,.38);
+}
+
+.pill-emo[aria-pressed="true"]{
+  background: rgba(227,59,251,.18);
+  border-color: rgba(227,59,251,.38);
+}
+
+.pill-courb[aria-pressed="true"]{
+  background: rgba(251,158,59,.18);
+  border-color: rgba(251,158,59,.38);
+}
+
+.pill-doul[aria-pressed="true"]{
+  background: rgba(251,59,149,.18);
+  border-color: rgba(251,59,149,.38);
+}
+
+.pill-sos[aria-pressed="true"]{
+  background: rgba(201,116,90,.18);
+  border-color: rgba(201,116,90,.38);
 }
 
 /* === Buttons === */
