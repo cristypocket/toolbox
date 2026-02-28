@@ -860,7 +860,8 @@ function openBreathTimer(options = {}){
   if(btCount) btCount.textContent = "";
   if(breathOrb) breathOrb.style.setProperty("--orb-scale", String(ORB_MIN_SCALE));
 
-  btSetSound(btConfig.sound);
+  // IMPORTANT : on NE démarre PAS le son ici.
+  // Le son doit démarrer uniquement quand l'utilisateur clique Start.
 
   if(breathTimer){
     safeShowModal(breathTimer);
@@ -868,7 +869,7 @@ function openBreathTimer(options = {}){
 }
 
 // -------------------------
-// Run 
+// Run
 // -------------------------
 function btStartRun(){
   btStopAll();
@@ -878,6 +879,9 @@ function btStartRun(){
   btUpdateUI();
 
   if(breathOrb) breathOrb.classList.add("is-running");
+
+  // ✅ son démarre uniquement au clic Start
+  btSetSound(btConfig.sound);
 
   const inhaleMs = btConfig.inhaleSec * 1000;
   const exhaleMs = btConfig.exhaleSec * 1000;
