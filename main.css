@@ -894,7 +894,7 @@ details.drop > ul button:active{
   display: grid;
   place-items: center;
   font-weight: 800;
-  font-size: 44px;          /* ajuste si tu veux */
+  font-size: 44px; 
   letter-spacing: .5px;
   color: var(--ink);
   opacity: .9;
