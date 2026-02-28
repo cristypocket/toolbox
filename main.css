@@ -229,7 +229,7 @@ details.drop > summary:focus-visible{
 :root[data-theme="dark"] .close{
   color: var(--ink);
 }
-:root[data-theme="dark"] .breathorb{
+:root[data-theme="dark"] .breath-orb{
   background: color-mix(in srgb, #a6c4bd24 75%, transparent);
 }
 
@@ -238,6 +238,10 @@ details.drop > summary:focus-visible{
     color-mix(in srgb, var(--terracotta) 30%, transparent),
     color-mix(in srgb, var(--sage) 22%, transparent)
   );
+}
+
+:root[data-theme="dark"] .breath-count{
+  color: var(--ink);
 }
 
 /* =========================
@@ -859,6 +863,7 @@ details.drop > ul button:active{
 /* === Orb === */
 
 .breath-orb{
+  position: relative;
   width: 180px;
   height: 180px;
   border-radius: 999px;             
@@ -881,6 +886,19 @@ details.drop > ul button:active{
   transform: scale(var(--orb-scale, 1));   /* <- scale piloté par JS */
   transition: transform 950ms linear;
   filter: blur(0.2px);
+}
+
+.breath-count{
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 44px;          /* ajuste si tu veux */
+  letter-spacing: .5px;
+  color: var(--ink);
+  opacity: .9;
+  pointer-events: none;
 }
 
 /* =========================
