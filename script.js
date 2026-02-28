@@ -557,7 +557,7 @@ function render(){
    const physChip = (tool.modes && tool.modes.includes("fatigue_phys"))
       ? `<span class="chip fatique_phys">🫩</span>`
       : "";
-   const mentChip = (tool.modes && tool.modes.includes("fatigue_phys"))
+   const mentChip = (tool.modes && tool.modes.includes("fatigue_mentale"))
       ? `<span class="chip fatique_mentale">🤯</span>`
       : "";  
    const emoChip = (tool.modes && tool.modes.includes("fatigue_emo"))
@@ -581,6 +581,12 @@ function render(){
           <span class="chip">${escapeHtml(tool.duration)}</span>
           <span class="chip">${escapeHtml(tool.intensity)}</span>
           ${sosChip}
+          ${okChip}
+          ${physChip}
+          ${mentChip}
+          ${emoChip}
+          ${doulChip}
+          ${courbChip}
         </div>
         <p style="margin-top:10px;">${escapeHtml(tool.summary)}</p>
       </div>
