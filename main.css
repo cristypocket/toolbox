@@ -573,7 +573,7 @@ details.drop > summary:focus-visible{
   }
   .nav-left{
   display: flex;  
-  align: center;
+  justify-content: center;
   gap: 5px;
   flex-wrap: wrap;
   min-width: 0;
