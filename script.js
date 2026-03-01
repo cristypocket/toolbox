@@ -1568,12 +1568,12 @@ function btStartRun(){
     if(!btRunning) return;
 
     const elapsed = now - btAnimStart;
-    const t = elapsed % cycleMs;
+    const tCycle = elapsed % cycleMs;
 
-    const phase = (t < inhaleMs) ? "inhale" : "exhale";
+    const phase = (tCycle < inhaleMs) ? "inhale" : "exhale";
     const progress = (phase === "inhale")
-      ? (t / inhaleMs)
-      : ((t - inhaleMs) / exhaleMs);
+      ? (tCycle / inhaleMs)
+      : ((tCycle - inhaleMs) / exhaleMs);
 
     if(btPhase){
       btPhase.textContent = (phase === "inhale") ? t("inhale") : t("exhale");
@@ -1587,7 +1587,7 @@ function btStartRun(){
       breathOrb.style.setProperty("--orb-scale", String(scale));
     }
 
-    btUpdateCenterCount(phase, t, inhaleMs, exhaleMs);
+    btUpdateCenterCount(phase, tCycle, inhaleMs, exhaleMs);
     btUpdateSound(phase, progress);
 
     btAnimId = requestAnimationFrame(step);
