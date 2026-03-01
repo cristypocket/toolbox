@@ -375,9 +375,15 @@ details.drop > summary:focus-visible{
   gap: 12px;
 }
 
+.brand-row{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
 .brand.brand-centered{
-  grid-column: 2;
-  justify-self: center;
   display: flex;
   align-items: center;
   gap: 14px;
@@ -446,6 +452,10 @@ details.drop > summary:focus-visible{
     min-width: 0;
     max-width: 60vw;
   }
+
+  .brand.brand-centered{
+  min-width: 0;
+  } 
 }
 
 /*@media (max-width: 760px){
