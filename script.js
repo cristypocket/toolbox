@@ -30,7 +30,31 @@ const TOOLS = [
     ],
     low: "Version low battery : juste le scan.",
     stop: "Stop si douleurs trop fortes.",
-    note: "A faire idéalement avant des étirements ou cohérence cardiaque, et après pour noter une éventuellement différence."
+    note: "A faire idéalement avant des étirements ou cohérence cardiaque, et après pour noter une éventuellement différence.",
+   
+   i18n: {
+    en: {
+      title: "Body scan",
+      category: "Somatic",
+      position: "lying down",
+      intensity: "very gentle",
+      summary: "Scan the body from feet to head, calmly.",
+      steps: [
+        "Breathe gently.",
+        "Start by noticing your feet and toes; wiggle them slightly if needed, just to connect.",
+        "Move up slowly: ankles, calves, knees, thighs.",
+        "Mentally note any tension you notice.",
+        "Continue with your pelvis and lower back; move up slowly, taking time to feel each muscle.",
+        "Then your hands and wrists, up to elbows, shoulders, and upper back.",
+        "Is anything pulling or tight? Note it.",
+        "Finally your neck, throat, jaw, cheeks, forehead, and the top of your head.",
+        "Keep breathing calmly."
+      ],
+      low: "Low battery version: just do the scan.",
+      stop: "Stop if pain becomes too intense.",
+      note: "Ideally do this before stretching or heart coherence, and again after to notice any change."
+    }
+  }
   },
    {
     id: "contracte-relache",
@@ -483,39 +507,64 @@ const I18N = {
   fr: {
     brand_title: "Boîte à outils",
 
-    // nav / actions
+    // actions
     favs: "★ Favoris",
     theme_dark: "🌙 Mode nuit",
     theme_light: "☀️ Mode jour",
     reset: "↺ Réinitialiser",
     search_placeholder: "Rechercher un outil…",
 
-    // hero
+    // nav FR
+    nav_exercises: "Exercices",
+    "nav.filters.contractRelax":"Contracté–relâché",
+    "nav.filters.softMobility":"Mobilisation douce",
+    "nav.filters.softStretch":"Étirements doux",
+     
+    nav_somatic: "Somatique",
+    "nav.filters.orientation":"Orientation",
+    "nav.filters.pendulation":"Pendulation",
+    "nav.filters.selfContact":"Auto-contact",
+     
+    nav_breath: "Respiration",
+    "nav.filters.heartCoherence":"Cohérence cardiaque",
+    "nav.filters.physiologicalSigh":"Soupir physiologique", 
+     
+    nav_pacing: "Pacing",
+    "nav.filters.energyCheck":"Check énergie",
+    "nav.filters.minimumViableDay":"Minimum viable day",
+     
+    nav_pain: "Douleur",
+    "nav.filters.neck":"Nuque",
+    "nav.filters.jaw":"Mâchoir",
+    "nav.filters.spikyRoller":"Rouleau à picots",
+    "nav.filters.fasciaBall":"Balle fascia", 
+     
+    // hero FR
     hero_title: "Ton sanctuaire de régulation",
     hero_subtitle: "Des outils doux pour apaiser le système nerveux, la douleur et l’énergie.",
     breath2min: "🌬 Respiration 2 min",
     random_tool: "🎲 Outil aléatoire",
 
-    // library
+    // library FR
     active_filter: "Filtre actif :",
     none: "Aucun",
 
-    // empty state
+    // empty state FR
     empty_title: "Aucun résultat",
     empty_help: "Essaie de changer le mode, enlever les favoris, ou supprimer le filtre.",
 
-    // cards
+    // cards FR
     open: "Ouvrir",
     fav: "Favori",
 
-    // modal
+    // modal FR
     steps: "Étapes",
     low: "🌥 Low battery :",
     stop: "🔥 Stop si :",
     note: "✨ Note :",
     start_timer: "⏱ Lancer le timer",
 
-    // timer
+    // timer FR
     ready: "Ready?",
     inhale: "Inspire…",
     exhale: "Expire…",
@@ -524,34 +573,67 @@ const I18N = {
   },
 
   en: {
+    // brand EN
     brand_title: "Toolbox",
 
+    // actions EN
     favs: "★ Favorites",
     theme_dark: "🌙 Dark mode",
     theme_light: "☀️ Light mode",
     reset: "↺ Reset",
     search_placeholder: "Search a tool…",
 
+    // nav EN
+    nav_exercises: "Exercises",
+    "nav.filters.contractRelax":"Contract–relax",
+    "nav.filters.softMobility":"Soft mobility",
+    "nav.filters.softStretch":"Soft stretch",
+     
+    nav_somatic: "Somatic",
+    "nav.filters.orientation":"Orientation",
+    "nav.filters.pendulation":"Pendulation",
+    "nav.filters.selfContact":"Self-contact",
+     
+    nav_breath: "Breathing",
+    "nav.filters.heartCoherence":"Heart coherence",
+    "nav.filters.physiologicalSigh":"Physiological sigh", 
+     
+    nav_pacing: "Pacing",
+    "nav.filters.energyCheck":"Energy check",
+    "nav.filters.minimumViableDay":"Minimum viable day",
+     
+    nav_pain: "Pain",
+    "nav.filters.neck":"Neck",
+    "nav.filters.jaw":"Jaws",
+    "nav.filters.spikyRoller":"Spiky rolle",
+    "nav.filters.fasciaBall":"Fascia ball", 
+
+    // hero EN
     hero_title: "Your regulation sanctuary",
     hero_subtitle: "Gentle tools to calm your nervous system, pain, and energy.",
     breath2min: "🌬 Breathing 2 min",
     random_tool: "🎲 Random tool",
-
+ 
+    // library EN
     active_filter: "Active filter:",
     none: "None",
 
+    // empty state EN
     empty_title: "No results",
     empty_help: "Try changing the mode, turning off favorites, or clearing the filter.",
 
+    // cards EN
     open: "Open",
     fav: "Favorite",
 
+    // modal EN
     steps: "Steps",
     low: "🌥 Low battery:",
     stop: "🔥 Stop if:",
     note: "✨ Note:",
     start_timer: "⏱ Start timer",
 
+    // timer EN
     ready: "Ready?",
     inhale: "Inhale…",
     exhale: "Exhale…",
