@@ -532,7 +532,7 @@ details.drop > summary:focus-visible{
 
 /* Search à droite */
 .nav-right .search{
-  width: 280px;
+  width: 345px;
   max-width: 36vw;
   min-width: 200px;
 }
