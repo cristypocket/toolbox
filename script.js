@@ -481,6 +481,20 @@ function escapeHtml(str){
     .replaceAll("'","&#039;");
 }
 
+function toolText(tool, key){
+  const lang = state.lang || "fr";
+  // priorité: tool.i18n[lang][key]
+  const v = tool?.i18n?.[lang]?.[key];
+  if(v !== undefined && v !== null) return v;
+  // fallback: tool[key]
+  return tool?.[key];
+}
+
+function toolArray(tool, key){
+  const v = toolText(tool, key);
+  return Array.isArray(v) ? v : [];
+}
+
 function fmt(sec){
   const m = Math.floor(sec/60);
   const s = sec % 60;
@@ -802,7 +816,21 @@ function matchesMode(tool){
 function matchesQuery(tool){
   const q = normalize(state.query);
   if(!q) return true;
-  const hay = normalize([tool.title, tool.category, tool.summary, ...(tool.tags || [])].join(" "));
+
+  const lang = state.lang || "fr";
+  const other = (lang === "en") ? "fr" : "en";
+
+  const title = toolText(tool,"title") || "";
+  const cat = toolText(tool,"category") || "";
+  const sum = toolText(tool,"summary") || "";
+
+  const titleOther = tool?.i18n?.[other]?.title || "";
+  const catOther = tool?.i18n?.[other]?.category || "";
+  const sumOther = tool?.i18n?.[other]?.summary || "";
+
+  const tags = (tool.tags || []).join(" ");
+
+  const hay = normalize([title, cat, sum, titleOther, catOther, sumOther, tags].join(" "));
   return hay.includes(q);
 }
 
@@ -885,9 +913,9 @@ function render(){
       <div>
         <h3>${escapeHtml(tool.title)}</h3>
         <div class="meta">
-          <span class="chip">${escapeHtml(tool.category)}</span>
+          <span class="chip">${escapeHtml(toolText(tool,"category")}</span>
           <span class="chip">${escapeHtml(tool.duration)}</span>
-          <span class="chip">${escapeHtml(tool.intensity)}</span>
+          <span class="chip">${escapeHtml(toolText(tool,"intensity")}</span>
           ${sosChip}
           ${okChip}
           ${physChip}
@@ -896,7 +924,7 @@ function render(){
           ${doulChip}
           ${courbChip}
         </div>
-        <p style="margin-top:10px;">${escapeHtml(tool.summary)}</p>
+        <p style="margin-top:10px;">${escapeHtml(toolText(tool,"summary")}</p>
       </div>
 
       <div class="hero-actions" style="justify-content:flex-start; margin-top:14px;">
@@ -936,22 +964,22 @@ function openTool(id){
 
   if(modalMeta){
     modalMeta.innerHTML = `
-      <span class="chip">${escapeHtml(tool.category)}</span>
+      <span class="chip">${escapeHtml(toolText(tool,"category")}</span>
       <span class="chip">${escapeHtml(tool.duration)}</span>
-      <span class="chip">${escapeHtml(tool.position)}</span>
-      <span class="chip">${escapeHtml(tool.intensity)}</span>
+      <span class="chip">${escapeHtml(toolText(tool,"position")}</span>
+      <span class="chip">${escapeHtml(toolText(tool,"intensity")}</span>
     `;
   }
 
-  const steps = (tool.steps || []).map(s => `<li>${escapeHtml(s)}</li>`).join("");
-
+const steps = toolArray(tool,"steps").map(s => `<li>${escapeHtml(s)}</li>`).join("");
+   
   if(modalBody){
     modalBody.innerHTML = `
      <h4>${escapeHtml(t("steps"))}</h4>
         <ul>${steps}</ul>
-           <p><strong>${escapeHtml(t("low"))}</strong> ${escapeHtml(tool.low || "—")}</p>
-           <p><strong>${escapeHtml(t("stop"))}</strong> ${escapeHtml(tool.stop || "—")}</p>
-           <p><strong>${escapeHtml(t("note"))}</strong> ${escapeHtml(tool.note || "—")}</p>
+           <p><strong>${escapeHtml(t("low"))}</strong> ${escapeHtml(toolText(tool,"low" || "—")}</p>
+           <p><strong>${escapeHtml(t("stop"))}</strong> ${escapeHtml(toolText(tool,"stop" || "—")}</p>
+           <p><strong>${escapeHtml(t("note"))}</strong> ${escapeHtml(toolText(tool,"note" || "—")}</p>
 `      ;
 
     // 👉 AJOUT DU TIMER SI L'OUTIL EN A UN
