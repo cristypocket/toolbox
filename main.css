@@ -590,7 +590,7 @@ details.drop > summary:focus-visible{
   .nav-actions{
     justify-content: center;
     flex-wrap: wrap;
-    gap: 2px; 
+    gap: 5px; 
   }
 
   .nav-right .search{
