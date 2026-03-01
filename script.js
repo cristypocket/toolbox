@@ -549,7 +549,7 @@ const I18N = {
      
     nav_pain: "Douleur",
     "nav.filters.neck":"Nuque",
-    "nav.filters.jaw":"Mâchoir",
+    "nav.filters.jaw":"Mâchoire",
     "nav.filters.spikyRoller":"Rouleau à picots",
     "nav.filters.fasciaBall":"Balle fascia", 
      
@@ -619,7 +619,7 @@ const I18N = {
     nav_pain: "Pain",
     "nav.filters.neck":"Neck",
     "nav.filters.jaw":"Jaws",
-    "nav.filters.spikyRoller":"Spiky rolle",
+    "nav.filters.spikyRoller":"Spiky roll",
     "nav.filters.fasciaBall":"Fascia ball", 
 
     // hero EN
@@ -868,54 +868,42 @@ function render(){
   grid.innerHTML = "";
 
   if(items.length === 0){
-  grid.innerHTML = `
-    <article class="card">
-      <h3>${escapeHtml(t("empty_title"))}</h3>
-      <p>${escapeHtml(t("empty_help"))}</p>
-      <div class="hero-actions">
-        <button class="btn" id="emptyReset">↺ ${escapeHtml(t("reset"))}</button>
-      </div>
-    </article>
-  `;
-  const btn = document.getElementById("emptyReset");
-  if(btn && clearFiltersBtn) btn.addEventListener("click", () => clearFiltersBtn.click());
-  return;
-}
+    grid.innerHTML = `
+      <article class="card">
+        <h3>${escapeHtml(t("empty_title"))}</h3>
+        <p>${escapeHtml(t("empty_help"))}</p>
+        <div class="hero-actions">
+          <button class="btn" id="emptyReset">↺ ${escapeHtml(t("reset"))}</button>
+        </div>
+      </article>
+    `;
+    const btn = document.getElementById("emptyReset");
+    if(btn && clearFiltersBtn) btn.addEventListener("click", () => clearFiltersBtn.click());
+    return;
+  }
 
   items.forEach(tool => {
     const isFav = state.favorites.has(tool.id);
-    const sosChip = (tool.modes && tool.modes.includes("sos"))
-      ? `<span class="chip sos">🔥</span>`
-      : "";
-   const okChip = (tool.modes && tool.modes.includes("ok"))
-      ? `<span class="chip ok">🌿</span>`
-      : "";
-   const physChip = (tool.modes && tool.modes.includes("fatigue_phys"))
-      ? `<span class="chip fatique_phys">🫩</span>`
-      : "";
-   const mentChip = (tool.modes && tool.modes.includes("fatigue_mentale"))
-      ? `<span class="chip fatique_mentale">🤯</span>`
-      : "";  
-   const emoChip = (tool.modes && tool.modes.includes("fatigue_emo"))
-      ? `<span class="chip fatigue_emo">🥺</span>`
-      : "";
-   const courbChip = (tool.modes && tool.modes.includes("courbatures"))
-      ? `<span class="chip courbatures">😬</span>`
-      : "";
-   const doulChip = (tool.modes && tool.modes.includes("douleurs"))
-      ? `<span class="chip douleurs">😣</span>`
-      : ""; 
-     
+
+    const sosChip = (tool.modes && tool.modes.includes("sos")) ? `<span class="chip sos">🔥</span>` : "";
+    const okChip  = (tool.modes && tool.modes.includes("ok")) ? `<span class="chip ok">🌿</span>` : "";
+    const physChip = (tool.modes && tool.modes.includes("fatigue_phys")) ? `<span class="chip fatique_phys">🫩</span>` : "";
+    const mentChip = (tool.modes && tool.modes.includes("fatigue_mentale")) ? `<span class="chip fatique_mentale">🤯</span>` : "";
+    const emoChip  = (tool.modes && tool.modes.includes("fatigue_emo")) ? `<span class="chip fatigue_emo">🥺</span>` : "";
+    const courbChip = (tool.modes && tool.modes.includes("courbatures")) ? `<span class="chip courbatures">😬</span>` : "";
+    const doulChip = (tool.modes && tool.modes.includes("douleurs")) ? `<span class="chip douleurs">😣</span>` : "";
+
     const card = document.createElement("article");
     card.className = "card";
 
     card.innerHTML = `
       <div>
-        <h3>${escapeHtml(tool.title)}</h3>
+        <h3>${escapeHtml(toolText(tool,"title") || "")}</h3>
+
         <div class="meta">
-          <span class="chip">${escapeHtml(toolText(tool,"category")}</span>
-          <span class="chip">${escapeHtml(tool.duration)}</span>
-          <span class="chip">${escapeHtml(toolText(tool,"intensity")}</span>
+          <span class="chip">${escapeHtml(toolText(tool,"category") || "")}</span>
+          <span class="chip">${escapeHtml(tool.duration || "")}</span>
+          <span class="chip">${escapeHtml(toolText(tool,"intensity") || "")}</span>
           ${sosChip}
           ${okChip}
           ${physChip}
@@ -924,14 +912,15 @@ function render(){
           ${doulChip}
           ${courbChip}
         </div>
-        <p style="margin-top:10px;">${escapeHtml(toolText(tool,"summary")}</p>
+
+        <p style="margin-top:10px;">${escapeHtml(toolText(tool,"summary") || "")}</p>
       </div>
 
       <div class="hero-actions" style="justify-content:flex-start; margin-top:14px;">
         <button class="btn small" data-open="${escapeHtml(tool.id)}">${escapeHtml(t("open"))}</button>
 
         <button class="btn small ghost" data-fav="${escapeHtml(tool.id)}" aria-pressed="${isFav ? "true":"false"}">
-        ${isFav ? "★" : "☆"} ${escapeHtml(t("fav"))}
+          ${isFav ? "★" : "☆"} ${escapeHtml(t("fav"))}
         </button>
       </div>
     `;
@@ -939,7 +928,6 @@ function render(){
     grid.appendChild(card);
   });
 
-  // Bind actions after render
   grid.querySelectorAll("[data-open]").forEach(btn => {
     btn.addEventListener("click", () => openTool(btn.getAttribute("data-open")));
   });
@@ -964,10 +952,10 @@ function openTool(id){
 
   if(modalMeta){
     modalMeta.innerHTML = `
-      <span class="chip">${escapeHtml(toolText(tool,"category")}</span>
+      <span class="chip">${escapeHtml(toolText(tool,"category"))}</span>
       <span class="chip">${escapeHtml(tool.duration)}</span>
-      <span class="chip">${escapeHtml(toolText(tool,"position")}</span>
-      <span class="chip">${escapeHtml(toolText(tool,"intensity")}</span>
+      <span class="chip">${escapeHtml(toolText(tool,"position"))}</span>
+      <span class="chip">${escapeHtml(toolText(tool,"intensity"))}</span>
     `;
   }
 
@@ -977,9 +965,9 @@ const steps = toolArray(tool,"steps").map(s => `<li>${escapeHtml(s)}</li>`).join
     modalBody.innerHTML = `
      <h4>${escapeHtml(t("steps"))}</h4>
         <ul>${steps}</ul>
-           <p><strong>${escapeHtml(t("low"))}</strong> ${escapeHtml(toolText(tool,"low" || "—")}</p>
-           <p><strong>${escapeHtml(t("stop"))}</strong> ${escapeHtml(toolText(tool,"stop" || "—")}</p>
-           <p><strong>${escapeHtml(t("note"))}</strong> ${escapeHtml(toolText(tool,"note" || "—")}</p>
+           <p><strong>${escapeHtml(t("low"))}</strong> ${escapeHtml(toolText(tool,"low" || "—"))}</p>
+           <p><strong>${escapeHtml(t("stop"))}</strong> ${escapeHtml(toolText(tool,"stop" || "—"))}</p>
+           <p><strong>${escapeHtml(t("note"))}</strong> ${escapeHtml(toolText(tool,"note" || "—"))}</p>
 `      ;
 
     // 👉 AJOUT DU TIMER SI L'OUTIL EN A UN
