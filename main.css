@@ -278,6 +278,7 @@ details.drop > summary:focus-visible{
 .hero h1{
   font-family: var(--title-font);
   font-size: clamp(60px, 4vw, 90px);
+  color: var(--ink); 
   letter-spacing: 2.5px;
   line-height: 1.1;
   margin-bottom: 18px;
@@ -386,6 +387,7 @@ details.drop > summary:focus-visible{
 .brand-title strong{
   font-family: var(--title-font);
   font-size: 46px;
+  color: var(--ink); 
   letter-spacing: 2.5px;
   line-height: 1.1;
   margin-bottom: 3px;
