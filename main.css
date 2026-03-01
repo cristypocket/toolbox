@@ -475,22 +475,24 @@ details.drop > summary:focus-visible{
 ========================= */
 
 .nav{
-  position: sticky;
-  left: 0;
-  right: 0;
-  top: 80px;
+  position: relative; /* dans le flux au départ */
+  top: 0;
   z-index: 1100;
 
   border-bottom: 1px solid var(--line);
   background: rgba(245,242,234,.6);
   backdrop-filter: blur(10px);
-
-  transition: top 0.2s ease;
 }
 
-:root.topbar-hidden .nav{
+.nav.alt{
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
 }
+
+#navSpacer{ height: 0; }
+#navSpacer.on{ height: var(--nav-h, 0px); }
 
 .nav-inner{
   max-width: var(--max);
