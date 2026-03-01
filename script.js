@@ -523,52 +523,52 @@ const I18N = {
 
     // actions FR
     "nav.actions.favs":"★ Favoris",
-    "nav.actions.theme_Dark": "🌙 Mode nuit",
-    "nav.actions.theme_Light": "☀️ Mode jour",
+    "nav.actions.theme_dark": "🌙 Mode nuit",
+    "nav.actions.theme_light": "☀️ Mode jour",
     "nav.actions.reset": "↺ Réinitialiser",
     "nav.actions.lang": "🇬🇧 EN", 
     search_placeholder: "Rechercher un outil…",
 
     // nav FR
-    nav_exercices: "Exercices",
+    "nav_exercices": "Exercices",
     "nav.filters.contractRelax":"Contracté–relâché",
     "nav.filters.softMobility":"Mobilisation douce",
     "nav.filters.softStretch":"Étirements doux",
      
-    nav_somatic: "Somatique",
+    "nav_somatic": "Somatique",
     "nav.filters.orientation":"Orientation",
     "nav.filters.pendulation":"Pendulation",
     "nav.filters.selfContact":"Auto-contact",
      
-    nav_breath: "Respiration",
+    "nav_breath": "Respiration",
     "nav.filters.heartCoherence":"Cohérence cardiaque",
     "nav.filters.physiologicalSigh":"Soupir physiologique", 
      
-    nav_pacing: "Pacing",
+    "nav_pacing": "Pacing",
     "nav.filters.energyCheck":"Check énergie",
     "nav.filters.minimumViableDay":"Minimum viable day",
      
-    nav_pain: "Douleur",
+    "nav_pain": "Douleur",
     "nav.filters.neck":"Nuque",
     "nav.filters.jaw":"Mâchoire",
     "nav.filters.spikyRoller":"Rouleau à picots",
     "nav.filters.fasciaBall":"Balle fascia",
      
     // hero FR
-    hero_title: "Ton sanctuaire de régulation",
-    hero_subtitle: "Des outils doux pour apaiser le système nerveux, la douleur et l’énergie.",
-    breath2min: "🌬 Respiration 2 min",
-    random_tool: "🎲 Outil aléatoire",
+    "hero.title": "Ton sanctuaire de régulation",
+    "hero.subtitle": "Des outils doux pour apaiser le système nerveux, la douleur et l’énergie.",
+    "hero.actions.breath2min": "🌬 Respiration 2 min",
+    "hero.actions.random": "🎲 Outil aléatoire",
      
     // modes FR
-    modes_title: "Mon état du moment...",
-    modes_ok: "🌿 OK",
-    modes_fatiguePhy: "🫩 Fatigue physique",
-    modes_fatigueMental: "🤯 Fatigue mental",
-    modes_fatigueEmo: "🥺 Fatigue émotionnelle",
-    modes_ache: "😬 Courbatures",
-    modes_pain: "😣 Douleurs",
-    modes_sos: "🔥 SOS", 
+    "modes.title": "Mon état du moment...",
+    "modes.ok": "🌿 OK",
+    "modes.fatiguePhy": "🫩 Fatigue physique",
+    "modes.fatigueMental": "🤯 Fatigue mental",
+    "modes.fatigueEmo": "🥺 Fatigue émotionnelle",
+    "modes.ache": "😬 Courbatures",
+    "modes.pain": "😣 Douleurs",
+    "modes.sos": "🔥 SOS", 
      
     // library FR
     active_filter: "Filtre actif :",
@@ -603,52 +603,52 @@ const I18N = {
 
     // actions EN
     "nav.actions.favs": "★ Favorites",
-    "nav.actions.theme_Dark": "🌙 Dark mode",
-    "nav.actions.theme_Light": "☀️ Light mode",
+    "nav.actions.theme_dark": "🌙 Dark mode",
+    "nav.actions.theme_light": "☀️ Light mode",
     "nav.actions.reset": "↺ Reset",
     "nav.actions.lang": "🇫🇷 FR", 
     search_placeholder: "Search a tool…",
 
     // nav EN
-    nav_exercices: "Exercises",
+    "nav_exercices": "Exercises",
     "nav.filters.contractRelax":"Contract–relax",
     "nav.filters.softMobility":"Soft mobility",
     "nav.filters.softStretch":"Soft stretch",
      
-    nav_somatic: "Somatic",
+    "nav_somatic": "Somatic",
     "nav.filters.orientation":"Orientation",
     "nav.filters.pendulation":"Pendulation",
     "nav.filters.selfContact":"Self-contact",
      
-    nav_breath: "Breathing",
+    "nav_breath": "Breathing",
     "nav.filters.heartCoherence":"Heart coherence",
     "nav.filters.physiologicalSigh":"Physiological sigh", 
      
-    nav_pacing: "Pacing",
+    "nav_pacing": "Pacing",
     "nav.filters.energyCheck":"Energy check",
     "nav.filters.minimumViableDay":"Minimum viable day",
      
-    nav_pain: "Pain",
+    "nav_pain": "Pain",
     "nav.filters.neck":"Neck",
     "nav.filters.jaw":"Jaws",
     "nav.filters.spikyRoller":"Spiky roll",
     "nav.filters.fasciaBall":"Fascia ball", 
 
     // hero EN
-    hero_title: "Your regulation sanctuary",
-    hero_subtitle: "Gentle tools to calm your nervous system, pain, and energy.",
-    breath2min: "🌬 Breathing 2 min",
-    random_tool: "🎲 Random tool",
+    "hero.title": "Your regulation sanctuary",
+    "hero.subtitle": "Gentle tools to calm your nervous system, pain, and energy.",
+    "hero.actions.breath2min": "🌬 Breathing 2 min",
+    "hero.actions.random": "🎲 Random tool",
 
     // modes EN
-    modes_title: "How do you feel right now…",
-    modes_ok: "🌿 OK",
-    modes_fatiguePhy: "🫩 Physical fatigue",
-    modes_fatigueMental: "🤯 Mental fatigue",
-    modes_fatigueEmo: "🥺 Emotional fatigue",
-    modes_ache: "😬 Muscle aches",
-    modes_pain: "😣 Pain",
-    modes_sos: "🔥 SOS", 
+    "modes.title": "How do you feel right now…",
+    "modes.ok": "🌿 OK",
+    "modes.fatiguePhy": "🫩 Physical fatigue",
+    "modes.fatigueMental": "🤯 Mental fatigue",
+    "modes.fatigueEmo": "🥺 Emotional fatigue",
+    "modes.ache": "😬 Muscle aches",
+    "modes.pain": "😣 Pain",
+    "modes.sos": "🔥 SOS", 
    
     // library EN
     active_filter: "Active filter:",
