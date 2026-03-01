@@ -3,8 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>Boîte à outils</title>
   <meta name="description" content="Une boîte à outils pour la gestion du stress, de la douleur et de l’énergie." />
+
   <link rel="icon" href="./images/wellbeing2.png" type="image/png">
   <link rel="stylesheet" href="main.css" />
 </head>
@@ -17,114 +19,129 @@
   <header class="topbar" role="banner">
     <div class="topbar-inner topbar-centered">
       <div class="brand-row">
-          <div class="brand brand-centered">
-            <img class="brand-icon" src="images/wellbeing2.png" alt="" aria-hidden="true">
+        <div class="brand brand-centered">
+          <img class="brand-icon" src="images/wellbeing2.png" alt="" aria-hidden="true">
           <div class="brand-title">
-          <strong>Boîte à outils</strong>
+            <!-- Brand title -->
+            <strong data-i18n="brand.title">Boîte à outils</strong>
           </div>
-          </div>
+        </div>
       </div>
     </div>
   </header>
-  
+
   <!-- ===================== -->
   <!-- NAVIGATION -->
   <!-- ===================== -->
-  <nav class="nav" aria-label="Navigation catégories">
+  <nav class="nav" aria-label="Navigation catégories" data-i18n-aria-label="nav.aria">
     <div class="nav-inner">
       <div class="nav-left">
-      <details class="drop">
-        <summary>Exercices</summary>
-        <ul>
-          <li><button data-filter="Contracté–relâché">Contracté–relâché</button></li>
-          <li><button data-filter="Mobilisation douce">Mobilisation douce</button></li>
-          <li><button data-filter="Étirements doux">Étirements doux</button></li>
-        </ul>
-      </details>
 
-      <details class="drop">
-        <summary>Somatique</summary>
-        <ul>
-          <li><button data-filter="Orientation">Orientation</button></li>
-          <li><button data-filter="Pendulation">Pendulation</button></li>
-          <li><button data-filter="Auto-contact">Auto-contact</button></li>
-        </ul>
-      </details>
+        <details class="drop">
+          <summary data-i18n="nav.categories.exercices">Exercices</summary>
+          <ul>
+            <li><button data-filter="Contracté–relâché" data-i18n="nav.filters.contractRelax">Contracté–relâché</button></li>
+            <li><button data-filter="Mobilisation douce" data-i18n="nav.filters.softMobility">Mobilisation douce</button></li>
+            <li><button data-filter="Étirements doux" data-i18n="nav.filters.softStretch">Étirements doux</button></li>
+          </ul>
+        </details>
 
-      <details class="drop">
-        <summary>Respiration</summary>
-        <ul>
-          <li><button data-filter="cohérence cardiaque">Cohérence cardiaque</button></li>
-          <li><button data-filter="soupir">Soupir physiologique</button></li>
-        </ul>
-      </details>
+        <details class="drop">
+          <summary data-i18n="nav.categories.somatique">Somatique</summary>
+          <ul>
+            <li><button data-filter="Orientation" data-i18n="nav.filters.orientation">Orientation</button></li>
+            <li><button data-filter="Pendulation" data-i18n="nav.filters.pendulation">Pendulation</button></li>
+            <li><button data-filter="Auto-contact" data-i18n="nav.filters.selfContact">Auto-contact</button></li>
+          </ul>
+        </details>
 
-      <details class="drop">
-        <summary>Pacing</summary>
-        <ul>
-          <li><button data-filter="Check énergie">Check énergie</button></li>
-          <li><button data-filter="Minimum viable day">Minimum viable day</button></li>
-        </ul>
-      </details>
+        <details class="drop">
+          <summary data-i18n="nav.categories.respiration">Respiration</summary>
+          <ul>
+            <li><button data-filter="cohérence cardiaque" data-i18n="nav.filters.heartCoherence">Cohérence cardiaque</button></li>
+            <li><button data-filter="soupir" data-i18n="nav.filters.physiologicalSigh">Soupir physiologique</button></li>
+          </ul>
+        </details>
 
-      <details class="drop">
-        <summary>Douleur</summary>
-        <ul>
-          <li><button data-filter="Nuque">Nuque</button></li>
-          <li><button data-filter="Mâchoire">Mâchoire</button></li>
-          <li><button data-filter="Rouleau">Rouleau à picots</button></li>
-          <li><button data-filter="Balle fascia">Balle fascia</button></li>
-        </ul>
-      </details>
+        <details class="drop">
+          <summary data-i18n="nav.categories.pacing">Pacing</summary>
+          <ul>
+            <li><button data-filter="Check énergie" data-i18n="nav.filters.energyCheck">Check énergie</button></li>
+            <li><button data-filter="Minimum viable day" data-i18n="nav.filters.minimumViableDay">Minimum viable day</button></li>
+          </ul>
+        </details>
+
+        <details class="drop">
+          <summary data-i18n="nav.categories.douleur">Douleur</summary>
+          <ul>
+            <li><button data-filter="Nuque" data-i18n="nav.filters.neck">Nuque</button></li>
+            <li><button data-filter="Mâchoire" data-i18n="nav.filters.jaw">Mâchoire</button></li>
+            <li><button data-filter="Rouleau" data-i18n="nav.filters.spikyRoller">Rouleau à picots</button></li>
+            <li><button data-filter="Balle fascia" data-i18n="nav.filters.fasciaBall">Balle fascia</button></li>
+          </ul>
+        </details>
+
       </div>
+
       <div class="nav-right">
         <div class="nav-actions">
           <button id="toggleFavs" class="btn small ghost" type="button" aria-pressed="false">
-          ★ Favoris <span id="favCount" class="fav-count">0</span>
+            <span data-i18n="nav.actions.favs">★ Favoris</span>
+            <span id="favCount" class="fav-count">0</span>
           </button>
 
           <button id="toggleTheme" class="btn small ghost" type="button">
-          🌙 Nuit
+            <span data-i18n="nav.actions.themeNight">🌙 Nuit</span>
           </button>
 
           <button id="clearFilters" class="btn small ghost" type="button">
-          ↺ Réinitialiser
+            <span data-i18n="nav.actions.reset">↺ Réinitialiser</span>
+          </button>
+
+          <!-- Toggle langue (nouveau) -->
+          <button id="toggleLang" class="btn small ghost" type="button" aria-pressed="false">
+            <span data-i18n="nav.actions.lang">EN</span>
           </button>
         </div>
 
         <div class="search">
-          <input id="search" type="search" placeholder="Rechercher un outil…" autocomplete="off" />
+          <input
+            id="search"
+            type="search"
+            placeholder="Rechercher un outil…"
+            data-i18n-placeholder="nav.search.placeholder"
+            autocomplete="off"
+          />
         </div>
       </div>
+
     </div>
   </nav>
 
-
-  
   <!-- ===================== -->
   <!-- HERO -->
   <!-- ===================== -->
   <section class="hero">
-    <h1>Ton sanctuaire de régulation</h1>
-    <p>Des outils doux pour apaiser le système nerveux, la douleur et l’énergie.</p>
+    <h1 data-i18n="hero.title">Ton sanctuaire de régulation</h1>
+    <p data-i18n="hero.subtitle">Des outils doux pour apaiser le système nerveux, la douleur et l’énergie.</p>
 
-      <div class="hero-actions">
-        <button class="btn" id="breath2min" type="button">🌬 Respiration 2 min</button>
-        <button class="btn" id="randomTool" type="button">🎲 Outil aléatoire</button>
+    <div class="hero-actions">
+      <button class="btn" id="breath2min" type="button" data-i18n="hero.actions.breath2min">🌬 Respiration 2 min</button>
+      <button class="btn" id="randomTool" type="button" data-i18n="hero.actions.random">🎲 Outil aléatoire</button>
+    </div>
+
+    <div class="feel-box" aria-label="Sélection de ton état du moment" data-i18n-aria-label="modes.ariaBox">
+      <h2 class="feel-title" data-i18n="modes.title">Mon état du moment...</h2>
+
+      <div class="feel-grid" role="group" aria-label="Choisir un état" data-i18n-aria-label="modes.ariaGroup">
+        <button class="pill pill-ok" type="button" data-mode="ok" aria-pressed="true" data-i18n="modes.ok">🌿 OK</button>
+        <button class="pill pill-phys" type="button" data-mode="fatigue_phys" aria-pressed="false" data-i18n="modes.fatiguePhys">🫩 Fatigue physique</button>
+        <button class="pill pill-ment" type="button" data-mode="fatigue_mentale" aria-pressed="false" data-i18n="modes.fatigueMental">🤯 Fatigue mentale</button>
+        <button class="pill pill-emo" type="button" data-mode="fatigue_emo" aria-pressed="false" data-i18n="modes.fatigueEmo">🥺 Fatigue émotionnelle</button>
+        <button class="pill pill-courb" type="button" data-mode="courbatures" aria-pressed="false" data-i18n="modes.aches">😬 Courbatures</button>
+        <button class="pill pill-doul" type="button" data-mode="douleurs" aria-pressed="false" data-i18n="modes.pain">😣 Douleurs</button>
+        <button class="pill pill-sos" type="button" data-mode="sos" aria-pressed="false" data-i18n="modes.sos">🔥 SOS</button>
       </div>
-
-      <div class="feel-box" aria-label="Sélection de ton état du moment">
-        <h2 class="feel-title">Mon état du moment...</h2>
-
-        <div class="feel-grid" role="group" aria-label="Choisir un état">
-          <button class="pill pill-ok" type="button" data-mode="ok" aria-pressed="true">🌿 OK</button>
-          <button class="pill pill-phys" type="button" data-mode="fatigue_phys" aria-pressed="false">🫩 Fatigue physique</button>
-          <button class="pill pill-ment" type="button" data-mode="fatigue_mentale" aria-pressed="false">🤯 Fatigue mentale</button>
-          <button class="pill pill-emo" type="button" data-mode="fatigue_emo" aria-pressed="false">🥺 Fatigue émotionnelle</button>
-          <button class="pill pill-courb" type="button" data-mode="courbatures" aria-pressed="false">😬 Courbatures</button>
-          <button class="pill pill-doul" type="button" data-mode="douleurs" aria-pressed="false">😣 Douleurs</button>
-          <button class="pill pill-sos" type="button" data-mode="sos" aria-pressed="false">🔥 SOS</button>
-        </div>
     </div>
   </section>
 
@@ -133,7 +150,8 @@
   <!-- ===================== -->
   <main id="library" class="wrap">
     <div class="active-filter">
-      Filtre actif : <strong id="activeFilter">Aucun</strong>
+      <span data-i18n="library.activeFilter">Filtre actif :</span>
+      <strong id="activeFilter" data-i18n="library.none">Aucun</strong>
     </div>
 
     <div id="grid" class="grid">
@@ -162,7 +180,7 @@
   <dialog id="breathTimer">
     <div class="modal">
       <div class="modal-top">
-        <h3>🌬 Timer respiration</h3>
+        <h3 data-i18n="timer.title">🌬 Timer respiration</h3>
         <button id="btClose" class="close">✕</button>
       </div>
 
@@ -170,14 +188,14 @@
         <div class="breath-orb-inner"></div>
         <div class="breath-count" id="btCount"></div>
       </div>
-      
-      <div id="btPhase" class="center-text">Ready ?</div>
+
+      <div id="btPhase" class="center-text" data-i18n="timer.ready">Ready ?</div>
       <div id="btRemaining" class="center-text">2:00</div>
 
       <div class="hero-actions">
-        <button id="btStart" class="btn primary">Démarrer</button>
-        <button id="btStop" class="btn">Stop</button>
-        <button id="btReset" class="btn ghost">Reset</button>
+        <button id="btStart" class="btn primary" data-i18n="timer.start">Démarrer</button>
+        <button id="btStop" class="btn" data-i18n="timer.stop">Stop</button>
+        <button id="btReset" class="btn ghost" data-i18n="timer.reset">Reset</button>
       </div>
     </div>
   </dialog>
