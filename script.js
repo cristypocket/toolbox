@@ -523,8 +523,8 @@ const I18N = {
 
     // actions FR
     "nav.actions.favs":"★ Favoris",
-    "nav.actions.theme_dark": "🌙 Mode nuit",
-    "nav.actions.theme_light": "☀️ Mode jour",
+    "nav.actions.theme_Night": "🌙 Mode nuit",
+    "nav.actions.theme_Light": "☀️ Mode jour",
     "nav.actions.reset": "↺ Réinitialiser",
     "nav.actions.lang": "🇬🇧 EN", 
     search_placeholder: "Rechercher un outil…",
@@ -604,7 +604,7 @@ const I18N = {
     // actions EN
     "nav.actions.favs": "★ Favorites",
     "nav.actions.theme_Night": "🌙 Dark mode",
-    "nav.actions.theme_Light: "☀️ Light mode",
+    "nav.actions.theme_Light": "☀️ Light mode",
     "nav.actions.reset": "↺ Reset",
     "nav.actions.lang": "🇫🇷 FR", 
     search_placeholder: "Search a tool…",
