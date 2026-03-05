@@ -1155,16 +1155,17 @@ function saveTheme(theme){
 // Filters
 // -------------------------
 function matchesMode(tool){
+  // Si aucun mode choisi -> on laisse passer tout le monde
+  if(!state.mode) return true;
+
   const toolModes = tool.modes || [];
 
-  // Cas normal : l’outil a été tagué avec les nouveaux modes
+  // Cas normal
   if(toolModes.includes(state.mode)) return true;
 
-  // Compat optionnelle : si un outil est encore en ancien format
-  // "fatigue" doit rester valable si tu n’as pas encore tout retagué
+  // Compat optionnelle
   if(state.mode.startsWith("fatigue_") && toolModes.includes("fatigue")) return true;
 
-  // (Optionnel) douleurs/courbatures: si tu as des anciens outils "douleur"
   if((state.mode === "douleurs" || state.mode === "courbatures") && toolModes.includes("douleur")) return true;
 
   return false;
@@ -1658,7 +1659,7 @@ function setupEvents(){
   // Reset filters
   if(clearFiltersBtn){
     clearFiltersBtn.addEventListener("click", () => {
-      state.mode = "ok";
+      state.mode = "";
       state.query = "";
       state.filter = "";
       state.showFavs = false;
