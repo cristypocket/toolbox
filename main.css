@@ -350,7 +350,7 @@ details.drop > summary:focus-visible{
 
 
 /* =========================
-   5. HEADER - TOPBAR
+   5. HEADER - TOPBAR - FOOTER
 ========================= */
 
 .topbar{
@@ -432,6 +432,20 @@ details.drop > summary:focus-visible{
   object-fit: contain;
   display: block;
   vertical-align:middle; 
+}
+
+.toolbox-footer {
+  width: 100%;
+  padding: 20px 16px;
+  margin-top: 40px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+  border-top: 1px solid #e5e5e5;
+}
+
+.toolbox-footer p {
+  margin: 0;
 }
 
 
