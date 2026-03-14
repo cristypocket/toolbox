@@ -170,6 +170,10 @@ details.drop > summary:focus-visible{
   border-bottom-color: rgba(233,241,238,.10);
 }
 
+:root[data-theme="dark"] .toolbox-footer{ 
+border-top-color: rgba(233,241,238,.10);
+}
+
 :root[data-theme="dark"] nav,
 :root[data-theme="dark"] .nav{
   background: rgba(10, 14, 13, 0.78);
