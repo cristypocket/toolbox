@@ -40,6 +40,7 @@
         <details class="drop">
           <summary data-i18n="nav_exercices">Exercices</summary>
           <ul>
+            <li><button data-filter="Renforcement" data-i18n="nav.filters.reinforcement">Renforcement</button></li>
             <li><button data-filter="Contracté–relâché" data-i18n="nav.filters.contractRelax">Contracté–relâché</button></li>
             <li><button data-filter="Mobilisation douce" data-i18n="nav.filters.softMobility">Mobilisation douce</button></li>
             <li><button data-filter="Étirements doux" data-i18n="nav.filters.softStretch">Étirements doux</button></li>
@@ -128,6 +129,7 @@
     <div class="hero-actions">
       <button class="btn" id="breath2min" type="button" data-i18n="hero.actions.breath2min">🌬 Respiration 2 min</button>
       <button class="btn" id="randomTool" type="button" data-i18n="hero.actions.random">🎲 Outil aléatoire</button>
+      <button class="btn" id="customInterval" type="button" data-i18n="hero.actions.customtimer">⏱️ Timer libre</button>
     </div>
 
     <div class="feel-box" aria-label="Sélection de ton état du moment" data-i18n-aria-label="modes.ariaBox">
@@ -142,6 +144,17 @@
         <button class="pill pill-doul" type="button" data-mode="douleurs" aria-pressed="false" data-i18n="modes.pain">😣 Douleurs</button>
         <button class="pill pill-sos" type="button" data-mode="sos" aria-pressed="false" data-i18n="modes.sos">🔥 SOS</button>
       </div>
+    </div>
+  </section>
+  
+  <section class="intensity-box">
+    <p class="intensity-title">Intensité souhaitée</p>
+    <div class="intensity-grid">
+      <button class="pill intensity-pill" data-intensity="" aria-pressed="true">Toutes</button>
+      <button class="pill intensity-pill" data-intensity="très doux" aria-pressed="false">🐛 Très doux</button>
+      <button class="pill intensity-pill" data-intensity="doux" aria-pressed="false">🦋 Doux</button>
+      <button class="pill intensity-pill" data-intensity="moyen" aria-pressed="false">✌️ Moyenne</button>
+      <button class="pill intensity-pill" data-intensity="élevé" aria-pressed="false">💪 Élevée</button>
     </div>
   </section>
 
@@ -180,7 +193,7 @@
   <dialog id="breathTimer">
     <div class="modal">
       <div class="modal-top">
-        <h3 data-i18n="timer.title">🌬 Timer respiration</h3>
+        <h3 data-i18n="breath.timer.title">🌬 Timer respiration</h3>
         <button id="btClose" class="close">✕</button>
       </div>
 
@@ -199,6 +212,67 @@
       </div>
     </div>
   </dialog>
+
+  <!-- ===================== -->
+  <!-- INTERVAL TIMER MODAL -->
+  <!-- ===================== -->
+  <dialog id="intervalTimer">
+    <div class="modal">
+      <div class="modal-top">
+        <h3 data-i18n="interval.timer.title">⏱️ Timer à intervale</h3>
+        <button id="itClose" class="close">✕</button>
+      </div>
+
+      <div class="interval-bar">
+        <div class="interval-bar-inner"></div>
+        <div class="interval-count" id="itCount"></div>
+      </div>
+
+      <div id="itPhase" class="center-text" data-i18n="timer.ready">Ready ?</div>
+      <div id="itRemaining" class="center-text">2:00</div>
+
+      <div class="hero-actions">
+        <button id="itStart" class="btn primary" data-i18n="timer.start">Démarrer</button>
+        <button id="itStop" class="btn" data-i18n="timer.stop">Stop</button>
+        <button id="itReset" class="btn ghost" data-i18n="timer.reset">Reset</button>
+      </div>
+    </div>
+  </dialog>
+
+  
+  <!-- =========================== -->
+  <!-- CUSTOM INTERVAL TIMER MODAL -->
+  <!-- =========================== -->
+  
+  <dialog id="customIntervalSetup">
+  <div class="modal">
+    <div class="modal-top">
+      <h3>⏱️ Timer à libre</h3>
+      <button id="cisClose" class="close">✕</button>
+    </div>
+
+    <div class="form-stack">
+      <label>
+        Temps d'exercice (sec)
+        <input id="cisExercise" type="number" min="1" value="30">
+      </label>
+
+      <label>
+        Temps de pause (sec)
+        <input id="cisBreak" type="number" min="1" value="30">
+      </label>
+
+      <label>
+        Nombre de répétitions
+        <input id="cisRounds" type="number" min="1" value="3">
+      </label>
+    </div>
+
+    <div class="hero-actions" style="margin-top:16px;">
+      <button id="cisStart" class="btn" type="button">⏱ Lancer le timer</button>
+    </div>
+  </div>
+</dialog>
 
   <script src="script.js" defer></script>
   <footer class="toolbox-footer">

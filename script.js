@@ -4,61 +4,101 @@
 ========================= */
 
 // -------------------------
-// DATA (Starter pack)
+// DATA (Fiches)
 // -------------------------
 const TOOLS = [
-   {
-    id: "bodyscan",
-    title: "Body scan",
-    category: "Somatique",
-    tags: ["Orientation","ancrage","somatique","surcharge","cohérence cardiaque","respiration","stress","douleurs"],
-    duration: "2-4 min",
-    position: "allongé",
+    
+      // --- Cartes Exercices - Renforcement --- //
+
+    {
+    id: "planche-10",
+    title: "Planche 3x 10 sec",
+    category: "Exercices",
+    tags: ["renforcement", "muscle", "abdos"],
+    duration: "1-2 min",
+    intervalTimer: { totalSec: 90, exerciseSec: 10, breakSec: 30 },   
+    position: "planche",
     intensity: "très doux",
-    modes: ["fatigue_mentale","fatigue_emo","fatigue_phys","douleurs","sos"],
-    summary: "On scan le corps des pieds à la tête, calmement.",
+    modes: ["ok","fatigue_mentale"],
+    summary: "Renforce ton corps.",
     steps: [
-      "Respire tranquillement.",
-      "Commence par sentir tes pieds, tes orteils, remue les légérement si besoin, juste pour t'y connecter.",
-      "Remonte tranquillement, en sentant tes chevilles, puis tes mollets, tes genoux, tes cuisses.",
-      "Note mentalement si tu sens des tensions.",
-      "Continue avec ton bassin, le bas de ton dos, remonte doucement en prenant le temps de sentir chaque muscle.",
-      "Puis tes mains, tes poignets, remonte jusqu'aux coudes, puis les épaule, le haut du dos.",
-      "Est-ce que ça tire? Note le mentalement.",
-      "Puis enfin ta nuque, ta gorge, ta mâchoire, tes pomettes, ton front et le haut de ton crâne.",
-      "Respire calmement."
+      "Positionne toi en planche, sur les mains.",
+      "Si tu préfères te positionner sur les coudes, fais bien attention à abaisser tes omoplates.", 
+      "Ecarte les pieds à largeur de hanches pour une meilleure stabilité.",
+      "Regarde le sol et rentre le menton légèrement pour protéger ta nuque.",
+      "Tiens 10 secondes.",
+      "Pendant la pause, mets-toi en posture du chiot. Les genoux au sol, en repos sur tes talons, les bras allongés devant et le front au sol.",
+      "Fais 3 répétitions."
     ],
-    low: "Version low battery : juste le scan.",
-    stop: "Stop si douleurs trop fortes.",
-    note: "A faire idéalement avant des étirements ou cohérence cardiaque, et après pour noter une éventuellement différence.",
-   
-   i18n: {
-    en: {
-      title: "Body scan",
-      category: "Somatic",
-      position: "lying down",
-      intensity: "very gentle",
-      summary: "Scan the body from feet to head, calmly.",
-      steps: [
-        "Breathe gently.",
-        "Start by noticing your feet and toes; wiggle them slightly if needed, just to connect.",
-        "Move up slowly: ankles, calves, knees, thighs.",
-        "Mentally note any tension you notice.",
-        "Continue with your pelvis and lower back; move up slowly, taking time to feel each muscle.",
-        "Then your hands and wrists, up to elbows, shoulders, and upper back.",
-        "Is anything pulling or tight? Note it.",
-        "Finally your neck, throat, jaw, cheeks, forehead, and the top of your head.",
-        "Keep breathing calmly."
-      ],
-      low: "Low battery version: just do the scan.",
-      stop: "Stop if pain becomes too intense.",
-      note: "Ideally do this before stretching or heart coherence, and again after to notice any change."
-    }
-  }
-  },
+       low: "Version low battery: fais juste 2 répétitions.",
+       stop: "Stop si douleurs ou fourmillements.",
+       note: "Plus tu pratiques, plus tu renforces ton corps et plus c'est facile.",
+
+      i18n: {
+       en: {
+         title: "Planck 3x 10sec",
+         category: "Exercise",
+         position: "planck",
+         intensity: "Very soft",
+         summary: "Strenghten your body.",
+         steps: [
+            "Position yourself in planck posture, on your hands.",
+            "If you prefer to stand on your elbows, make sure to lower your shoulder plates.",
+            "Place your feet hip-width apart for better stability.",
+            "Look at the floor and tuck your chin slightly to protect your neck.",
+            "Hold for 10 seconds.",
+            "During break time, move into puppy pose. Kneel on the floor, resting on your heels, arms extended in front of you, and forehead on the floor.",
+            "Repeat 3 times."
+          ]
+        }
+      }
+    },
    {
-    id: "contracte-relache",
-    title: "Contracté–relâché",
+    id: "planche-30",
+    title: "Planche 3x 30 sec",
+    category: "Exercices",
+    tags: ["renforcement", "muscle", "abdos"],
+    duration: "2-3 min",
+    intervalTimer: { totalSec: 150, exerciseSec: 30, breakSec: 30 },   
+    position: "planche",
+    intensity: "moyen",
+    modes: ["ok","fatigue_mentale"],
+    summary: "Renforce ton corps.",
+    steps: [
+      "Positionne toi en planche, sur les mains. Ecarte les pieds à largeur de hanches pour une meilleure stabilité. Regarde le sol et rentre le menton légèrement pour protéger ta nuque.",
+      "Tiens 30 secondes.",
+      "Pendant la pause, mets-toi en posture du chiot. Les genoux au sol, en repos sur tes talons, les bras allongés devant et le front au sol.",
+      "Fais 3 répétitions."
+    ],
+    low: "Version low battery: tiens juste 10 secondes.",
+    stop: "Stop si douleurs ou fourmillements.",
+    note: "Plus tu pratiques, plus tu renforces ton corps et plus c'est facile.",
+
+      i18n: {
+       en: {
+         title: "Planck 3x 30sec",
+         category: "Exercise",
+         position: "planck",
+         intensity: "moderate",
+         summary: "Strenghten your body.",
+         steps: [
+            "Position yourself in planck posture. Place your feet hip-width apart for better stability. Look at the floor and tuck your chin slightly to protect your neck.",
+            "Hold for 30 seconds.",
+            "During break time, move into puppy pose. Kneel on the floor, resting on your heels, arms extended in front of you, and forehead on the floor.",
+            "Repeat 3 times."
+         ],
+         low: "Low battery version: hold for just 10 seconds.",
+         stop: "Stop if you experience pain or tingling.",
+         note: "The more you practice, the more you strengthen your body and the easier it gets." 
+       }
+     }
+  },
+
+    // --- Cartes Exercices - Contracté-Relaché --- //
+   
+   {
+    id: "contracte-relache-stress",
+    title: "Contracté–relâché pour le stress",
     category: "Exercices",
     tags: ["Contracté–relâché", "stress", "douleur", "relâchement"],
     duration: "5 min",
@@ -79,7 +119,7 @@ const TOOLS = [
 
    i18n: {
     en: {
-      title: "Contract-Relax",
+      title: "Contract-Relax for stress",
       category: "Exercises",
       position: "sitting/lying down",
       intensity: "very gentle",
@@ -97,6 +137,50 @@ const TOOLS = [
     }
   }   
    },
+   {
+      id: "contracte-relache-omoplates",
+      title: "Contracté–relâché des omoplates",
+      category: "Exercices",
+      tags: ["Contracté–relâché", "stress", "douleur", "relâchement"],
+      duration: "3 min",
+      position: "A quatre pattes",
+      intensity: "doux",
+      modes: ["ok","fatigue_phys","fatigue_mentale","courbatures","sos"],
+      summary: "Relâcher les tensions sans forcer, en alternant contraction légère et détente.",
+      steps: [
+         "Inspire doucement en position neutre.",
+         "Souffle en poussant sur tes mains pour faire le dos rond, enroule ta tête en direction de ton torse en rentrant le menton.",
+         "Inspire en revenant en position neutre.",
+         "Souffle en creusant le torse, comme si tes omoplates pouvaient se toucher.",
+         "Inspire en revenant en position neutre.", 
+         "Répète 6 fois."
+      ],
+      low: "Version low battery : reduis l'amplitude des mouvements.",
+      stop: "Stop si douleur articulaire inhabituelle, vertige, crispation.",
+      note: "Ce n’est pas la performance qui apaise. C’est la permission.",
+      
+      i18n: {
+         en: {
+            title: "Shoulder plates contract-Relax",
+            category: "Exercises",
+            position: "On all fours",
+            intensity: "gentle",
+            summary: "Release tension without forcing it, by alternating light contraction and relaxation.",
+            steps: [
+               "Inhale gently through your nose in a neutral position.",
+               "Exhale through your mouth as you push through your hands to round your back, rolling your head towards your chest and tucking your chin.",
+               "Inhale as you return to a neutral position.",
+               "Exhale as you draw your chest in, as if your shoulder blades could touch.",
+               "Inhale as you return to a neutral position.",
+               "Repeat 6 times."
+            ],
+       low: "Low battery version: reduce the range of movement.",
+       stop: "Stop if you experience unusual joint pain, dizziness, or muscle tension.",
+       note: "It is not performance that brings peace. It is permission."
+    }
+  }   
+   },
+   
   {
     id: "mobilisation-douce",
     title: "Mobilisation douce",
@@ -177,6 +261,58 @@ const TOOLS = [
     }
   }  
   },
+   
+   // --- Cartes somatiques --- //
+   
+   {
+    id: "bodyscan",
+    title: "Body scan",
+    category: "Somatique",
+    tags: ["Orientation","ancrage","somatique","surcharge","cohérence cardiaque","respiration","stress","douleurs"],
+    duration: "2-4 min",
+    position: "allongé",
+    intensity: "très doux",
+    modes: ["fatigue_mentale","fatigue_emo","fatigue_phys","douleurs","sos"],
+    summary: "On scan le corps des pieds à la tête, calmement.",
+    steps: [
+      "Respire tranquillement.",
+      "Commence par sentir tes pieds, tes orteils, remue les légérement si besoin, juste pour t'y connecter.",
+      "Remonte tranquillement, en sentant tes chevilles, puis tes mollets, tes genoux, tes cuisses.",
+      "Note mentalement si tu sens des tensions.",
+      "Continue avec ton bassin, le bas de ton dos, remonte doucement en prenant le temps de sentir chaque muscle.",
+      "Puis tes mains, tes poignets, remonte jusqu'aux coudes, puis les épaule, le haut du dos.",
+      "Est-ce que ça tire? Note le mentalement.",
+      "Puis enfin ta nuque, ta gorge, ta mâchoire, tes pomettes, ton front et le haut de ton crâne.",
+      "Respire calmement."
+    ],
+    low: "Version low battery : juste le scan.",
+    stop: "Stop si douleurs trop fortes.",
+    note: "A faire idéalement avant des étirements ou cohérence cardiaque, et après pour noter une éventuellement différence.",
+   
+   i18n: {
+    en: {
+      title: "Body scan",
+      category: "Somatic",
+      position: "lying down",
+      intensity: "very gentle",
+      summary: "Scan the body from feet to head, calmly.",
+      steps: [
+        "Breathe gently.",
+        "Start by noticing your feet and toes; wiggle them slightly if needed, just to connect.",
+        "Move up slowly: ankles, calves, knees, thighs.",
+        "Mentally note any tension you notice.",
+        "Continue with your pelvis and lower back; move up slowly, taking time to feel each muscle.",
+        "Then your hands and wrists, up to elbows, shoulders, and upper back.",
+        "Is anything pulling or tight? Note it.",
+        "Finally your neck, throat, jaw, cheeks, forehead, and the top of your head.",
+        "Keep breathing calmly."
+      ],
+      low: "Low battery version: just do the scan.",
+      stop: "Stop if pain becomes too intense.",
+      note: "Ideally do this before stretching or heart coherence, and again after to notice any change."
+    }
+  }
+  }, 
   {
     id: "orientation",
     title: "Orientation",
@@ -337,6 +473,9 @@ const TOOLS = [
        }
      }   
   },
+
+    // --- Cartes Respiration --- //
+
   {
     id: "coherence",
     title: "Cohérence cardiaque",
@@ -616,7 +755,7 @@ const TOOLS = [
     tags: ["Rouleau", "rouleau à picots", "fascia", "dos", "récup", "douleur"],
     duration: "5 min",
     position: "allongé",
-    intensity: "doux à modéré",
+    intensity: "moyen",
     modes: ["fatigue_phys","douleurs","sos"],
     summary: "Décompression + fascia : on dose pour éviter l’habituation (pas tous les jours).",
     steps: [
@@ -636,7 +775,7 @@ const TOOLS = [
          title: "Spiky roll - neck",
          category: "Pain",
          position: "lying down",
-         intensity: "gentle to moderate",
+         intensity: "moderate",
          summary: "Decompression + fascia: don't use every day to avoid habituation.",
          steps: [
            "Place the spiky roll under your neck, with your body flat on the floor and your arms at your sides.",
@@ -659,7 +798,7 @@ const TOOLS = [
     tags: ["Balle fascia", "Balle", "trapèze", "épaule", "fascia", "nuque"],
     duration: "2–6 min",
     position: "allongé",
-    intensity: "doux à modéré",
+    intensity: "moyen",
     modes: ["ok","fatigue_phys","douleurs","sos"],
     summary: "Déverrouillage doux : pression + mouvement du bras.",
     steps: [
@@ -678,7 +817,7 @@ const TOOLS = [
          title: "Fascia ball - trapezius",
          category: "Pain",
          position: "lying down",
-         intensity: "gentle to moderate",
+         intensity: "moderate",
          summary: "Soft unlocking: pressure + arm movement.",
          steps: [
            "Lie down on your back.",
@@ -736,23 +875,28 @@ const TOOLS = [
        }
      }
   }
+
+    
 ];
 
 // -------------------------
 // State
 // -------------------------
+
 const state = {
-  mode: "",
-  query: "",
-  filter: "",
-  showFavs: false,
-  favorites: new Set(),
-  lang: "fr", 
+   mode: "",
+   intensityfilter: "",
+   query: "",
+   filter: "",
+   showFavs: false,
+   favorites: new Set(),
+   lang: "fr", 
 };
 
 // -------------------------
 // Storage keys
 // -------------------------
+
 const LS_FAVS = "toolbox_favorites_v1";
 const LS_THEME = "toolbox_theme_v1";
 const LS_LANG = "toolbox_lang_v1";
@@ -787,8 +931,27 @@ const breathOrb = breathTimer ? breathTimer.querySelector(".breath-orb") : null;
 const breathOrbInner = breathTimer ? breathTimer.querySelector(".breath-orb-inner") : null;
 const btCount = document.getElementById("btCount");
 
+const intervalTimer = document.getElementById("intervalTimer");
+const itClose = document.getElementById("itClose");
+const itStart = document.getElementById("itStart");
+const itStop = document.getElementById("itStop");
+const itReset = document.getElementById("itReset");
+const itPhase = document.getElementById("itPhase");
+const itRemaining = document.getElementById("itRemaining");
+const intervalBar = intervalTimer ? intervalTimer.querySelector(".interval-bar") : null;
+const intervalBarInner = intervalTimer ? intervalTimer.querySelector(".interval-bar-inner") : null;
+const itCount = document.getElementById("itCount");
+
 const breath2min = document.getElementById("breath2min");
 const randomTool = document.getElementById("randomTool");
+
+const customInterval = document.getElementById("customInterval");
+const customIntervalSetup = document.getElementById("customIntervalSetup");
+const cisClose = document.getElementById("cisClose");
+const cisStart = document.getElementById("cisStart");
+const cisExercise = document.getElementById("cisExercise");
+const cisBreak = document.getElementById("cisBreak");
+const cisRounds = document.getElementById("cisRounds");
 
 // -------------------------
 // Utils
@@ -859,6 +1022,7 @@ const I18N = {
 
     // nav FR
     "nav_exercices": "Exercices",
+    "nav.filters.reinforcement":"Renforcement", 
     "nav.filters.contractRelax":"Contracté–relâché",
     "nav.filters.softMobility":"Mobilisation douce",
     "nav.filters.softStretch":"Étirements doux",
@@ -882,11 +1046,12 @@ const I18N = {
     "nav.filters.spikyRoller":"Rouleau à picots",
     "nav.filters.fasciaBall":"Balle fascia",
      
-    // hero FR
-    hero_title: "Ton sanctuaire de régulation",
-    hero_subtitle: "Des outils doux pour apaiser le système nerveux, la douleur et l’énergie.",
-    breath2min: "🌬 Respiration 2 min",
-    random_tool: "🎲 Outil aléatoire",
+     // hero FR
+     hero_title: "Ton sanctuaire de régulation",
+     hero_subtitle: "Des outils doux pour apaiser le système nerveux, la douleur et l’énergie.",
+     breath2min: "🌬 Respiration 2 min",
+     random_tool: "🎲 Outil aléatoire",
+     custom_interval: "⏱️ Timer libre",
      
     // modes FR
     "modes.title": "Mon état du moment...",
@@ -916,12 +1081,15 @@ const I18N = {
     stop: "🔥 Stop si :",
     note: "✨ Note :",
     start_timer: "⏱ Lancer le timer",
-    "timer.title": "🌬 Timer respiration", 
+    "breath.timer.title": "🌬 Timer respiration",
+    "interval.timer.title": "⏱️ Timer à intervale", 
 
     // timer FR
     ready: "Ready?",
     inhale: "Inspire…",
     exhale: "Expire…",
+    exercise: "Exercice.",
+    break: "Pause.", 
     done: "Terminé 🌿",
     "timer.start": "Démarrer",
     "timer.stop": "Stop",
@@ -942,10 +1110,11 @@ const I18N = {
 
     // nav EN
     "nav_exercices": "Exercises",
+    "nav.filters.reinforcement":"Reinforcement", 
     "nav.filters.contractRelax":"Contract–relax",
     "nav.filters.softMobility":"Soft mobility",
     "nav.filters.softStretch":"Soft stretch",
-     
+
     "nav_somatic": "Somatic",
     "nav.filters.orientation":"Orientation",
     "nav.filters.pendulation":"Pendulation",
@@ -965,11 +1134,12 @@ const I18N = {
     "nav.filters.spikyRoller":"Spiky roll",
     "nav.filters.fasciaBall":"Fascia ball", 
 
-    // hero EN
-    hero_title: "Your regulation sanctuary",
-    hero_subtitle: "Gentle tools to calm your nervous system, pain, and energy.",
-    breath2min: "🌬 Breathing 2 min",
-    random_tool: "🎲 Random tool",
+     // hero EN
+     hero_title: "Your regulation sanctuary",
+     hero_subtitle: "Gentle tools to calm your nervous system, pain, and energy.",
+     breath2min: "🌬 Breathing 2 min",
+     random_tool: "🎲 Random tool",
+     custom_interval: "⏱️ Custom timer",
 
     // modes EN
     "modes.title": "How do you feel right now…",
@@ -999,12 +1169,15 @@ const I18N = {
     stop: "🔥 Stop if:",
     note: "✨ Note:",
     start_timer: "⏱ Start timer",
-    "timer.title": "🌬 Breathing timer", 
+    "breath.timer.title": "🌬 Breathing timer",
+    "interval.timer.title": "⏱️ Interval timer", 
 
     // timer EN
     ready: "Ready?",
     inhale: "Inhale…",
     exhale: "Exhale…",
+    exercise: "Exercise.",
+    break: "Break.", 
     done: "All done 🌿",
     "timer.start": "Start",
     "timer.stop": "Stop",
@@ -1038,20 +1211,21 @@ function applyLangToStaticHtml(){
 
   // 4) textes “connus” (ceux que tu as en dur dans HTML sans data-i18n partout)
   // -> on cible par ID, stable et sûr :
-  const brandStrong = document.querySelector(".brand-title strong");
-  if(brandStrong) brandStrong.textContent = t("brand_title");
+   const brandStrong = document.querySelector(".brand-title strong");
+   if(brandStrong) brandStrong.textContent = t("brand_title");
+   
+   const heroH1 = document.querySelector(".hero h1");
+   if(heroH1) heroH1.textContent = t("hero_title");
+   
+   const heroP = document.querySelector(".hero p");
+   if(heroP) heroP.textContent = t("hero_subtitle");
+   
+   if(breath2min) breath2min.textContent = t("breath2min");
+   if(randomTool) randomTool.textContent = t("random_tool");
+   if(customInterval) customInterval.textContent = t("custom_interval");
 
-  const heroH1 = document.querySelector(".hero h1");
-  if(heroH1) heroH1.textContent = t("hero_title");
-
-  const heroP = document.querySelector(".hero p");
-  if(heroP) heroP.textContent = t("hero_subtitle");
-
-  if(breath2min) breath2min.textContent = t("breath2min");
-  if(randomTool) randomTool.textContent = t("random_tool");
-
-  // search
-  if(searchInput) searchInput.setAttribute("placeholder", t("search_placeholder"));
+   // search
+   if(searchInput) searchInput.setAttribute("placeholder", t("search_placeholder"));
 }
 
 function setLang(next){
@@ -1205,12 +1379,18 @@ function matchesFavs(tool){
   return state.favorites.has(tool.id);
 }
 
+function matchesIntensity(tool){
+  if(!state.intensityFilter) return true;
+  return normalize(tool.intensity).includes(normalize(state.intensityFilter));
+}
+
 function getFilteredTools(){
-  return TOOLS
-    .filter(matchesMode)
-    .filter(matchesQuery)
-    .filter(matchesFilter)
-    .filter(matchesFavs);
+   return TOOLS
+      .filter(matchesMode)
+      .filter(matchesQuery)
+      .filter(matchesFilter)
+      .filter(matchesIntensity)
+      .filter(matchesFavs);
 }
 
 // -------------------------
@@ -1240,35 +1420,44 @@ function render(){
     return;
   }
 
-  items.forEach(tool => {
-    const isFav = state.favorites.has(tool.id);
-
-    const sosChip = (tool.modes && tool.modes.includes("sos")) ? `<span class="chip sos">🔥</span>` : "";
-    const okChip  = (tool.modes && tool.modes.includes("ok")) ? `<span class="chip ok">🌿</span>` : "";
-    const physChip = (tool.modes && tool.modes.includes("fatigue_phys")) ? `<span class="chip fatique_phys">🫩</span>` : "";
-    const mentChip = (tool.modes && tool.modes.includes("fatigue_mentale")) ? `<span class="chip fatique_mentale">🤯</span>` : "";
-    const emoChip  = (tool.modes && tool.modes.includes("fatigue_emo")) ? `<span class="chip fatigue_emo">🥺</span>` : "";
-    const courbChip = (tool.modes && tool.modes.includes("courbatures")) ? `<span class="chip courbatures">😬</span>` : "";
-    const doulChip = (tool.modes && tool.modes.includes("douleurs")) ? `<span class="chip douleurs">😣</span>` : "";
-
-    const card = document.createElement("article");
-    card.className = "card";
-
-    card.innerHTML = `
+   items.forEach(tool => {
+      const isFav = state.favorites.has(tool.id);
+      
+      const sosChip = (tool.modes && tool.modes.includes("sos")) ? `<span class="chip sos">🔥</span>` : "";
+      const okChip  = (tool.modes && tool.modes.includes("ok")) ? `<span class="chip ok">🌿</span>` : "";
+      const physChip = (tool.modes && tool.modes.includes("fatigue_phys")) ? `<span class="chip fatique_phys">🫩</span>` : "";
+      const mentChip = (tool.modes && tool.modes.includes("fatigue_mentale")) ? `<span class="chip fatique_mentale">🤯</span>` : "";
+      const emoChip  = (tool.modes && tool.modes.includes("fatigue_emo")) ? `<span class="chip fatigue_emo">🥺</span>` : "";
+      const courbChip = (tool.modes && tool.modes.includes("courbatures")) ? `<span class="chip courbatures">😬</span>` : "";
+      const doulChip = (tool.modes && tool.modes.includes("douleurs")) ? `<span class="chip douleurs">😣</span>` : "";
+      
+      const tresdouxChip = (tool.intensity === "très doux") ? `<span class="chip tresdoux">🐛 Très doux</span>` : "";
+      const douxChip  = (tool.intensity === "doux") ? `<span class="chip doux">🦋 Doux</span>` : "";
+      const moyenChip = (tool.intensity === "moyen") ? `<span class="chip moyen">✌️ Moyen</span>` : "";
+      const eleveChip = (tool.intensity === "élevé") ? `<span class="chip eleve">💪 Élevé</span>` : "";
+      
+      const card = document.createElement("article");
+      card.className = "card";
+      
+      card.innerHTML = `
       <div>
         <h3>${escapeHtml(toolText(tool,"title") || "")}</h3>
 
         <div class="meta">
-          <span class="chip">${escapeHtml(toolText(tool,"category") || "")}</span>
-          <span class="chip">${escapeHtml(tool.duration || "")}</span>
-          <span class="chip">${escapeHtml(toolText(tool,"intensity") || "")}</span>
-          ${sosChip}
-          ${okChip}
-          ${physChip}
-          ${mentChip}
-          ${emoChip}
-          ${doulChip}
-          ${courbChip}
+        <span class="chip">${escapeHtml(toolText(tool,"category") || "")}</span>
+        <span class="chip">${escapeHtml(tool.duration || "")}</span>
+        ${tresdouxChip}
+        ${douxChip}
+        ${moyenChip}
+        ${eleveChip}
+        ${okChip}
+        ${physChip}
+        ${mentChip}
+        ${emoChip}
+        ${doulChip}
+        ${courbChip}
+        ${sosChip}
+        
         </div>
 
         <p style="margin-top:10px;">${escapeHtml(toolText(tool,"summary") || "")}</p>
@@ -1313,7 +1502,6 @@ function openTool(id){
       <span class="chip">${escapeHtml(toolText(tool,"category") || "")}</span>
       <span class="chip">${escapeHtml(tool.duration || "")}</span>
       <span class="chip">${escapeHtml(toolText(tool,"position") || "")}</span>
-      <span class="chip">${escapeHtml(toolText(tool,"intensity") || "")}</span>
     `;
   }
 
@@ -1329,24 +1517,28 @@ function openTool(id){
       <p><strong>${escapeHtml(t("note"))}</strong> ${escapeHtml(toolText(tool,"note") || "—")}</p>
     `;
 
-    if(tool.timer){
-      modalBody.innerHTML += `
-        <div style="margin-top:16px;">
-          <button class="btn" id="startToolTimer" type="button">
-            ${escapeHtml(t("start_timer"))}
-          </button>
-        </div>
-      `;
+  if(tool.timer || tool.intervalTimer){
+    modalBody.innerHTML += `
+       <div style="margin-top:16px;">
+         <button class="btn" id="startToolTimer" type="button">
+           ${escapeHtml(t("start_timer"))}
+         </button>
+       </div>
+     `;
 
-      setTimeout(() => {
-        const btn = document.getElementById("startToolTimer");
-        if(btn){
-          btn.addEventListener("click", () => {
-            openBreathTimer({ ...tool.timer, sound: true });
-          });
-        }
+     setTimeout(() => {
+       const btn = document.getElementById("startToolTimer");
+       if(!btn) return;
+
+       btn.addEventListener("click", () => {
+         if(tool.intervalTimer){
+           openIntervalTimer(tool.intervalTimer);
+         } else if(tool.timer){
+           openBreathTimer({ ...tool.timer, sound: true });
+           }
+       });
       }, 0);
-    }
+   }
   }
 
   safeShowModal(toolModal);
@@ -1372,8 +1564,23 @@ let btRunning = false;
 let btAnimId = null;
 let btAnimStart = 0;
 
+let itConfig = {
+  totalSec: 120,
+  exerciseSec: 30,
+  breakSec: 30
+};
+
+let itLeft = itConfig.totalSec;
+let itTick = null;
+let itRunning = false;
+let itAnimId = null;
+let itAnimStart = 0;
+
 const ORB_MIN_SCALE = 1;
 const ORB_MAX_SCALE = 3.0;
+
+const BAR_MIN_SCALE = 0;
+const BAR_MAX_SCALE = 1; 
 
 // -------------------------
 // Audio
@@ -1458,6 +1665,45 @@ function btUpdateSound(phase, progress){
   noiseGain.gain.setTargetAtTime(vol, audioCtx.currentTime, 0.15);
 }
 
+function playIntervalBell(type = "transition"){
+  const Ctx = window.AudioContext || window.webkitAudioContext;
+  if(!Ctx) return;
+
+  const ctx = new Ctx();
+  const now = ctx.currentTime;
+
+  function bell(freq, delay){
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = "triangle";   // son plus doux qu'un sine pur
+    osc.frequency.value = freq;
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    // attaque douce
+    gain.gain.setValueAtTime(0.0001, now + delay);
+    gain.gain.linearRampToValueAtTime(0.12, now + delay + 0.02);
+
+    // décroissance longue (effet gong)
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + delay + 1.2);
+
+    osc.start(now + delay);
+    osc.stop(now + delay + 1.2);
+  }
+
+  if(type === "done"){
+    bell(660, 0);
+    bell(990, 0.18);
+  } else {
+    bell(880, 0);
+  }
+
+  setTimeout(() => ctx.close(), 1500);
+}
+
+
 // -------------------------
 // UI helpers
 // -------------------------
@@ -1514,7 +1760,64 @@ function btResetAll(){
 }
 
 // -------------------------
-// Open timer
+// UI helpers Interval Time
+// -------------------------
+
+function itUpdateUI(){
+  if(itRemaining) itRemaining.textContent = fmt(itLeft);
+}
+
+function itUpdateCenterCount(phase, tMs, exerciseMs, breakMs){
+  if(!itCount) return;
+
+  let remainingMs;
+
+  if(phase === "exercise"){
+    remainingMs = exerciseMs - tMs;
+  } else {
+    remainingMs = breakMs - (tMs - exerciseMs);
+  }
+
+  const sec = Math.max(1, Math.ceil(remainingMs / 1000));
+  itCount.textContent = String(sec);
+}
+
+function itStopAll(){
+  itRunning = false;
+
+  if(itTick){
+    clearInterval(itTick);
+    itTick = null;
+  }
+
+  if(itAnimId){
+    cancelAnimationFrame(itAnimId);
+    itAnimId = null;
+  }
+
+  if(intervalBar){
+    intervalBar.classList.remove("is-running");
+    intervalBar.style.setProperty("--bar-scale", String(BAR_MIN_SCALE));
+  } 
+
+  if(itPhase) itPhase.textContent = t("ready");
+  if(itCount) itCount.textContent = "";
+
+  if(noiseGain && audioCtx){
+    noiseGain.gain.setTargetAtTime(0.0001, audioCtx.currentTime, 0.08);
+  } 
+}
+
+function itResetAll(){
+  itStopAll();
+  itLeft = itConfig.totalSec;
+  itUpdateUI();
+}
+
+
+
+// -------------------------
+// Open breath timer
 // -------------------------
 
 function openBreathTimer(options = {}){
@@ -1544,7 +1847,36 @@ function openBreathTimer(options = {}){
 }
 
 // -------------------------
-// Run
+// Open interval timer
+// -------------------------
+
+function openIntervalTimer(options = {}){
+  const total = Number(options.totalSec);
+  const exe = Number(options.exerciseSec);
+  const brk = Number(options.breakSec);
+
+  itConfig = {
+    totalSec: Number.isFinite(total) && total > 0 ? total : 780,
+    exerciseSec: Number.isFinite(exe) && exe > 0 ? exe : 60,
+    breakSec: Number.isFinite(brk) && brk > 0 ? brk : 30
+  };
+
+  itLeft = itConfig.totalSec;
+  itUpdateUI();
+
+  if(itPhase) itPhase.textContent = "Ready?";
+  if(itCount) itCount.textContent = "";
+  if(intervalBar) intervalBar.style.setProperty("--bar-scale", String(BAR_MIN_SCALE));
+
+  // IMPORTANT : pas de son ici
+
+  if(intervalTimer){
+    safeShowModal(intervalTimer);
+  }
+}
+
+// -------------------------
+// Run Breath timer
 // -------------------------
 
 function btStartRun(){
@@ -1608,18 +1940,90 @@ function btStartRun(){
 }
 
 // -------------------------
+// Run Interval timer
+// -------------------------
+
+function itStartRun(){
+  playIntervalBell("transition"); 
+  itStopAll();
+  itRunning = true;
+
+  itLeft = Math.max(1, itLeft);
+  itUpdateUI();
+
+  if(intervalBar) intervalBar.classList.add("is-running");
+   
+  const exerciseMs = itConfig.exerciseSec * 1000;
+  const breakMs = itConfig.breakSec * 1000;
+  const cycleinterMs  = exerciseMs + breakMs;
+
+  itAnimStart = performance.now();
+
+  let lastPhase = null; 
+
+  const step = (now) => {
+    if(!itRunning) return;
+
+    const elapsed = now - itAnimStart;
+    const tCycle = elapsed % cycleinterMs;
+
+    const phase = (tCycle < exerciseMs) ? "exercise" : "break";
+    const progress = (phase === "exercise")
+      ? (tCycle / exerciseMs)
+      : ((tCycle - exerciseMs) / breakMs);
+
+    if(lastPhase !== null && phase !== lastPhase){
+      playIntervalBell("transition");
+    }
+    lastPhase = phase; 
+
+    if(itPhase){
+      itPhase.textContent = (phase === "exercise") ? t("exercise") : t("break");
+    }
+ 
+
+    const scale = (phase === "exercise")
+      ? (BAR_MIN_SCALE + (BAR_MAX_SCALE - BAR_MIN_SCALE) * progress)
+      : (BAR_MAX_SCALE - (BAR_MAX_SCALE - BAR_MIN_SCALE) * progress);
+
+    if(intervalBar){
+      intervalBar.style.setProperty("--bar-scale", String(scale));
+    }
+
+    itUpdateCenterCount(phase, tCycle, exerciseMs, breakMs);
+
+    itAnimId = requestAnimationFrame(step);
+  };
+
+  itAnimId = requestAnimationFrame(step);
+
+  itTick = setInterval(() => {
+    itLeft = Math.max(0, itLeft - 1);
+    itUpdateUI();
+
+    if(itLeft <= 0){
+      itStopAll();
+      if(itPhase) itPhase.textContent = t("done");
+      playIntervalBell("done"); 
+    }
+  }, 1000);
+}
+
+
+// -------------------------
 // Events
 // -------------------------
 function setupEvents(){
 
   // Dropdown behavior
-  document.addEventListener("click", (e) => {
+  
+   document.addEventListener("click", (e) => {
     document.querySelectorAll("details.drop").forEach(d => {
       if(!d.contains(e.target)) d.open = false;
     });
-  });
+   });
 
-  document.querySelectorAll("details.drop").forEach(d => {
+   document.querySelectorAll("details.drop").forEach(d => {
     d.addEventListener("toggle", () => {
       if(!d.open) return;
       document.querySelectorAll("details.drop").forEach(other => {
@@ -1627,6 +2031,7 @@ function setupEvents(){
       });
     });
   });
+
 
   // Filter buttons
     document.querySelectorAll("[data-filter]").forEach(btn => {
@@ -1644,6 +2049,15 @@ function setupEvents(){
        render();
        });
     });
+
+   document.querySelectorAll("[data-intensity]").forEach(btn => {
+      btn.addEventListener("click", () => {
+         state.intensityFilter = btn.getAttribute("data-intensity") || "";
+         document.querySelectorAll("[data-intensity]").forEach(x => x.setAttribute("aria-pressed","false"));
+         btn.setAttribute("aria-pressed","true");
+         render();
+      });
+   });
 
   // Mode pills
   document.querySelectorAll(".pill").forEach(p => {
@@ -1664,25 +2078,31 @@ function setupEvents(){
   }
 
   // Reset filters
-  if(clearFiltersBtn){
-    clearFiltersBtn.addEventListener("click", () => {
-      state.mode = "";
-      state.query = "";
-      state.filter = "";
-      state.showFavs = false;
-
-      if(searchInput) searchInput.value = "";
+   if(clearFiltersBtn){
+      clearFiltersBtn.addEventListener("click", () => {
+         state.mode = "";
+         state.query = "";
+         state.filter = "";
+         state.showFavs = false;
+         state.intensityFilter = "";
+         
+   if(searchInput) searchInput.value = "";
 
       // reset pills UI
-      document.querySelectorAll(".pill").forEach(x => x.setAttribute("aria-pressed","false"));
-      const okBtn = document.querySelector('.pill[data-mode="ok"]');
-      if(okBtn) okBtn.setAttribute("aria-pressed","true");
 
-      if(favBtn) favBtn.setAttribute("aria-pressed","false");
-
-      render();
-    });
-  }
+         document.querySelectorAll("[data-intensity]").forEach(x => x.setAttribute("aria-pressed","false"));
+         const allIntensityBtn = document.querySelector('.intensity-pill[data-intensity=""]');
+         if(allIntensityBtn) allIntensityBtn.setAttribute("aria-pressed","true");
+         
+         document.querySelectorAll(".pill").forEach(x => x.setAttribute("aria-pressed","false"));
+         const okBtn = document.querySelector('.pill[data-mode="ok"]');
+         if(okBtn) okBtn.setAttribute("aria-pressed","true");
+         
+         if(favBtn) favBtn.setAttribute("aria-pressed","false");
+         
+         render();
+      });
+   }
 
   // Favorites toggle
   if(favBtn){
@@ -1748,6 +2168,46 @@ function setupEvents(){
   if(btStart) btStart.addEventListener("click", btStartRun);
   if(btStop) btStop.addEventListener("click", btStopAll);
   if(btReset) btReset.addEventListener("click", btResetAll);
+
+  // Interval timer controls
+  if(itClose && intervalTimer){
+    itClose.addEventListener("click", () => {
+      itStopAll();
+      intervalTimer.close();
+    });
+  }
+  if(itStart) itStart.addEventListener("click", itStartRun);
+  if(itStop) itStop.addEventListener("click", itStopAll);
+  if(itReset) itReset.addEventListener("click", itResetAll);
+
+   // Custom Timer Controls
+   if(customInterval){
+      customInterval.addEventListener("click", () => {
+         safeShowModal(customIntervalSetup);
+      });
+   }
+   if(cisClose && customIntervalSetup){
+      cisClose.addEventListener("click", () => {
+         customIntervalSetup.close();
+      });
+   }
+   if(cisStart){
+      cisStart.addEventListener("click", () => {
+         const exerciseSec = Math.max(1, Number(cisExercise?.value || 30));
+         const breakSec = Math.max(1, Number(cisBreak?.value || 30));
+         const rounds = Math.max(1, Number(cisRounds?.value || 3));
+         
+         const totalSec = (exerciseSec + breakSec) * rounds;
+         
+         if(customIntervalSetup) customIntervalSetup.close();
+         
+         openIntervalTimer({
+            totalSec,
+            exerciseSec,
+            breakSec
+         });
+      });
+   }
 }
 
 // -------------------------
@@ -1821,7 +2281,7 @@ function init(){
   loadTheme();
   loadLang();
   setupEvents();
-  setupStickyHeaderNav(); 
+  setupTopbarHide(); 
   render();
 }
 
