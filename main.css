@@ -314,7 +314,7 @@ details.drop > summary:focus-visible{
 
 .hero h1{
   font-family: var(--title-font);
-  font-size: clamp(60px, 4vw, 90px);
+  font-size: clamp(45px, 4vw, 70px);
   color: var(--ink); 
   letter-spacing: 2.5px;
   line-height: 1.1;
