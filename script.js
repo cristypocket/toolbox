@@ -1062,6 +1062,14 @@ const I18N = {
     "modes.aches": "😬 Courbatures",
     "modes.pain": "😣 Douleurs",
     "modes.sos": "🔥 SOS", 
+
+     // intensity FR
+     "intensity.title": "Intensité souhaitée",
+     "intensity.all": "Toutes",
+     "intensity.verygentle": "🐛 Très doux",
+     "intensity.gentle": "🦋 Doux",
+     "intensity.moderate": "✌️ Moyenne",
+     "intensity.high": "💪 Élevée",
      
     // library FR
     "library.activeFilter": "Filtre actif :",
@@ -1150,6 +1158,14 @@ const I18N = {
     "modes.aches": "😬 Muscle aches",
     "modes.pain": "😣 Pain",
     "modes.sos": "🔥 SOS", 
+
+      // intensity EN
+     "intensity.title": "Intensity",
+     "intensity.all": "All",
+     "intensity.verygentle": "🐛 Very gentle",
+     "intensity.gentle": "🦋 Gentle",
+     "intensity.moderate": "✌️ Moderate",
+     "intensity.high": "💪 High",
    
     // library EN
     "library.activeFilter": "Active filter:",
