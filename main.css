@@ -397,7 +397,7 @@ details.drop > summary:focus-visible{
   padding: 10px 12px;
   border-radius: 999px;
   font-size: 14px;
-}
+} 
 
 .form-stack{
   display: grid;
