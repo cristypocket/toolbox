@@ -1051,7 +1051,7 @@ const I18N = {
      hero_subtitle: "Des outils doux pour apaiser le système nerveux, la douleur et l’énergie.",
      breath2min: "🌬 Respiration 2 min",
      random_tool: "🎲 Outil aléatoire",
-     "hero.actions.customtimer": "⏱️ Timer libre",
+     custom_interval: "⏱️ Timer libre",
      
     // modes FR
     "modes.title": "Mon état du moment...",
@@ -1139,7 +1139,7 @@ const I18N = {
      hero_subtitle: "Gentle tools to calm your nervous system, pain, and energy.",
      breath2min: "🌬 Breathing 2 min",
      random_tool: "🎲 Random tool",
-     "hero.actions.customtimer": "⏱️ Custom timer",
+     custom_interval: "⏱️ Custom timer",
 
     // modes EN
     "modes.title": "How do you feel right now…",
