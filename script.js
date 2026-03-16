@@ -40,7 +40,7 @@ const TOOLS = [
          category: "Exercise",
          position: "planck",
          intensity: "Very gentle",
-         summary: "Strenghten your body.",
+         summary: "Strengthen your body.",
          steps: [
             "Position yourself in planck posture, on your hands.",
             "If you prefer to stand on your elbows, make sure to lower your shoulder plates.",
@@ -80,7 +80,7 @@ const TOOLS = [
          category: "Exercise",
          position: "planck",
          intensity: "moderate",
-         summary: "Strenghten your body.",
+         summary: "Strengthen your body.",
          steps: [
             "Position yourself in planck posture. Place your feet hip-width apart for better stability. Look at the floor and tuck your chin slightly to protect your neck.",
             "Hold for 30 seconds.",
