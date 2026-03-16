@@ -39,7 +39,7 @@ const TOOLS = [
          title: "Planck 3x 10sec",
          category: "Exercise",
          position: "planck",
-         intensity: "Very soft",
+         intensity: "Very gentle",
          summary: "Strenghten your body.",
          steps: [
             "Position yourself in planck posture, on your hands.",
