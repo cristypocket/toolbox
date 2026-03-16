@@ -885,7 +885,7 @@ const TOOLS = [
 
 const state = {
    mode: "",
-   intensityfilter: "",
+   intensityFilter: "",
    query: "",
    filter: "",
    showFavs: false,
@@ -1447,10 +1447,11 @@ function render(){
       const courbChip = (tool.modes && tool.modes.includes("courbatures")) ? `<span class="chip courbatures">😬</span>` : "";
       const doulChip = (tool.modes && tool.modes.includes("douleurs")) ? `<span class="chip douleurs">😣</span>` : "";
       
-      const tresdouxChip = (tool.intensity === "très doux") ? `<span class="chip tresdoux">🐛 Très doux</span>` : "";
-      const douxChip  = (tool.intensity === "doux") ? `<span class="chip doux">🦋 Doux</span>` : "";
-      const moyenChip = (tool.intensity === "moyen") ? `<span class="chip moyen">✌️ Moyen</span>` : "";
-      const eleveChip = (tool.intensity === "élevé") ? `<span class="chip eleve">💪 Élevé</span>` : "";
+      const intensity = normalize(toolText(tool, "intensity") || "");
+      const tresdouxChip = (intensity === "tres doux" || intensity === "very gentle") ? `<span class="chip tresdoux">${escapeHtml(t("intensity.verygentle"))}</span>` : "";
+      const douxChip = (intensity === "doux" || intensity === "gentle") ? `<span class="chip doux">${escapeHtml(t("intensity.gentle"))}</span>` : "";
+      const moyenChip = (intensity === "moyen" || intensity === "moderate") ? `<span class="chip moyen">${escapeHtml(t("intensity.moderate"))}</span>` : "";
+      const eleveChip = (intensity === "eleve" || intensity === "high") ? `<span class="chip eleve">${escapeHtml(t("intensity.high"))}</span>` : "";
       
       const card = document.createElement("article");
       card.className = "card";
