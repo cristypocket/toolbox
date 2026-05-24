@@ -1039,19 +1039,6 @@ details.drop > ul button:active{
   background: rgba(200, 185, 230, 0.14);
 }
 
-.btn.kofi .kofi-hover {
-  display: none;
-}
-
-.btn.kofi:hover .kofi-normal {
-  display: none;
-}
-
-.btn.kofi:hover .kofi-hover {
-  display: inline;
-}
-
-
 /* === Orb === */
 
 .breath-orb{
