@@ -335,6 +335,12 @@ details.drop > summary:focus-visible{
   flex-wrap: wrap;
 }
 
+.kofi-row {
+  display: flex;
+  justify-content: center;
+  padding: 1.4rem 0 0.6rem;
+}
+
 .feel-box{
   margin: 22px auto 0;
   max-width: 900px;
