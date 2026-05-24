@@ -1021,8 +1021,9 @@ details.drop > ul button:active{
 }
 
 .btn.kofi{
-  background: transparent;
-  transition: background-color 0.2s ease; 
+   position: relative;
+   background: transparent;
+   transition: background-color 0.2s ease; 
 }
 
 .btn.kofi .kofi-text {
