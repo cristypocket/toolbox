@@ -1016,6 +1016,7 @@ details.drop > ul button:active{
 
 .btn.kofi{
   background: transparent;
+  transition: background-color 0.2s ease; 
 }
 
 .btn.small{
@@ -1028,7 +1029,7 @@ details.drop > ul button:active{
 }
 
 .btn.kofi:hover{
-  background: rgba(186, 160, 214, 0.18);
+  background: rgba(200, 185, 230, 0.14;
 }
 
 
