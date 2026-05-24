@@ -1014,6 +1014,10 @@ details.drop > ul button:active{
   background: transparent;
 }
 
+.btn.kofi{
+  background: transparent;
+}
+
 .btn.small{
   font-size: 13px;
   padding: 6px 10px;
@@ -1021,6 +1025,10 @@ details.drop > ul button:active{
 
 .btn:hover{
   transform: translateY(-1px);
+}
+
+.btn.kofi:hover{
+  background: rgba(186, 160, 214, 0.18);
 }
 
 
