@@ -1025,6 +1025,10 @@ details.drop > ul button:active{
   transition: background-color 0.2s ease; 
 }
 
+.btn.kofi .kofi-text {
+  transition: opacity 0.2s ease;
+}
+
 .btn.small{
   font-size: 13px;
   padding: 6px 10px;
@@ -1036,6 +1040,21 @@ details.drop > ul button:active{
 
 .btn.kofi:hover{
   background: rgba(200, 185, 230, 0.14);
+}
+
+.btn.kofi:hover .kofi-text {
+  opacity: 0;
+}
+
+.btn.kofi::after {
+  content: "💜 Merci";
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.btn.kofi:hover::after {
+  opacity: 1;
 }
 
 
