@@ -338,7 +338,7 @@ details.drop > summary:focus-visible{
 .kofi-row {
   display: flex;
   justify-content: center;
-  padding: 1.4rem 0 0.6rem;
+  padding: 3rem 0 1rem;
 }
 
 .feel-box{
