@@ -1047,7 +1047,7 @@ const I18N = {
     "nav.filters.fasciaBall":"Balle fascia",
      
      // hero FR
-     "button.kofi": "☕️ Soutenir le projet"
+     "button.kofi": "☕️ Soutenir le projet",
      hero_title: "Ton sanctuaire de régulation",
      hero_subtitle: "Des outils doux pour apaiser le système nerveux, la douleur et l’énergie.",
      breath2min: "🌬 Respiration 2 min",
@@ -1144,7 +1144,7 @@ const I18N = {
     "nav.filters.fasciaBall":"Fascia ball", 
 
      // hero EN
-     "button.kofi": "☕️ Support the project"
+     "button.kofi": "☕️ Support the project",
      hero_title: "Your regulation sanctuary",
      hero_subtitle: "Gentle tools to calm your nervous system, pain, and energy.",
      breath2min: "🌬 Breathing 2 min",
